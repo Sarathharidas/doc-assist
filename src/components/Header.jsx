@@ -17,7 +17,19 @@ import Visit from "../assets/image/start-visit.png";
 
 import { Autoplay } from 'swiper/modules';
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 const Login = () => {
+
+  const [isLoggedIn, setIsLoggedIn] =useState(false)
+
+  useEffect(() => {
+    const token =localStorage.getItem("TOKEN")
+    if (token){
+      setIsLoggedIn(true)
+    }else{
+      setIsLoggedIn(false)
+    }
+  },[])
 
   let navigate = useNavigate();
   const routeChange = ()=>{
@@ -93,7 +105,7 @@ const Login = () => {
                     },
                   }}
                 >
-                  Log in
+                 {isLoggedIn ? "Log out" : "Log in"}
                 </Button>
                 <Button
                   sx={{

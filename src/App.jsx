@@ -1,23 +1,24 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from './components/Login'
-import Header from './components/Header'
-import FreedPage from "./components/FreedPage";
-import SignUp from "./components/SignUp";
+import Login from './view/Login'
+import FreedPage from "./view/FreedPage";
+import SignUp from "./view/SignUp";
+import Home from "./view/Home";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Header />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/freedpage" element={<FreedPage/>}/>
-        <Route path="/signup" element={<SignUp/>}/>
-      </Routes>
-    </BrowserRouter>
-    
-   
+      <ToastContainer/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/freedpage" element={<FreedPage />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

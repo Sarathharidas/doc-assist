@@ -1,18 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import AppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import { Typography, Divider, Link, FormControlLabel, Checkbox, IconButton } from '@mui/material';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
+import { Typography, Link, FormControlLabel, Checkbox,  } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import IndeterminateCheckbox from '../components/SideBar';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
@@ -20,7 +9,7 @@ import MicNoneIcon from '@mui/icons-material/MicNone';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { FormControl, Select, MenuItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PauseIcon from '@mui/icons-material/Pause';
 import { useState } from 'react';
@@ -30,6 +19,20 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import CloseIcon from '@mui/icons-material/Close';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { styled } from '@mui/material/styles';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import FolderDeleteIcon from '@mui/icons-material/FolderDelete';
+import Window from "../assets/image/windows-system-step1.png";
+import Window_two from "../assets/image/windows-system-step2.png";
+import Window_three from "../assets/image/windows-system-step3.png";
+import Window_Four from "../assets/image/windows-system-step4.png";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { TextareaAutosize } from '@mui/material';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -38,13 +41,26 @@ import { Button, TextField } from '@mui/material';
 
 const drawerWidth = 300;
 
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
+
+
 const options = [
-  { value: 'allnote', label: 'All Notes', icon: <PauseIcon /> },
-  { value: 'unreadnotes', label: 'Unread Notes', icon: <PauseIcon /> },
-  { value: 'trash', label: 'Trash', icon: <PauseIcon /> }
+  { value: 'allnote', label: 'All Notes', icon: <StickyNote2Icon /> },
+  { value: 'unreadnotes', label: 'Unread Notes', icon: <MailOutlineIcon /> },
+  { value: 'trash', label: 'Trash', icon: <FolderDeleteIcon /> }
 ];
 export default function FreedPage() {
-  const [selectedOption, setSelectedOption] = useState('allnote'); // Setting 'work' as default
+  const [selectedOption, setSelectedOption] = useState('allnote');
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -751,7 +767,46 @@ export default function FreedPage() {
                   />
                 </Typography>
               </Box>
-              <Typography sx={{ color: '#6b6b6b', fontSize: '14px', marginBottom: '25px' }}>Drag in or<Link sx={{ px: '4px', }}>Upload</Link>a pre-recorded visit.</Typography>
+
+              <Box sx={{
+                marginBottom: '25px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '5px',
+              }}>
+                <Typography sx={{ color: '#6b6b6b', fontSize: '14px', }}>Drag in or</Typography>
+
+                <Button
+                  sx={{
+                    background: 'transparent',
+                    boxShadow: 'none',
+                    color: '#1976d2',
+                    padding: '0px',
+                    width: 'auto',
+                    display: 'contents',
+                    textTransform: 'capitalize',
+                    '&:hover': {
+                      background: 'none',
+                      boxShadow: 'none',
+                    },
+                    '& svg': {
+                      display: 'none',
+                    },
+
+                  }}
+                  component="label"
+                  role={undefined}
+                  variant="contained"
+                  tabIndex={-1}
+                  startIcon={<CloudUploadIcon />}
+                >
+                  Upload
+                  <VisuallyHiddenInput type="file" />
+                </Button>
+
+                <Typography sx={{ color: '#6b6b6b', fontSize: '14px', }}>a pre-recorded visit.</Typography>
+              </Box>
               <Link sx={{
                 fontSize: '18px',
               }}>How do I tell my patient about Freed?</Link>
@@ -760,7 +815,7 @@ export default function FreedPage() {
 
 
             {/* End visit model */}
-            <Box style={{ display: 'block', }}>
+            <Box style={{ display: 'none', }}>
               <Typography sx={{
                 color: '#000000de',
                 fontSize: '22px',
@@ -832,8 +887,266 @@ export default function FreedPage() {
               </Box>
             </Box>
             {/* End visit model */}
+
+
+
+
           </Box>
+
+          {/* ============================== End visit model ============================== */}
+          <Box style={{ display: 'block', }} sx={{ padding: '32px', }}>
+            <Box>
+              <Typography sx={{
+                fontSize: '34px',
+                color: '#000000de',
+                margin: '0px 0px 0.35em',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 400,
+                fontSize: '34px',
+                lineHeight: 1.235,
+                letterSpacing: '0.00735em',
+
+              }} variant='h1'>Freed needs the microphone permission to capture visits
+              </Typography>
+              <Typography sx={{
+                fontSize: '16px',
+                color: '#000000de',
+                margin: '0px 0px 5.6px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: 1.5,
+                letterSpacing: '0.00938em',
+
+              }} variant='p'>Please follow the steps below to allow Freed to access your microphone:
+              </Typography>
+            </Box>
+            <Box sx={{
+              marginTop: '5px',
+            }}>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }} variant='h3'>1. Use the Start menu to open Settings
+              </Typography>
+              <Box sx={{
+                backgroundColor: 'rgb(255, 255, 255)',
+                color: 'rgba(0, 0, 0, 0.87)',
+                transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                borderRadius: '4px',
+                boxShadow: '0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)',
+                display: 'inline-block',
+                margin: '16px',
+              }}>
+                <img src={Window} alt="Window" />
+              </Box>
+            </Box>
+
+
+            <Box sx={{
+              marginTop: '5px',
+            }}>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }} variant='h3'>2. Click "Privacy"
+              </Typography>
+              <Box sx={{
+                backgroundColor: 'rgb(255, 255, 255)',
+                color: 'rgba(0, 0, 0, 0.87)',
+                transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                borderRadius: '4px',
+                boxShadow: '0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)',
+                display: 'inline-block',
+                margin: '16px',
+              }}>
+                <img style={{ maxWidth: '50vw', }} src={Window_two} alt="Window" />
+              </Box>
+            </Box>
+
+
+            <Box sx={{
+              marginTop: '5px',
+            }}>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }} variant='h3'>3. Click "Microphone" in the left navigation bar, then make sure that it says "Microphone access for this device is on" (click Change if it's Off)
+              </Typography>
+              <Box sx={{
+                backgroundColor: 'rgb(255, 255, 255)',
+                color: 'rgba(0, 0, 0, 0.87)',
+                transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                borderRadius: '4px',
+                boxShadow: '0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)',
+                display: 'inline-block',
+                margin: '16px',
+              }}>
+                <img style={{ maxWidth: '50vw', }} src={Window_three} alt="Window" />
+              </Box>
+            </Box>
+
+
+
+            <Box sx={{
+              marginTop: '5px',
+            }}>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }} variant='h3'>4. Scroll down and make sure that "Allow desktop apps to access your microphone" is On
+              </Typography>
+              <Box sx={{
+                backgroundColor: 'rgb(255, 255, 255)',
+                color: 'rgba(0, 0, 0, 0.87)',
+                transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                borderRadius: '4px',
+                boxShadow: '0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)',
+                display: 'inline-block',
+                margin: '16px',
+              }}>
+                <img style={{ maxWidth: '50vw', }} src={Window_Four} alt="Window" />
+              </Box>
+            </Box>
+
+            <Box>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }}>5.<Link sx={{
+                margin: '0px',
+                fontFamily: 'inherit',
+                color: 'rgb(25, 118, 210)',
+                textDecoration: 'underline',
+                textDecorationColor: 'rgba(25, 118, 210, 0.4)',
+                marginLeft: '10px',
+                cursor: 'pointer',
+              }}>Click here</Link> to start capturing a visit</Typography>
+            </Box>
+          </Box>
+          {/* ============================== End visit model ============================== */}
+
+
+
+          {/* ============================ Visit card Summary =============================== */}
+
+          <Box style={{ display: 'block', }} sx={{
+
+            backgroundColor: 'rgb(255, 255, 255)',
+            color: 'rgba(0, 0, 0, 0.87)',
+            boxShadow: '0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)',
+            position: 'relative',
+            transition: 'margin 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+            overflowAnchor: 'none',
+            borderRadius: '0px',
+            margin: '25px',
+            padding: '16px',
+            width: 'calc(100% - 100px)',
+
+          }}>
+            <Typography
+              sx={{
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 400,
+                fontSize: '24px',
+                lineHeight: '23px',
+                letterSpacing: '0.00938em',
+                color: 'rgba(0, 0, 0, 0.87)',
+                boxSizing: 'border-box',
+                cursor: 'text',
+                display: 'inline-flex',
+                WebkitBoxAlign: 'center',
+                alignItems: 'center',
+                position: 'relative',
+                gap: '8px',
+              }}
+            >Visit Summary <ErrorOutlineIcon sx={{
+              color: '#0000008a',
+              width: '15px',
+              height: '15px',
+            }} /></Typography>
+
+
+            <Box sx={{
+              width: '100%',
+              marginTop: '35px',
+              marginBottom: '15px',
+              '& textarea': {
+                width: 'calc(100% - 40px)',
+                height: 'auto !important',
+                resize: 'none',
+                fontSize: '16px',
+                fontWeight: 400,
+                lineHeight: '24px',
+                letterSpacing: '0.00938em',
+                color: 'rgba(0, 0, 0, 0.87)',
+                padding: '16px',
+                borderRadius: '4px',
+              },
+            }}>
+              <TextareaAutosize
+                id="w3review"
+                name="w3review"
+                aria-label="empty textarea"
+                rows={4}
+                defaultValue="At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies."
+              />
+            </Box>
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+              <Box sx={{ display: 'flex', gap: '10px', }}>
+                <ThumbUpOffAltIcon sx={{
+                  color: '#0000008a',
+                  width: '25px',
+                  height: '25px',
+                  cursor: 'pointer',
+                }} />
+                <ThumbDownOffAltIcon sx={{
+                  color: '#0000008a',
+                  width: '25px',
+                  height: '25px',
+                  cursor: 'pointer',
+                }} />
+              </Box>
+              <Box>
+                <Button sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  border: '1px solid #1976d2',
+                }}> <ContentCopyIcon sx={{ width: '18px', height: '18px' }} /> COPY</Button>
+              </Box>
+            </Box>
+          </Box>
+
+          {/* ============================ Visit card Summary =============================== */}
+
         </Box>
+
+
       </Box>
 
       <Box>

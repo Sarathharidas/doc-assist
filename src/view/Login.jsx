@@ -6,7 +6,8 @@ import app from '../services/firebase'
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import { useFormik } from "formik";
 import { Signup_Schema } from "../validation_schema";
-import { NavLink,useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const auth = getAuth(app)
 const provider = new GoogleAuthProvider();
@@ -14,15 +15,31 @@ const provider = new GoogleAuthProvider();
 const Login = () => {
  const navigate = useNavigate()
   const [user, setUser] = useState();
+ 
 
   const handleLogin = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         setUser(result.user);
-        console.log(result.user)
+        
+        if(result.accessToken) {
+          
+          localStorage.setItem('TOKEN', JSON.stringify(result.
+            accessToken
+          ))
+          const userInfo= {email: result.email, displayName: result.displayName}
+          localStorage.setItem('USER', JSON.stringify(userInfo))
+            }
+
+        console.log("hgahsd",result.user)
       })
-      .catch((error) => console.log(error));
-    }
+      .catch((error) => {
+        if (error.message ==="Firebase: Error (auth/invalid-credential."){
+          toast.error("Invalid credential. Please try again")
+        }
+      })
+       
+  }
     
     useEffect(() => {
       console.log(user)
@@ -38,10 +55,24 @@ const Login = () => {
         // Create a new user with email and password using firebase
         signInWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          console.log("Result => ", res.user);
-          navigate('/freedpage')
+          console.log("tokr",res.user.accessToken)
+          if(res?.user?.accessToken) {
+          localStorage.setItem('TOKEN', JSON.stringify(res.user.
+            accessToken
+            ))
+            const userInfo= {email: res.email, displayName: res.displayName}
+            localStorage.setItem('USER', JSON.stringify(userInfo))
+          }
+          console.log("res => ", res.user);
+          
+          navigate('/')
         })
-        .catch(err => console.log("Error => ", err))
+        .catch((error) => {
+          console.log("fff",typeof error.message)
+          if (error.message === "Firebase: Error (auth/invalid-credential)."){
+            toast.error("Invalid credential. Please try again")
+          }
+        })
         
     },
   });

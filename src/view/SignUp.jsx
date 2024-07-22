@@ -1,8 +1,8 @@
 
 
 
-import { Box, Button, Checkbox, colors, Container, FormControlLabel, Input, Link, TextField, Typography } from "@mui/material";
-import React from "react";
+import { Box, Button, Checkbox, Container, FormControlLabel,  Link, TextField, Typography } from "@mui/material";
+
 import { Link as RouterLink } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
@@ -11,9 +11,6 @@ import { useState } from 'react';
 import { Signup_Schema } from "../validation_schema";
 //import Snackbar from "@material-ui/core/Snackbar";
 import { useNavigate } from "react-router-dom";
-
-import CircularProgress from '@mui/material/CircularProgress';
-
 
 const auth = getAuth(app)
 
@@ -32,7 +29,7 @@ const SignUp = () => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
           console.log("Result => ", res.user);
-          navigate('/')
+          navigate('/login')
         })
         .catch(err => console.log("Error => ", err))
 
