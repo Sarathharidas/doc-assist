@@ -6,6 +6,7 @@ import SignUp from "./components/specific/SignUp";
 import Home from "./view/Home";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import MicPermissions from "./view/MicPermissions";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/freedpage" element={<FreedPage />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/help/microhone" element={<MicPermissions />} />
         </Routes>
       </BrowserRouter>
     </>

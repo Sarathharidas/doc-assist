@@ -1,6 +1,8 @@
+
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Typography, Link, FormControlLabel, Checkbox, } from '@mui/material';
+import { Typography, Link  } from '@mui/material';
+import {FormControlLabel, Checkbox, } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
@@ -42,77 +44,35 @@ import { Button, TextField } from '@mui/material';
 import Note from '../components/specific/Note';
 import { useNavigate } from 'react-router-dom';
 
-
-
-const drawerWidth = 300;
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
-
 const options = [
   { value: 'allnote', label: 'All Notes', icon: <StickyNote2Icon /> },
   { value: 'unreadnotes', label: 'Unread Notes', icon: <MailOutlineIcon /> },
   { value: 'trash', label: 'Trash', icon: <FolderDeleteIcon /> }
 ];
-export default function FreedPage() {
+
+
+
+const MicPermissions = () => {
   const [selectedOption, setSelectedOption] = useState('allnote');
+  const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
-  const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  
   const handleClose = () => {
     setOpen(false);
   };
-
-const navigate = useNavigate()
-
-
-  async function checkMicrophone() {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        console.log("Microphone access granted");
-        // Do something with the stream, such as recording audio
-        stream.getTracks().forEach(track => track.stop()); // Stop the tracks when done
-    } catch (error) {
-        console.error("Microphone access denied", error);
-        navigate("/help/microhone")
-    }
-}
-
-  // navigator.mediaDevices.getUserMedia({ audio: true })
-  //   .then(stream => {
-    //     console.log('Microphone access granted:', stream);
-    //     // Handle further actions after access is granted (e.g., start recording)
-    //   })
-    //   .catch(error => {
-      //     console.error('Error accessing microphone:', error);
-      //     // Handle errors (e.g., user denied access or browser doesn't support getUserMedia)
-      //   });
-      
-      // to set
-
   
-
-  
+  const navigate = useNavigate()
 
   return (
-    <>
-      <Box
+    <div>
+
+<Box
         sx={{ position: "relative", background: "#1976d2", padding: "10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Typography sx={{ color: "#fff", fontSize: "20px" }}>Freed</Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', '& svg': { color: '#fff', filter: 'none' } }}>
@@ -138,7 +98,7 @@ const navigate = useNavigate()
             <Box sx={{
               padding: '0 16px 0 16px'
             }}>
-              <Button sx={{ width: '100%', marginTop: '10px', }} variant="outlined" ><AddIcon sx={{ width: '20px', height: '20px', marginRight: '8px' }} />Start A Visit</Button>
+              <Button sx={{ width: '100%', marginTop: '10px', }} onClick={()=> navigate("/freedpage")} variant="outlined" ><AddIcon sx={{ width: '20px', height: '20px', marginRight: '8px' }} />Start A Visit</Button>
             </Box>
             <Box sx={{
               padding: '0 16px 0 16px'
@@ -269,94 +229,156 @@ const navigate = useNavigate()
 
             {/* capture visit model */}
             <Box style={{ display: '', }}>
-              <Button onClick={checkMicrophone} sx={{
-                transition:
-                  'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, ' +
-                  'box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, ' +
-                  'border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-                borderRadius: '24px',
-                padding: '0px 16px',
-                minWidth: '48px',
-                width: 'auto',
-                height: '48px',
-                zIndex: 1050,
-                boxShadow:
-                  'rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, ' +
-                  'rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, ' +
-                  'rgba(0, 0, 0, 0.12) 0px 1px 18px 0px',
-                color: 'rgba(0, 0, 0, 0.87)',
-                backgroundColor: 'rgb(224, 224, 224)',
-                margin: '8px',
-              }}>
-                <MicNoneIcon />CAPTURE CONVERSATION</Button>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: '15px', }}>
-                <Typography sx={{
-                  textAlign: 'center', display: 'flex', width: '130px', justifyContent: 'center', gap: '10px',
-                }}>
-                  <span
-                    style={{
-                      borderBottom: '1px solid #000',
-                      display: 'inline-block',
-                      lineHeight: '0.1em',
-                      margin: '10px 0 17px',
-                      width: '50%',
-                    }}
-                  />
-                  or
-                  <span
-                    style={{
-                      borderBottom: '1px solid #000',
-                      display: 'inline-block',
-                      lineHeight: '0.1em',
-                      margin: '10px 0 17px',
-                      width: '50%',
-                    }}
-                  />
-                </Typography>
-              </Box>
+            <Box style={{ display: 'block', }} sx={{ padding: '32px', }}>
+            <Box>
+              <Typography sx={{
+                fontSize: '34px',
+                color: '#000000de',
+                margin: '0px 0px 0.35em',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 400,
+                fontSize: '34px',
+                lineHeight: 1.235,
+                letterSpacing: '0.00735em',
 
+              }} variant='h1'>Freed needs the microphone permission to capture visits
+              </Typography>
+              <Typography sx={{
+                fontSize: '16px',
+                color: '#000000de',
+                margin: '0px 0px 5.6px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: 1.5,
+                letterSpacing: '0.00938em',
+
+              }} variant='p'>Please follow the steps below to allow Freed to access your microphone:
+              </Typography>
+            </Box>
+            <Box sx={{
+              marginTop: '5px',
+            }}>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }} variant='h3'>1. Use the Start menu to open Settings
+              </Typography>
               <Box sx={{
-                marginBottom: '25px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '5px',
+                backgroundColor: 'rgb(255, 255, 255)',
+                color: 'rgba(0, 0, 0, 0.87)',
+                transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                borderRadius: '4px',
+                boxShadow: '0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)',
+                display: 'inline-block',
+                margin: '16px',
               }}>
-                <Typography sx={{ color: '#6b6b6b', fontSize: '14px', }}>Drag in or</Typography>
-
-                <Button
-                  sx={{
-                    background: 'transparent',
-                    boxShadow: 'none',
-                    color: '#1976d2',
-                    padding: '0px',
-                    width: 'auto',
-                    display: 'contents',
-                    textTransform: 'capitalize',
-                    '&:hover': {
-                      background: 'none',
-                      boxShadow: 'none',
-                    },
-                    '& svg': {
-                      display: 'none',
-                    },
-
-                  }}
-                  component="label"
-                  role={undefined}
-                  variant="contained"
-                  tabIndex={-1}
-                  startIcon={<CloudUploadIcon />}
-                >
-                  Upload
-                  <VisuallyHiddenInput type="file" />
-                </Button>
-
-                <Typography sx={{ color: '#6b6b6b', fontSize: '14px', }}>a pre-recorded visit.</Typography>
+                <img src={Window} alt="Window" />
               </Box>
-              <Link sx={{
-                fontSize: '18px',
-              }}>How do I tell my patient about Freed?</Link>
+            </Box>
+
+
+            <Box sx={{
+              marginTop: '5px',
+            }}>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }} variant='h3'>2. Click "Privacy"
+              </Typography>
+              <Box sx={{
+                backgroundColor: 'rgb(255, 255, 255)',
+                color: 'rgba(0, 0, 0, 0.87)',
+                transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                borderRadius: '4px',
+                boxShadow: '0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)',
+                display: 'inline-block',
+                margin: '16px',
+              }}>
+                <img style={{ maxWidth: '50vw', }} src={Window_two} alt="Window" />
+              </Box>
+            </Box>
+
+
+            <Box sx={{
+              marginTop: '5px',
+            }}>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }} variant='h3'>3. Click "Microphone" in the left navigation bar, then make sure that it says "Microphone access for this device is on" (click Change if it's Off)
+              </Typography>
+              <Box sx={{
+                backgroundColor: 'rgb(255, 255, 255)',
+                color: 'rgba(0, 0, 0, 0.87)',
+                transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                borderRadius: '4px',
+                boxShadow: '0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)',
+                display: 'inline-block',
+                margin: '16px',
+              }}>
+                <img style={{ maxWidth: '50vw', }} src={Window_three} alt="Window" />
+              </Box>
+            </Box>
+
+
+
+            <Box sx={{
+              marginTop: '5px',
+            }}>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }} variant='h3'>4. Scroll down and make sure that "Allow desktop apps to access your microphone" is On
+              </Typography>
+              <Box sx={{
+                backgroundColor: 'rgb(255, 255, 255)',
+                color: 'rgba(0, 0, 0, 0.87)',
+                transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                borderRadius: '4px',
+                boxShadow: '0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)',
+                display: 'inline-block',
+                margin: '16px',
+              }}>
+                <img style={{ maxWidth: '50vw', }} src={Window_Four} alt="Window" />
+              </Box>
+            </Box>
+
+            <Box>
+              <Typography sx={{
+                margin: '0px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: 1.6,
+                letterSpacing: '0.0075em',
+              }}>5.<Link sx={{
+                margin: '0px',
+                fontFamily: 'inherit',
+                color: 'rgb(25, 118, 210)',
+                textDecoration: 'underline',
+                textDecorationColor: 'rgba(25, 118, 210, 0.4)',
+                marginLeft: '10px',
+                cursor: 'pointer',
+              }} href="/freedpage">Click here</Link> to start capturing a visit</Typography>
+            </Box>
+          </Box>
             </Box>
             {/* capture visit model */}
 
@@ -766,6 +788,8 @@ const navigate = useNavigate()
           </DialogActions>
         </Dialog>
       </Box>
-    </>
-  );
+    </div>
+  )
 }
+
+export default MicPermissions
