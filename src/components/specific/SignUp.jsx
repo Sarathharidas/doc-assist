@@ -1,23 +1,19 @@
-
-
-
-import { Box, Button, Checkbox, Container, FormControlLabel,  Link, TextField, Typography } from "@mui/material";
-
+import { Box, Button, Checkbox, Container, FormControlLabel, Link, TextField, Typography } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-import app from '../services/firebase';
+import app from '../../services/firebase';
 import { useState } from 'react';
-import { Signup_Schema } from "../validation_schema";
+import { Signup_Schema } from "../../validation_schema";
 //import Snackbar from "@material-ui/core/Snackbar";
 import { useNavigate } from "react-router-dom";
 
 const auth = getAuth(app)
 
 const SignUp = () => {
-  
+
   const [initialValues] = useState({ email: "", password: "" });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const SignUp = useFormik({
     initialValues,
@@ -32,12 +28,10 @@ const SignUp = () => {
           navigate('/login')
         })
         .catch(err => console.log("Error => ", err))
-
     },
   });
   return (
     <>
-
       <Box>
         <Container maxWidth="xl">
           <Box sx={{
@@ -65,7 +59,7 @@ const SignUp = () => {
               margin: '32px',
             }} variant="h5">Create Your Freed Account</Typography>
 
-            <Box component='form' noValidate onSubmit={SignUp.handleSubmit}  sx={{ display: 'flex', flexDirection: 'column', gap: '16px', }}>
+            <Box component='form' noValidate onSubmit={SignUp.handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: '16px', }}>
               <TextField
                 // sx={{
                 //   width: '100%', padding: '6px 15px',
@@ -136,7 +130,6 @@ const SignUp = () => {
                     fontSize: '14px',
                     textDecoration: 'underline',
                     textDecorationColor: '#808080',
-
                   }}
                 >Already have an account? Sign in</Link>
               </Box>

@@ -2,5 +2,11 @@ import * as Yup from "yup";
 
 export const Signup_Schema = Yup.object({
   email: Yup.string().max(255, "Email must not be greater than 255 characters.").matches(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/, "Email must be a valid email address.").required("Email field is required."),
-  password: Yup.string().required('Password field is required.').min(6, 'Password is too short - should be 6 chars minimum.').matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
-});
+    password: Yup.string()
+      .min(8, "You must enter at least 8 characters.")
+      .matches(/[0-9]/, "You must enter at least one number.")
+      .matches(/[a-z]/, "You must enter at least one lowercase letter.")
+      .matches(/[A-Z]/, "You must enter at least one uppercase letter.")
+      .matches(/[#?!@$%^&*-]/, "You must enter at least one symbols.")
+      .required("Password field is Required.")
+})

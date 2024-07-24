@@ -5,36 +5,40 @@ import {
   Grid,
   Link,
   List,
-  ListItem,
-  Slider,
   Typography,
 } from "@mui/material";
-import "../App.css";
-import HeroImg from "../assets/image/hero-img.jpg";
-import Images_Slider from "../components/Slider"
-import Note from "../assets/image/Note.svg";
-import Visit from "../assets/image/start-visit.png";
+import "../../App.css";
+import HeroImg from "../../assets/image/hero-img.jpg";
+import Images_Slider from '../common/Slider'
+import Note from "../../assets/image/Note.svg";
+import Visit from "../../assets/image/start-visit.png";
+import Footer from "./Footer"
 
-import { Autoplay } from 'swiper/modules';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 const Login = () => {
 
-  const [isLoggedIn, setIsLoggedIn] =useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
-    const token =localStorage.getItem("TOKEN")
-    if (token){
+    const token = localStorage.getItem("TOKEN")
+    if (token) {
       setIsLoggedIn(true)
-    }else{
+    } else {
       setIsLoggedIn(false)
     }
-  },[])
-
+  }, [])
+ console.log("sd",isLoggedIn)
   let navigate = useNavigate();
-  const routeChange = ()=>{
-    let path ='/login';
+  const routeChange = () => {
+    if(isLoggedIn){
+      setIsLoggedIn(false)
+      localStorage.removeItem("TOKEN")
+    }else{
+      let path = '/login';
     navigate(path)
+    } 
   }
 
   return (
@@ -42,7 +46,7 @@ const Login = () => {
       {/* header section */}
       <Box
         sx={{
-          borderBottom:"1px solid rgba(6, 31, 47, 0.5)",
+          borderBottom: "1px solid rgba(6, 31, 47, 0.5)",
         }}
       >
         <Container maxWidth="xl">
@@ -87,7 +91,7 @@ const Login = () => {
                 <Link>Pricing</Link>
                 <Link>About Us</Link>
                 <Button
-                onClick={routeChange}
+                  onClick={routeChange}
                   sx={{
                     borderRadius: "8px",
                     marginLeft: "8px",
@@ -105,7 +109,7 @@ const Login = () => {
                     },
                   }}
                 >
-                 {isLoggedIn ? "Log out" : "Log in"}
+                  {isLoggedIn ? "Log out" : "Log in"}
                 </Button>
                 <Button
                   sx={{
@@ -613,11 +617,7 @@ const Login = () => {
               </Box>
             </Grid>
           </Grid>
-          <Box sx={{ textAlign: 'center', marginTop: '30px' }}>
-            <Typography variant="h1" sx={{ fontSize: "16px", color: "#061f2f", fontWeight: "600", textAlign: 'center', }}>
-              We're dedicated to making Freed accessible to all aspiring clinicians. If you're a student or trainee, please contact us for a discount.
-            </Typography>
-          </Box>
+          <Footer />
         </Container>
       </Box>
       {/* Instant clinical Card section */}

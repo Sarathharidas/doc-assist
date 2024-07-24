@@ -1,8 +1,8 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from './view/Login'
+import Login from './components/specific/Login'
 import FreedPage from "./view/FreedPage";
-import SignUp from "./view/SignUp";
+import SignUp from "./components/specific/SignUp";
 import Home from "./view/Home";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

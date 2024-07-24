@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Typography, Link, FormControlLabel, Checkbox,  } from '@mui/material';
+import { Typography, Link, FormControlLabel, Checkbox, } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
@@ -34,11 +34,12 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-
+//import MicPermissions from '../components/MicPermissions';
 import DescriptionIcon from '@mui/icons-material/Description';
 
 import { Button, TextField } from '@mui/material';
-
+//import Record from '../components/layout/Record';
+import Note from '../components/specific/Note'
 const drawerWidth = 300;
 
 const VisuallyHiddenInput = styled('input')({
@@ -52,7 +53,6 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
-
 
 const options = [
   { value: 'allnote', label: 'All Notes', icon: <StickyNote2Icon /> },
@@ -205,495 +205,7 @@ export default function FreedPage() {
               </Box>
 
               <Box >
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                  justifyContent: 'space-between',
-                  '&:hover': {
-                    backgroundColor: '#1976d214'
-                  },
-                }}>
-                  <FormControlLabel
-                    sx={{
-                      marginRight: '0',
-                    }}
-                    control={<Checkbox checked={false} />}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    padding: '8px 16px',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}>
-                    <Typography sx={{
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>Unknown</Typography>
-                    <Typography sx={{
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      color: '#000000de',
-                      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    }} variant='p'>07/18/24 3:46pm (1 min)</Typography>
-                    <Typography sx={{
-                      color: '#686d73',
-                      fontSize: '16px',
-                      fontWeight: '400',
-                    }} variant='p'>Paused</Typography>
-                  </Box>
-                  <DeleteIcon sx={{ color: '#686d73' }} />
-                  < PauseIcon />
-                </Box>
-
+                <Note/>
               </Box>
             </Box>
           </Box>
@@ -721,95 +233,95 @@ export default function FreedPage() {
           }}>
 
             {/* capture visit model */}
-            <Box style={{ display: 'none', }}>
-              <Button sx={{
-                transition:
-                  'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, ' +
-                  'box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, ' +
-                  'border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-                borderRadius: '24px',
-                padding: '0px 16px',
-                minWidth: '48px',
-                width: 'auto',
-                height: '48px',
-                zIndex: 1050,
-                boxShadow:
-                  'rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, ' +
-                  'rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, ' +
-                  'rgba(0, 0, 0, 0.12) 0px 1px 18px 0px',
-                color: 'rgba(0, 0, 0, 0.87)',
-                backgroundColor: 'rgb(224, 224, 224)',
-                margin: '8px',
-              }}>
-                <MicNoneIcon />CAPTURE CONVERSATION</Button>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: '15px', }}>
-                <Typography sx={{
-                  textAlign: 'center', display: 'flex', width: '130px', justifyContent: 'center', gap: '10px',
-                }}>
-                  <span
-                    style={{
-                      borderBottom: '1px solid #000',
-                      display: 'inline-block',
-                      lineHeight: '0.1em',
-                      margin: '10px 0 17px',
-                      width: '50%',
-                    }}
-                  />
-                  or
-                  <span
-                    style={{
-                      borderBottom: '1px solid #000',
-                      display: 'inline-block',
-                      lineHeight: '0.1em',
-                      margin: '10px 0 17px',
-                      width: '50%',
-                    }}
-                  />
-                </Typography>
-              </Box>
-
-              <Box sx={{
-                marginBottom: '25px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '5px',
-              }}>
-                <Typography sx={{ color: '#6b6b6b', fontSize: '14px', }}>Drag in or</Typography>
-
-                <Button
-                  sx={{
-                    background: 'transparent',
-                    boxShadow: 'none',
-                    color: '#1976d2',
-                    padding: '0px',
+            <Box style={{ display: '', }}>
+                <Button sx={{
+                    transition:
+                        'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, ' +
+                        'box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, ' +
+                        'border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                    borderRadius: '24px',
+                    padding: '0px 16px',
+                    minWidth: '48px',
                     width: 'auto',
-                    display: 'contents',
-                    textTransform: 'capitalize',
-                    '&:hover': {
-                      background: 'none',
-                      boxShadow: 'none',
-                    },
-                    '& svg': {
-                      display: 'none',
-                    },
+                    height: '48px',
+                    zIndex: 1050,
+                    boxShadow:
+                        'rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, ' +
+                        'rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, ' +
+                        'rgba(0, 0, 0, 0.12) 0px 1px 18px 0px',
+                    color: 'rgba(0, 0, 0, 0.87)',
+                    backgroundColor: 'rgb(224, 224, 224)',
+                    margin: '8px',
+                }}>
+                    <MicNoneIcon />CAPTURE CONVERSATION</Button>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: '15px', }}>
+                    <Typography sx={{
+                        textAlign: 'center', display: 'flex', width: '130px', justifyContent: 'center', gap: '10px',
+                    }}>
+                        <span
+                            style={{
+                                borderBottom: '1px solid #000',
+                                display: 'inline-block',
+                                lineHeight: '0.1em',
+                                margin: '10px 0 17px',
+                                width: '50%',
+                            }}
+                        />
+                        or
+                        <span
+                            style={{
+                                borderBottom: '1px solid #000',
+                                display: 'inline-block',
+                                lineHeight: '0.1em',
+                                margin: '10px 0 17px',
+                                width: '50%',
+                            }}
+                        />
+                    </Typography>
+                </Box>
 
-                  }}
-                  component="label"
-                  role={undefined}
-                  variant="contained"
-                  tabIndex={-1}
-                  startIcon={<CloudUploadIcon />}
-                >
-                  Upload
-                  <VisuallyHiddenInput type="file" />
-                </Button>
+                <Box sx={{
+                    marginBottom: '25px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '5px',
+                }}>
+                    <Typography sx={{ color: '#6b6b6b', fontSize: '14px', }}>Drag in or</Typography>
 
-                <Typography sx={{ color: '#6b6b6b', fontSize: '14px', }}>a pre-recorded visit.</Typography>
-              </Box>
-              <Link sx={{
-                fontSize: '18px',
-              }}>How do I tell my patient about Freed?</Link>
+                    <Button
+                        sx={{
+                            background: 'transparent',
+                            boxShadow: 'none',
+                            color: '#1976d2',
+                            padding: '0px',
+                            width: 'auto',
+                            display: 'contents',
+                            textTransform: 'capitalize',
+                            '&:hover': {
+                                background: 'none',
+                                boxShadow: 'none',
+                            },
+                            '& svg': {
+                                display: 'none',
+                            },
+
+                        }}
+                        component="label"
+                        role={undefined}
+                        variant="contained"
+                        tabIndex={-1}
+                        startIcon={<CloudUploadIcon />}
+                    >
+                        Upload
+                        <VisuallyHiddenInput type="file" />
+                    </Button>
+
+                    <Typography sx={{ color: '#6b6b6b', fontSize: '14px', }}>a pre-recorded visit.</Typography>
+                </Box>
+                <Link sx={{
+                    fontSize: '18px',
+                }}>How do I tell my patient about Freed?</Link>
             </Box>
             {/* capture visit model */}
 
@@ -894,7 +406,7 @@ export default function FreedPage() {
           </Box>
 
           {/* ============================== End visit model ============================== */}
-          <Box style={{ display: 'block', }} sx={{ padding: '32px', }}>
+          <Box style={{ display: 'none', }} sx={{ padding: '32px', }}>
             <Box>
               <Typography sx={{
                 fontSize: '34px',
@@ -1050,7 +562,7 @@ export default function FreedPage() {
 
           {/* ============================ Visit card Summary =============================== */}
 
-          <Box style={{ display: 'block', }} sx={{
+          <Box style={{ display: 'none', }} sx={{
 
             backgroundColor: 'rgb(255, 255, 255)',
             color: 'rgba(0, 0, 0, 0.87)',
@@ -1145,7 +657,6 @@ export default function FreedPage() {
           {/* ============================ Visit card Summary =============================== */}
 
         </Box>
-
 
       </Box>
 
