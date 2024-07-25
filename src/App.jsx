@@ -1,7 +1,7 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './components/specific/Login'
-import FreedPage from "./view/FreedPage";
+import Record from './view/Record';
 import SignUp from "./components/specific/SignUp";
 import Home from "./view/Home";
 import { ToastContainer } from 'react-toastify';
@@ -16,7 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/freedpage" element={<FreedPage />} />
+          <Route path="/record" element={<Record />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/help/microhone" element={<MicPermissions />} />
         </Routes>

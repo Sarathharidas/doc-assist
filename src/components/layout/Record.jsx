@@ -7,8 +7,6 @@
 
 // const Record = () => {
 
-
-
 //     return (
 //         <div>
 //             <Box style={{ display: '', }}>
