@@ -1,0 +1,323 @@
+import { Box, Button, Typography } from "@mui/material";
+import MicNoneIcon from "@mui/icons-material/MicNone";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import PauseIcon from '@mui/icons-material/Pause';
+import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
+
+import AddPatientModal from "./AddPatientModal";
+
+const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+});
+
+const Recorder = ({ getData }) => {
+    const [isRecording, setIsRecording] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
+    const [saveAudioModal, setSaveAudioModal] = useState(false)
+    const [patientName, setPatientName] = useState('')
+    const [audioBlob, setAudioBlob] = useState(null)
+    const mediaRecorder = useRef(null);
+    const chunks = useRef([]);
+
+    useEffect(() => {
+        if (audioBlob) {
+            console.log('audioBlob', audioBlob, 'patientName', patientName);
+            getData({ blob: audioBlob?.blob, name: patientName })
+            handleCloseModal()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [audioBlob])
+
+    const startRecording = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder.current = new MediaRecorder(stream);
+            mediaRecorder.current.ondataavailable = (e) => {
+                chunks.current.push(e.data);
+            };
+            mediaRecorder.current.onstop = () => {
+                console.log('onstop, patientName:', patientName);
+                const blob = new Blob(chunks.current, { type: 'audio/mp3' });
+                chunks.current = [];
+                saveRecording(blob);
+            };
+            mediaRecorder.current.start();
+            setIsRecording(true);
+            setIsPaused(false);
+        } catch (err) {
+            console.error('Error accessing microphone:', err);
+        }
+    };
+
+    const pausedRecording = () => {
+        if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
+            mediaRecorder.current.pause();
+            setIsPaused(true);
+        }
+    }
+
+    const resumeRecording = () => {
+        if (mediaRecorder.current && mediaRecorder.current.state === 'paused') {
+            mediaRecorder.current.resume();
+            setIsPaused(false);
+        }
+    }
+
+    const playPauseRecording = () => {
+        if (isPaused) resumeRecording()
+        else pausedRecording()
+    }
+
+    const stopRecording = () => {
+        if (mediaRecorder.current && ['recording', 'paused'].includes(mediaRecorder.current.state)) {
+            mediaRecorder.current.stop();
+            setIsRecording(false);
+            setIsPaused(false);
+        }
+    };
+
+    const handleSaveAudioName = () => {
+        setSaveAudioModal(true)
+        pausedRecording()
+    }
+
+    const handleCloseModal = () => {
+        setPatientName('')
+        setSaveAudioModal(false)
+    }
+
+    const saveRecording = (blob) => {
+        const url = URL.createObjectURL(blob);
+        setAudioBlob({ url, blob })
+    }
+
+    return (
+        <>
+            {!isRecording && (
+                <Box>
+                    <Button
+                        onClick={startRecording}
+                        sx={{
+                            transition:
+                                "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, " +
+                                "box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, " +
+                                "border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+                            borderRadius: "24px",
+                            padding: "0px 16px",
+                            minWidth: "48px",
+                            width: "auto",
+                            height: "48px",
+                            zIndex: 1050,
+                            boxShadow:
+                                "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, " +
+                                "rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, " +
+                                "rgba(0, 0, 0, 0.12) 0px 1px 18px 0px",
+                            color: "rgba(0, 0, 0, 0.87)",
+                            backgroundColor: "rgb(224, 224, 224)",
+                            margin: "8px",
+                        }}
+                    >
+                        <MicNoneIcon />
+                        CAPTURE CONVERSATION
+                    </Button>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            my: "15px",
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                textAlign: "center",
+                                display: "flex",
+                                width: "130px",
+                                justifyContent: "center",
+                                gap: "10px",
+
+                                "& span": {
+                                    borderBottom: "1px solid #000",
+                                    display: "inline-block",
+                                    lineHeight: "0.1em",
+                                    margin: "10px 0 17px",
+                                    width: "50%",
+                                },
+                            }}
+                        >
+                            <span />
+                            or
+                            <span />
+                        </Typography>
+                    </Box>
+
+                    <Box
+                        sx={{
+                            marginBottom: "25px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "5px",
+                        }}
+                    >
+                        <Typography sx={{ color: "#6b6b6b", fontSize: "14px" }}>
+                            Drag in or
+                        </Typography>
+
+                        <Button
+                            sx={{
+                                background: "transparent",
+                                boxShadow: "none",
+                                color: "#1976d2",
+                                padding: "0px",
+                                width: "auto",
+                                display: "contents",
+                                textTransform: "capitalize",
+                                "&:hover": {
+                                    background: "none",
+                                    boxShadow: "none",
+                                },
+                                "& svg": {
+                                    display: "none",
+                                },
+                            }}
+                            component="label"
+                            role={undefined}
+                            variant="contained"
+                            tabIndex={-1}
+                            startIcon={<CloudUploadIcon />}
+                        >
+                            Upload
+                            <VisuallyHiddenInput type="file" />
+                        </Button>
+
+                        <Typography sx={{ color: "#6b6b6b", fontSize: "14px" }}>
+                            a pre-recorded visit.
+                        </Typography>
+                    </Box>
+                    <Link
+                        sx={{
+                            fontSize: "18px",
+                        }}
+                    >
+                        How do I tell my patient about Freed?
+                    </Link>
+                </Box>
+            )}
+
+            {isRecording && (
+                <Box>
+                    <Typography
+                        sx={{
+                            color: "#000000de",
+                            fontSize: "22px",
+                            fontWeight: "500",
+                            marginBottom: "15px",
+                        }}
+                        variant="h1"
+                    >
+                        {isPaused ? 'Paused' : 'Listening'}
+                    </Typography>
+                    <Typography
+                        sx={{
+                            color: "#000000de",
+                            fontSize: "16px",
+                            fontWeight: "500",
+                        }}
+                        variant="p"
+                    >
+                        Press End Visit to generate your note, or play to continue.
+                    </Typography>
+
+                    <Box
+                        sx={{ marginTop: "15px" }}
+                    >
+                        <Button
+                            sx={{
+                                transition:
+                                    "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, " +
+                                    "box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, " +
+                                    "border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+                                borderRadius: "24px",
+                                padding: "0px 16px",
+                                minWidth: "48px",
+                                width: "auto",
+                                height: "48px",
+                                zIndex: 1050,
+                                boxShadow:
+                                    "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, " +
+                                    "rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, " +
+                                    "rgba(0, 0, 0, 0.12) 0px 1px 18px 0px",
+                                color: "rgba(0, 0, 0, 0.87)",
+                                backgroundColor: "rgb(224, 224, 224)",
+                                margin: "8px",
+                            }}
+                            onClick={handleSaveAudioName}
+                        >
+                            <MicNoneIcon /> END VISIT
+                        </Button>
+                        <Button
+                            sx={{
+                                transition:
+                                    "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, " +
+                                    "box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, " +
+                                    "border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+                                borderRadius: "24px",
+                                padding: "0px 16px",
+                                minWidth: "48px",
+                                width: "auto",
+                                height: "48px",
+                                zIndex: 1050,
+                                boxShadow:
+                                    "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, " +
+                                    "rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, " +
+                                    "rgba(0, 0, 0, 0.12) 0px 1px 18px 0px",
+                                color: "rgba(0, 0, 0, 0.87)",
+                                backgroundColor: "rgb(224, 224, 224)",
+                                margin: "8px",
+                            }}
+                            onClick={playPauseRecording}
+                        >
+                            {isPaused ?
+                                <PlayArrowIcon /> :
+                                <PauseIcon />
+                            }
+                        </Button>
+                    </Box>
+
+                    <Box sx={{ marginTop: "35px" }}>
+                        <Link sx={{ fontSize: "18px" }}>
+                            How do I tell my patient about Freed?
+                        </Link>
+                    </Box>
+                </Box>
+            )}
+
+            <AddPatientModal
+                showModal={saveAudioModal}
+                patientName={patientName}
+                setPatientName={setPatientName}
+                onSave={stopRecording}
+                handleClose={handleCloseModal}
+            />
+        </>
+    );
+};
+
+Recorder.prototype = {
+    getData: PropTypes.func
+}
+
+export default Recorder;
