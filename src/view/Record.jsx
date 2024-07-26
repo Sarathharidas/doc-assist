@@ -16,13 +16,85 @@ import { Button } from "@mui/material";
 import SideBar from "../components/common/SideBar";
 import Recorder from "../components/common/Recorder";
 import { uploadAudio } from "../services/uploadAudio";
+import { recordsList } from "../services/recordsList";
+import { useEffect, useState } from "react";
 
 const FreedPage = () => {
+  /**
+   * State for storing the records fetched from the server
+   */
+  const [records, setRecords] = useState([]);
 
-  const handleSaveAudio = (data) => {
-    console.log(data);
-    uploadAudio(data?.blob, { patientName: data?.name })
+  /**
+   * State for indicating if the records are still loading
+   */
+  const [loadingRecords, setLoadingRecords] = useState(false);
+
+  /**
+   * Fetches the records from the server and updates the state
+   * @returns {Promise<void>}
+   */
+  const fetchRecords = async () => {
+    setLoadingRecords(true);
+    try {
+      /**
+       * Get the records from the server
+       */
+      const response = await recordsList();
+      if (response) {
+        /**
+         * Set the records state
+         */
+        setRecords(response);
+      }
+    } catch (error) {
+      /**
+       * Handle any errors that occur
+       */
+      console.log(error);
+    } finally {
+      /**
+       * Set the loading state to false
+       */
+      setLoadingRecords(false);
+    }
   };
+
+  /**
+   * Fetches the records from the server and updates the state
+   */
+  /**
+   * Handles saving the audio data to the server and then fetches the updated records
+   * @param {Object} data - The data containing the audio blob and patient name
+   * @param {Blob} data.blob - The audio blob to be saved
+   * @param {string} data.name - The name of the patient for the recording
+   * @returns {Promise<void>} - A promise that resolves when the records are fetched again
+   */
+  const handleSaveAudio = (data) => {
+    // Format the current date and time to be used as part of the file name
+    const formattedDate = new Date()
+      .toISOString()
+      .replace(/:/g, "-")
+      .replace(/\..+/, "");
+
+    // Generate the file name based on the patient name and the formatted date
+    const fileName = `${data?.name}-${formattedDate}`;
+
+    // Upload the audio data to the server and fetch the updated records
+    uploadAudio(data?.blob, { patientName: data?.name }, fileName)?.then(() =>
+      fetchRecords()
+    );
+  };
+
+  /**
+   * Fetches the records from the server when the component mounts.
+   * This function is called inside the useEffect hook with an empty dependency array.
+   * This means that it will only run once, when the component mounts.
+   */
+  useEffect(() => {
+    // Call the fetchRecords function to fetch the records from the server
+    fetchRecords();
+  }, []); // Empty dependency array ensures that the effect runs only once
 
   return (
     <>
@@ -52,7 +124,7 @@ const FreedPage = () => {
       </Box>
 
       <Box sx={{ display: "flex" }}>
-        <SideBar />
+        <SideBar loading={loadingRecords} records={records} />
 
         <Box
           sx={{

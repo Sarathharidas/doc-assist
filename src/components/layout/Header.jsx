@@ -29,7 +29,7 @@ const Login = () => {
       setIsLoggedIn(false)
     }
   }, [])
- console.log("sd",isLoggedIn)
+ 
   let navigate = useNavigate();
   const routeChange = () => {
     if(isLoggedIn){

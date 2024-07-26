@@ -2,87 +2,83 @@ import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 //import { signInWithGoogle } from "../services/firebase";
-import app from '../../services/firebase'
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "../../services/firebase";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useFormik } from "formik";
 import { Signup_Schema } from "../../validation_schema";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const auth = getAuth(app)
+const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 const Login = () => {
- const navigate = useNavigate()
+  const navigate = useNavigate();
   const [user, setUser] = useState();
- 
+
   const handleLogin = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         setUser(result.user);
-        navigate('/')
-        if(result.user.accessToken) {
-          localStorage.setItem('TOKEN', JSON.stringify(result.user.
-            accessToken
-          ))
-          
-          const userInfo= {email: result.email, displayName: result.displayName}
-          localStorage.setItem('USER', JSON.stringify(userInfo))
-            }
-        
-        console.log("hgahsd",result.user)
-      })
-      .catch((error) => {
-        if (error.message ==="Firebase: Error (auth/invalid-credential."){
-          console.log(error.message)
-          toast.error("Invalid Email Or Password. Please Try Again")
+        navigate("/");
+        if (result.user.accessToken) {
+          localStorage.setItem(
+            "TOKEN",
+            JSON.stringify(result.user.accessToken)
+          );
+
+          const userInfo = {
+            email: result.email,
+            displayName: result.displayName,
+          };
+          localStorage.setItem("USER", JSON.stringify(userInfo));
         }
       })
-    }
-    
-    useEffect(() => {
-      console.log(user)
-    }, [user])
-    
-    const logIn = useFormik({
-      initialValues: { email: '', password: '' },
-      validationSchema: Signup_Schema,
-      onSubmit: ({ email, password }) => {
-        
-        console.log({ email, password });
-        
-        // Create a new user with email and password using firebase
-        signInWithEmailAndPassword(auth, email, password)
+      .catch((error) => {
+        if (error.message === "Firebase: Error (auth/invalid-credential.") {
+          console.log(error.message);
+          toast.error("Invalid Email Or Password. Please Try Again");
+        }
+      });
+  };
+
+  const logIn = useFormik({
+    initialValues: { email: "", password: "" },
+    validationSchema: Signup_Schema,
+    onSubmit: ({ email, password }) => {
+      // Create a new user with email and password using firebase
+      signInWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          console.log("tokr",res.user.accessToken)
-          if(res?.user?.accessToken) {
-            localStorage.setItem('TOKEN', JSON.stringify(res.user.
-              accessToken
-            ))
-            const userInfo= {email: res.email, displayName: res.displayName}
-            localStorage.setItem('USER', JSON.stringify(userInfo))
+          if (res?.user?.accessToken) {
+            localStorage.setItem("TOKEN", JSON.stringify(res.user.accessToken));
+            const userInfo = { email: res.email, displayName: res.displayName };
+            localStorage.setItem("USER", JSON.stringify(userInfo));
           }
-          console.log("res => ", res.user);
-          navigate('/')
+          navigate("/");
         })
         .catch((error) => {
-          console.log("fff",typeof error.message)
-          if (error.message === "Firebase: Error (auth/invalid-credential)."){
-            toast.error("Invalid email or password. Please try again")
+          if (error.message === "Firebase: Error (auth/invalid-credential).") {
+            toast.error("Invalid email or password. Please try again");
           }
-        })
-        // .catch((users,password) => {
-        //     if (password !== users.passwordHash) {
-        //        toast.error("Invalid password. Please try again")
-        //      }
-        //   })
-        
-      },
+        });
+      // .catch((users,password) => {
+      //     if (password !== users.passwordHash) {
+      //        toast.error("Invalid password. Please try again")
+      //      }
+      //   })
+    },
   });
 
   return (
     <>
-      <Box sx={{ position: "relative", background: "#1976d2", padding: "10px" }}>
+      <Box
+        sx={{ position: "relative", background: "#1976d2", padding: "10px" }}
+      >
         <Typography sx={{ color: "#fff", fontSize: "25px" }}>Freed</Typography>
       </Box>
       <Box>
@@ -148,7 +144,7 @@ const Login = () => {
               </svg>
               Sign in with Google
             </Button>
-            <Box component='form' noValidate onSubmit={logIn.handleSubmit}>
+            <Box component="form" noValidate onSubmit={logIn.handleSubmit}>
               <Box>
                 <Box
                   sx={{
@@ -199,7 +195,11 @@ const Login = () => {
                   onChange={logIn.handleChange}
                   onBlur={logIn.handleBlur}
                   error={logIn.errors.email && logIn.touched.email}
-                  helperText={(logIn.errors.email && logIn.touched.email) && logIn.errors.email}
+                  helperText={
+                    logIn.errors.email &&
+                    logIn.touched.email &&
+                    logIn.errors.email
+                  }
                   FormHelperTextProps={{ sx: { ml: 0, fontSize: 13 } }}
                 />
 
@@ -213,7 +213,11 @@ const Login = () => {
                   onChange={logIn.handleChange}
                   onBlur={logIn.handleBlur}
                   error={logIn.errors.password && logIn.touched.password}
-                  helperText={(logIn.errors.password && logIn.touched.password) && logIn.errors.password}
+                  helperText={
+                    logIn.errors.password &&
+                    logIn.touched.password &&
+                    logIn.errors.password
+                  }
                   FormHelperTextProps={{ sx: { ml: 0, fontSize: 13 } }}
                 />
               </Box>
@@ -227,7 +231,7 @@ const Login = () => {
                     color: "#fff",
                     marginTop: "15px",
                     marginBottom: "15px",
-                    '&:hover': {
+                    "&:hover": {
                       background: "#115293",
                     },
                   }}
