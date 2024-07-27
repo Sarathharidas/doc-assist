@@ -17,13 +17,18 @@ import SideBar from "../components/common/SideBar";
 import Recorder from "../components/common/Recorder";
 import { uploadAudio } from "../services/uploadAudio";
 import { recordsList } from "../services/recordsList";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const FreedPage = () => {
   /**
    * State for storing the records fetched from the server
    */
   const [records, setRecords] = useState([]);
+
+  const userId = localStorage.getItem("userId");
+
+  const navigate = useNavigate();
 
   /**
    * State for indicating if the records are still loading
@@ -40,7 +45,7 @@ const FreedPage = () => {
       /**
        * Get the records from the server
        */
-      const response = await recordsList();
+      const response = await recordsList(userId);
       if (response) {
         /**
          * Set the records state
@@ -70,7 +75,7 @@ const FreedPage = () => {
    * @param {string} data.name - The name of the patient for the recording
    * @returns {Promise<void>} - A promise that resolves when the records are fetched again
    */
-  const handleSaveAudio = (data) => {
+  const handleSaveAudio = async (data) => {
     // Format the current date and time to be used as part of the file name
     const formattedDate = new Date()
       .toISOString()
@@ -82,7 +87,7 @@ const FreedPage = () => {
 
     // Upload the audio data to the server and fetch the updated records
     uploadAudio(data?.blob, { patientName: data?.name }, fileName)?.then(() =>
-      fetchRecords()
+      setTimeout(() => fetchRecords(), 500)
     );
   };
 
@@ -96,6 +101,10 @@ const FreedPage = () => {
     fetchRecords();
   }, []); // Empty dependency array ensures that the effect runs only once
 
+  useLayoutEffect(() => {
+    if (!userId) navigate("/login");
+  }, []);
+
   return (
     <>
       <Box
@@ -108,7 +117,12 @@ const FreedPage = () => {
           alignItems: "center",
         }}
       >
-        <Typography sx={{ color: "#fff", fontSize: "20px" }}>Freed</Typography>
+        <Typography
+          sx={{ color: "#fff", fontSize: "20px", cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        >
+          Freed
+        </Typography>
         <Box
           sx={{
             display: "flex",

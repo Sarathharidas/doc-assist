@@ -21,6 +21,8 @@ const auth = getAuth(app);
 
 const SignUp = () => {
   const [initialValues] = useState({ email: "", password: "" });
+  const [acceptPolicy, setAcceptPolicy] = useState(false);
+
   const navigate = useNavigate();
 
   const SignUp = useFormik({
@@ -31,7 +33,17 @@ const SignUp = () => {
       // Create a new user with email and password using firebase
       createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          navigate("/login");
+          if (res?.user?.accessToken) {
+            localStorage.setItem("token", JSON.stringify(res.user.accessToken));
+            const userInfo = {
+              email: res.email,
+              displayName: res.displayName,
+              uid: res.user.uid,
+            };
+            localStorage.setItem("userId", res.user.uid);
+            localStorage.setItem("user", JSON.stringify(userInfo));
+          }
+          navigate("/record");
         })
         .catch((err) => console.log("Error => ", err));
     },
@@ -153,6 +165,7 @@ const SignUp = () => {
                   color: "#061f2f",
                   fontSize: "14px",
                 }}
+                disabled={!acceptPolicy}
               >
                 CREATE ACCOUNT
               </Button>
@@ -180,7 +193,12 @@ const SignUp = () => {
                   sx={{
                     display: "contents",
                   }}
-                  control={<Checkbox />}
+                  control={
+                    <Checkbox
+                      checked={acceptPolicy}
+                      onChange={() => setAcceptPolicy((prev) => !prev)}
+                    />
+                  }
                   label={
                     <span>
                       I agree to the terms of{" "}

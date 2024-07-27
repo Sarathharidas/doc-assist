@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import { Typography, FormControlLabel, Checkbox } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import PauseIcon from "@mui/icons-material/Pause";
 import PropTypes from "prop-types";
+import { PlayArrow } from "@mui/icons-material";
 
 const Note = ({ record }) => {
   const createdAt = record?.createdAt?.toDate();
@@ -70,7 +70,7 @@ const Note = ({ record }) => {
           </Typography>
         </Box>
         <DeleteIcon sx={{ color: "#686d73" }} />
-        <PauseIcon />
+        <PlayArrow />
       </Box>
     </div>
   );

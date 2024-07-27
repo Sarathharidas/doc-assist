@@ -9,37 +9,46 @@ import {
 } from "@mui/material";
 import "../../App.css";
 import HeroImg from "../../assets/image/hero-img.jpg";
-import Images_Slider from '../common/Slider'
+import Images_Slider from "../common/Slider";
 import Note from "../../assets/image/Note.svg";
 import Visit from "../../assets/image/start-visit.png";
-import Footer from "./Footer"
+import Footer from "./Footer";
 
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Login = () => {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("TOKEN")
+    const token = localStorage.getItem("userId");
     if (token) {
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
     } else {
-      setIsLoggedIn(false)
+      setIsLoggedIn(false);
     }
-  }, [])
- 
+  }, []);
+
   let navigate = useNavigate();
   const routeChange = () => {
-    if(isLoggedIn){
-      setIsLoggedIn(false)
-      localStorage.removeItem("TOKEN")
-    }else{
-      let path = '/login';
-    navigate(path)
-    } 
-  }
+    if (isLoggedIn) {
+      setIsLoggedIn(false);
+      localStorage.clear();
+    } else {
+      let path = "/login";
+      navigate(path);
+    }
+  };
+
+  const handleTryFree = () => {
+    const userId = localStorage.getItem("userId");
+
+    if (userId) {
+      navigate("/record");
+    } else {
+      navigate("/signup");
+    }
+  };
 
   return (
     <>
@@ -128,6 +137,7 @@ const Login = () => {
                       color: "#fff",
                     },
                   }}
+                  onClick={handleTryFree}
                 >
                   Try for Free
                 </Button>
@@ -139,7 +149,7 @@ const Login = () => {
       {/* header section */}
 
       {/* hero section */}
-      <Box sx={{ marginTop: "5rem", paddingBottom: '5rem', }}>
+      <Box sx={{ marginTop: "5rem", paddingBottom: "5rem" }}>
         <Container maxWidth="xl">
           <Grid container spacing={2} justifyContent="space-between">
             <Grid item xs={12} lg={6}>
@@ -196,6 +206,7 @@ const Login = () => {
                         color: "#fff",
                       },
                     }}
+                    onClick={handleTryFree}
                   >
                     Try for Free
                   </Button>
@@ -235,34 +246,50 @@ const Login = () => {
       {/* hero section */}
 
       {/* slider section */}
-      <Box sx={{
-        background: "#fff",
-      }}>
-        <Box sx={{ paddingBottom: "75px", }}>
+      <Box
+        sx={{
+          background: "#fff",
+        }}
+      >
+        <Box sx={{ paddingBottom: "75px" }}>
           <Container maxWidth="xl">
-            <Box sx={{
-              paddingTop: "75px",
-              textAlign: 'center',
-              paddingBottom: '20px',
-            }}>
-              <Typography sx={{
-                fontSize: "48px",
-                color: '#061f2f',
-                fontWeight: '400',
-                marginBottom: '5px',
-              }} variant="h1">Loved by over 10,000 clinicians</Typography>
-              <Typography sx={{
-                fontSize: "20px",
-                color: '#061f2f',
-                fontWeight: '400',
-              }} variant="p">(and their families)</Typography>
+            <Box
+              sx={{
+                paddingTop: "75px",
+                textAlign: "center",
+                paddingBottom: "20px",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "48px",
+                  color: "#061f2f",
+                  fontWeight: "400",
+                  marginBottom: "5px",
+                }}
+                variant="h1"
+              >
+                Loved by over 10,000 clinicians
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "20px",
+                  color: "#061f2f",
+                  fontWeight: "400",
+                }}
+                variant="p"
+              >
+                (and their families)
+              </Typography>
             </Box>
           </Container>
           <Box>
             <Images_Slider />
-            <Box sx={{
-              textAlign: 'center',
-            }}>
+            <Box
+              sx={{
+                textAlign: "center",
+              }}
+            >
               <Button
                 sx={{
                   borderRadius: "8px",
@@ -275,7 +302,7 @@ const Login = () => {
                   background: "#d9c7ff",
                   textTransform: "capitalize",
                   transition: "background-color 0.2s, color 0.2s",
-                  marginTop: '10px',
+                  marginTop: "10px",
                   "&:hover": {
                     backgroundColor: "#000",
                     color: "#d9c7ff",
@@ -291,18 +318,35 @@ const Login = () => {
       {/* slider section */}
 
       {/* Instant clinical Card section */}
-      <Box sx={{
-        paddingY: '100px',
-      }}>
+      <Box
+        sx={{
+          paddingY: "100px",
+        }}
+      >
         <Container maxWidth="xl">
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography variant="h1" sx={{ fontSize: "48px", color: "#061f2f", fontWeight: "400", textAlign: 'left', marginBottom: '50px' }}>
+          <Box sx={{ textAlign: "center" }}>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: "48px",
+                color: "#061f2f",
+                fontWeight: "400",
+                textAlign: "left",
+                marginBottom: "50px",
+              }}
+            >
               Instant clinical notes tailored to you
             </Typography>
           </Box>
           <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
-              <Box sx={{ background: '#fff', borderRadius: '16px', padding: '20px' }}>
+              <Box
+                sx={{
+                  background: "#fff",
+                  borderRadius: "16px",
+                  padding: "20px",
+                }}
+              >
                 <Box
                   sx={{
                     width: "80px",
@@ -316,12 +360,39 @@ const Login = () => {
                 >
                   <img src={Note} alt="Note" />
                 </Box>
-                <Typography sx={{ fontSize: "20px", color: "#061f2f", fontWeight: "600", textAlign: 'left', marginBottom: '10px', marginTop: '30px' }}>Notes in your style, 10x faster</Typography>
-                <Typography sx={{ fontSize: "20px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>Freed learns your style and format, with every edit. Get customized clinical notes in moments, not hours.</Typography>
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    color: "#061f2f",
+                    fontWeight: "600",
+                    textAlign: "left",
+                    marginBottom: "10px",
+                    marginTop: "30px",
+                  }}
+                >
+                  Notes in your style, 10x faster
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    color: "#061f2f",
+                    fontWeight: "500",
+                    textAlign: "left",
+                  }}
+                >
+                  Freed learns your style and format, with every edit. Get
+                  customized clinical notes in moments, not hours.
+                </Typography>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Box sx={{ background: '#fff', borderRadius: '16px', padding: '20px' }}>
+              <Box
+                sx={{
+                  background: "#fff",
+                  borderRadius: "16px",
+                  padding: "20px",
+                }}
+              >
                 <Box
                   sx={{
                     width: "80px",
@@ -335,12 +406,39 @@ const Login = () => {
                 >
                   <img src={Note} alt="Note" />
                 </Box>
-                <Typography sx={{ fontSize: "20px", color: "#061f2f", fontWeight: "600", textAlign: 'left', marginBottom: '10px', marginTop: '30px' }}>Notes in your style, 10x faster</Typography>
-                <Typography sx={{ fontSize: "20px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>Freed learns your style and format, with every edit. Get customized clinical notes in moments, not hours.</Typography>
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    color: "#061f2f",
+                    fontWeight: "600",
+                    textAlign: "left",
+                    marginBottom: "10px",
+                    marginTop: "30px",
+                  }}
+                >
+                  Notes in your style, 10x faster
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    color: "#061f2f",
+                    fontWeight: "500",
+                    textAlign: "left",
+                  }}
+                >
+                  Freed learns your style and format, with every edit. Get
+                  customized clinical notes in moments, not hours.
+                </Typography>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Box sx={{ background: '#fff', borderRadius: '16px', padding: '20px' }}>
+              <Box
+                sx={{
+                  background: "#fff",
+                  borderRadius: "16px",
+                  padding: "20px",
+                }}
+              >
                 <Box
                   sx={{
                     width: "80px",
@@ -354,29 +452,60 @@ const Login = () => {
                 >
                   <img src={Note} alt="Note" />
                 </Box>
-                <Typography sx={{ fontSize: "20px", color: "#061f2f", fontWeight: "600", textAlign: 'left', marginBottom: '10px', marginTop: '30px' }}>Notes in your style, 10x faster</Typography>
-                <Typography sx={{ fontSize: "20px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>Freed learns your style and format, with every edit. Get customized clinical notes in moments, not hours.</Typography>
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    color: "#061f2f",
+                    fontWeight: "600",
+                    textAlign: "left",
+                    marginBottom: "10px",
+                    marginTop: "30px",
+                  }}
+                >
+                  Notes in your style, 10x faster
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    color: "#061f2f",
+                    fontWeight: "500",
+                    textAlign: "left",
+                  }}
+                >
+                  Freed learns your style and format, with every edit. Get
+                  customized clinical notes in moments, not hours.
+                </Typography>
               </Box>
             </Grid>
-
           </Grid>
         </Container>
       </Box>
       {/* Instant clinical Card section */}
 
       {/* simplicity Card section */}
-      <Box sx={{
-        paddingY: '100px',
-        background: '#fff',
-      }}>
+      <Box
+        sx={{
+          paddingY: "100px",
+          background: "#fff",
+        }}
+      >
         <Container maxWidth="xl">
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography variant="h1" sx={{ fontSize: "48px", color: "#061f2f", fontWeight: "400", textAlign: 'left', marginBottom: '50px' }}>
+          <Box sx={{ textAlign: "center" }}>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: "48px",
+                color: "#061f2f",
+                fontWeight: "400",
+                textAlign: "left",
+                marginBottom: "50px",
+              }}
+            >
               Off the charts simplicity
             </Typography>
           </Box>
-          <Grid container spacing={2} >
-            <Grid sx={{ paddingLeft: '0px' }} item xs={12} md={4}>
+          <Grid container spacing={2}>
+            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4}>
               <Box
                 sx={{
                   width: "460px",
@@ -385,32 +514,45 @@ const Login = () => {
                   "& img": {
                     width: "100%",
                     height: "100%",
-                    objectFit: 'cover',
-                    borderRadius: '.5rem',
+                    objectFit: "cover",
+                    borderRadius: ".5rem",
                   },
                 }}
               >
                 <img src={Visit} alt="visit-img" />
               </Box>
-              <Box sx={{
-                paddingTop: '20px',
-              }}>
-                <Typography variant="h1" sx={{
-                  fontSize: '20px',
-                  fontWeight: '600',
-                  color: '#061f2f',
-                  marginBottom: '5px',
-
-                }}>1. Capture</Typography>
-                <Typography sx={{
-                  lineHeight: 1.4,
-                  color: '#061f2f',
-                  fontSize: '20px',
-                  fontWeight: 500,
-                }} variant="p">Select “Capture visit”’ when your visit begins. Freed can listen for up to two hours, whether it's a virtual or office visit.</Typography>
+              <Box
+                sx={{
+                  paddingTop: "20px",
+                }}
+              >
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "20px",
+                    fontWeight: "600",
+                    color: "#061f2f",
+                    marginBottom: "5px",
+                  }}
+                >
+                  1. Capture
+                </Typography>
+                <Typography
+                  sx={{
+                    lineHeight: 1.4,
+                    color: "#061f2f",
+                    fontSize: "20px",
+                    fontWeight: 500,
+                  }}
+                  variant="p"
+                >
+                  Select “Capture visit”’ when your visit begins. Freed can
+                  listen for up to two hours, whether it's a virtual or office
+                  visit.
+                </Typography>
               </Box>
             </Grid>
-            <Grid sx={{ paddingLeft: '0px' }} item xs={12} md={4}>
+            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4}>
               <Box
                 sx={{
                   width: "460px",
@@ -419,32 +561,44 @@ const Login = () => {
                   "& img": {
                     width: "100%",
                     height: "100%",
-                    objectFit: 'cover',
-                    borderRadius: '.5rem',
+                    objectFit: "cover",
+                    borderRadius: ".5rem",
                   },
                 }}
               >
                 <img src={Visit} alt="visit-img" />
               </Box>
-              <Box sx={{
-                paddingTop: '20px',
-              }}>
-                <Typography variant="h1" sx={{
-                  fontSize: '20px',
-                  fontWeight: '600',
-                  color: '#061f2f',
-                  marginBottom: '5px',
-
-                }}>2. Edit</Typography>
-                <Typography sx={{
-                  lineHeight: 1.4,
-                  color: '#061f2f',
-                  fontSize: '20px',
-                  fontWeight: 500,
-                }} variant="p">Select “End visit” and view your completed SOAP note in about a minute. Edit to help Freed learn your style.</Typography>
+              <Box
+                sx={{
+                  paddingTop: "20px",
+                }}
+              >
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "20px",
+                    fontWeight: "600",
+                    color: "#061f2f",
+                    marginBottom: "5px",
+                  }}
+                >
+                  2. Edit
+                </Typography>
+                <Typography
+                  sx={{
+                    lineHeight: 1.4,
+                    color: "#061f2f",
+                    fontSize: "20px",
+                    fontWeight: 500,
+                  }}
+                  variant="p"
+                >
+                  Select “End visit” and view your completed SOAP note in about
+                  a minute. Edit to help Freed learn your style.
+                </Typography>
               </Box>
             </Grid>
-            <Grid sx={{ paddingLeft: '0px' }} item xs={12} md={4}>
+            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4}>
               <Box
                 sx={{
                   width: "460px",
@@ -453,36 +607,50 @@ const Login = () => {
                   "& img": {
                     width: "100%",
                     height: "100%",
-                    objectFit: 'cover',
-                    borderRadius: '.5rem',
+                    objectFit: "cover",
+                    borderRadius: ".5rem",
                   },
                 }}
               >
                 <img src={Visit} alt="visit-img" />
               </Box>
-              <Box sx={{
-                paddingTop: '20px',
-              }}>
-                <Typography variant="h1" sx={{
-                  fontSize: '20px',
-                  fontWeight: '600',
-                  color: '#061f2f',
-                  marginBottom: '5px',
-
-                }}>3. Sign off</Typography>
-                <Typography sx={{
-                  lineHeight: 1.4,
-                  color: '#061f2f',
-                  fontSize: '20px',
-                  fontWeight: 500,
-                }} variant="p">Send simple patient instructions, and copy completed notes into any EHR.</Typography>
+              <Box
+                sx={{
+                  paddingTop: "20px",
+                }}
+              >
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "20px",
+                    fontWeight: "600",
+                    color: "#061f2f",
+                    marginBottom: "5px",
+                  }}
+                >
+                  3. Sign off
+                </Typography>
+                <Typography
+                  sx={{
+                    lineHeight: 1.4,
+                    color: "#061f2f",
+                    fontSize: "20px",
+                    fontWeight: 500,
+                  }}
+                  variant="p"
+                >
+                  Send simple patient instructions, and copy completed notes
+                  into any EHR.
+                </Typography>
               </Box>
             </Grid>
           </Grid>
         </Container>
-        <Box sx={{
-          textAlign: 'center',
-        }}>
+        <Box
+          sx={{
+            textAlign: "center",
+          }}
+        >
           <Button
             sx={{
               borderRadius: "8px",
@@ -495,7 +663,7 @@ const Login = () => {
               background: "#d9c7ff",
               textTransform: "capitalize",
               transition: "background-color 0.2s, color 0.2s",
-              marginTop: '10px',
+              marginTop: "10px",
               "&:hover": {
                 backgroundColor: "#000",
                 color: "#d9c7ff",
@@ -508,96 +676,262 @@ const Login = () => {
       </Box>
       {/* simplicity Card section */}
 
-
-
       {/* Instant clinical Card section */}
-      <Box sx={{
-        paddingY: '100px',
-      }}>
+      <Box
+        sx={{
+          paddingY: "100px",
+        }}
+      >
         <Container maxWidth="xl">
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography variant="h1" sx={{ fontSize: "48px", color: "#061f2f", fontWeight: "400", textAlign: 'center', marginBottom: '50px' }}>
+          <Box sx={{ textAlign: "center" }}>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: "48px",
+                color: "#061f2f",
+                fontWeight: "400",
+                textAlign: "center",
+                marginBottom: "50px",
+              }}
+            >
               Pricing
             </Typography>
           </Box>
           <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
-              <Box sx={{ background: '#fff', borderRadius: '16px', padding: '20px', height: '285px', }}>
-                <Typography sx={{ fontSize: "32px", color: "#061f2f", fontWeight: "500", textAlign: 'left', marginBottom: '0px', }}>Trail</Typography>
-                <Typography sx={{ fontSize: "18px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>Free</Typography>
-                <Box sx={{ marginY: '10px', }}>
-                  <Typography sx={{ fontSize: "18px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>10 free visits</Typography>
-                  <Typography sx={{ fontSize: "18px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>Cancel anytime</Typography>
-                </Box>
-                <Button
+              <Box
+                sx={{
+                  background: "#fff",
+                  borderRadius: "16px",
+                  padding: "20px",
+                  height: "285px",
+                }}
+              >
+                <Typography
                   sx={{
-                    marginTop: '20px',
-                    borderRadius: "8px",
-                    padding: "1rem 1.5rem",
-                    fontSize: "1.125rem",
-                    fontWeight: 500,
-                    lineHeight: 1,
+                    fontSize: "32px",
                     color: "#061f2f",
-                    background: "#d9c7ff",
-                    textTransform: "capitalize",
-                    transition: "background-color 0.2s, color 0.2s",
-                    "&:hover": {
-                      backgroundColor: "#000",
-                      color: "#fff",
-                    },
+                    fontWeight: "500",
+                    textAlign: "left",
+                    marginBottom: "0px",
                   }}
                 >
-                  Try for Free
-                </Button>
-                <Typography sx={{ fontSize: "15px", color: "#061f2f", fontWeight: "500", textAlign: 'left', opacity: '0.5', marginTop: '15px' }}>No credit card needed</Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Box sx={{ background: '#fff', borderRadius: '16px', padding: '20px', height: '285px', }}>
-                <Typography sx={{ fontSize: "32px", color: "#061f2f", fontWeight: "500", textAlign: 'left', marginBottom: '0px', }}>Individual</Typography>
-                <Typography sx={{ fontSize: "18px", color: "#061f2f", fontWeight: "500", textAlign: 'left', marginBottom: '10px', }}>$99 / month</Typography>
-
-                <Box sx={{ marginY: '10px', }}>
-                  <Typography sx={{ fontSize: "18px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>10 free visits</Typography>
-                  <Typography sx={{ fontSize: "18px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>Unlimited visits</Typography>
-                </Box>
-                <Button
+                  Trail
+                </Typography>
+                <Typography
                   sx={{
-                    borderRadius: "8px",
-                    marginTop: '20px',
-                    padding: "1rem 1.5rem",
-                    fontSize: "1.125rem",
-                    fontWeight: 500,
-                    lineHeight: 1,
+                    fontSize: "18px",
                     color: "#061f2f",
-                    background: "#d9c7ff",
-                    textTransform: "capitalize",
-                    transition: "background-color 0.2s, color 0.2s",
-                    "&:hover": {
-                      backgroundColor: "#000",
-                      color: "#fff",
-                    },
+                    fontWeight: "500",
+                    textAlign: "left",
                   }}
                 >
-                  Try for Free
-                </Button>
-
-                <Typography sx={{ fontSize: "15px", color: "#061f2f", fontWeight: "500", textAlign: 'left', opacity: '0.5', marginTop: '15px' }}>No credit card needed</Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Box sx={{ background: '#fff', borderRadius: '16px', padding: '20px', height: '285px', }}>
-                <Typography sx={{ fontSize: "32px", color: "#061f2f", fontWeight: "500", textAlign: 'left', marginBottom: '0px', }}>Group</Typography>
-                <Typography sx={{ fontSize: "18px", color: "#061f2f", fontWeight: "500", textAlign: 'left', marginBottom: '10px', }}>Custom pricing</Typography>
-                <Box sx={{ marginY: '10px', }}>
-                  <Typography sx={{ fontSize: "18px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>License management
+                  Free
+                </Typography>
+                <Box sx={{ marginY: "10px" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      color: "#061f2f",
+                      fontWeight: "500",
+                      textAlign: "left",
+                    }}
+                  >
+                    10 free visits
                   </Typography>
-                  <Typography sx={{ fontSize: "18px", color: "#061f2f", fontWeight: "500", textAlign: 'left', }}>Organization-wide BAA</Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      color: "#061f2f",
+                      fontWeight: "500",
+                      textAlign: "left",
+                    }}
+                  >
+                    Cancel anytime
+                  </Typography>
+                </Box>
+                <Button
+                  sx={{
+                    marginTop: "20px",
+                    borderRadius: "8px",
+                    padding: "1rem 1.5rem",
+                    fontSize: "1.125rem",
+                    fontWeight: 500,
+                    lineHeight: 1,
+                    color: "#061f2f",
+                    background: "#d9c7ff",
+                    textTransform: "capitalize",
+                    transition: "background-color 0.2s, color 0.2s",
+                    "&:hover": {
+                      backgroundColor: "#000",
+                      color: "#fff",
+                    },
+                  }}
+                  onClick={handleTryFree}
+                >
+                  Try for Free
+                </Button>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    color: "#061f2f",
+                    fontWeight: "500",
+                    textAlign: "left",
+                    opacity: "0.5",
+                    marginTop: "15px",
+                  }}
+                >
+                  No credit card needed
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Box
+                sx={{
+                  background: "#fff",
+                  borderRadius: "16px",
+                  padding: "20px",
+                  height: "285px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "32px",
+                    color: "#061f2f",
+                    fontWeight: "500",
+                    textAlign: "left",
+                    marginBottom: "0px",
+                  }}
+                >
+                  Individual
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "18px",
+                    color: "#061f2f",
+                    fontWeight: "500",
+                    textAlign: "left",
+                    marginBottom: "10px",
+                  }}
+                >
+                  $99 / month
+                </Typography>
+
+                <Box sx={{ marginY: "10px" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      color: "#061f2f",
+                      fontWeight: "500",
+                      textAlign: "left",
+                    }}
+                  >
+                    10 free visits
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      color: "#061f2f",
+                      fontWeight: "500",
+                      textAlign: "left",
+                    }}
+                  >
+                    Unlimited visits
+                  </Typography>
                 </Box>
                 <Button
                   sx={{
                     borderRadius: "8px",
-                    marginTop: '20px',
+                    marginTop: "20px",
+                    padding: "1rem 1.5rem",
+                    fontSize: "1.125rem",
+                    fontWeight: 500,
+                    lineHeight: 1,
+                    color: "#061f2f",
+                    background: "#d9c7ff",
+                    textTransform: "capitalize",
+                    transition: "background-color 0.2s, color 0.2s",
+                    "&:hover": {
+                      backgroundColor: "#000",
+                      color: "#fff",
+                    },
+                  }}
+                  onClick={handleTryFree}
+                >
+                  Try for Free
+                </Button>
+
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    color: "#061f2f",
+                    fontWeight: "500",
+                    textAlign: "left",
+                    opacity: "0.5",
+                    marginTop: "15px",
+                  }}
+                >
+                  No credit card needed
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Box
+                sx={{
+                  background: "#fff",
+                  borderRadius: "16px",
+                  padding: "20px",
+                  height: "285px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "32px",
+                    color: "#061f2f",
+                    fontWeight: "500",
+                    textAlign: "left",
+                    marginBottom: "0px",
+                  }}
+                >
+                  Group
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "18px",
+                    color: "#061f2f",
+                    fontWeight: "500",
+                    textAlign: "left",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Custom pricing
+                </Typography>
+                <Box sx={{ marginY: "10px" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      color: "#061f2f",
+                      fontWeight: "500",
+                      textAlign: "left",
+                    }}
+                  >
+                    License management
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      color: "#061f2f",
+                      fontWeight: "500",
+                      textAlign: "left",
+                    }}
+                  >
+                    Organization-wide BAA
+                  </Typography>
+                </Box>
+                <Button
+                  sx={{
+                    borderRadius: "8px",
+                    marginTop: "20px",
                     padding: "1rem 1.5rem",
                     fontSize: "1.125rem",
                     fontWeight: 500,
@@ -621,7 +955,6 @@ const Login = () => {
         </Container>
       </Box>
       {/* Instant clinical Card section */}
-
     </>
   );
 };

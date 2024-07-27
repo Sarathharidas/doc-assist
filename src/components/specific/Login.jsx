@@ -25,18 +25,22 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         setUser(result.user);
-        navigate("/");
+
         if (result.user.accessToken) {
           localStorage.setItem(
-            "TOKEN",
+            "token",
             JSON.stringify(result.user.accessToken)
           );
+
+          localStorage.setItem("userId", result.user.uid);
 
           const userInfo = {
             email: result.email,
             displayName: result.displayName,
+            uid: result.user.uid,
           };
-          localStorage.setItem("USER", JSON.stringify(userInfo));
+          localStorage.setItem("user", JSON.stringify(userInfo));
+          navigate("/");
         }
       })
       .catch((error) => {
@@ -55,11 +59,16 @@ const Login = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then((res) => {
           if (res?.user?.accessToken) {
-            localStorage.setItem("TOKEN", JSON.stringify(res.user.accessToken));
-            const userInfo = { email: res.email, displayName: res.displayName };
-            localStorage.setItem("USER", JSON.stringify(userInfo));
+            localStorage.setItem("token", JSON.stringify(res.user.accessToken));
+            const userInfo = {
+              email: res.email,
+              displayName: res.displayName,
+              uid: res.user.uid,
+            };
+            localStorage.setItem("userId", result.user.uid);
+            localStorage.setItem("user", JSON.stringify(userInfo));
+            navigate("/");
           }
-          navigate("/");
         })
         .catch((error) => {
           if (error.message === "Firebase: Error (auth/invalid-credential).") {
@@ -79,7 +88,12 @@ const Login = () => {
       <Box
         sx={{ position: "relative", background: "#1976d2", padding: "10px" }}
       >
-        <Typography sx={{ color: "#fff", fontSize: "25px" }}>Freed</Typography>
+        <Typography
+          sx={{ color: "#fff", fontSize: "25px" }}
+          onClick={() => navigate("/")}
+        >
+          Freed
+        </Typography>
       </Box>
       <Box>
         <Container maxWidth="xl">

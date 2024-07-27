@@ -78,7 +78,12 @@ const MicPermissions = () => {
           alignItems: "center",
         }}
       >
-        <Typography sx={{ color: "#fff", fontSize: "20px" }}>Freed</Typography>
+        <Typography
+          sx={{ color: "#fff", fontSize: "20px" }}
+          onClick={() => navigate("/")}
+        >
+          Freed
+        </Typography>
         <Box
           sx={{
             display: "flex",

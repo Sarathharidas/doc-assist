@@ -1,28 +1,31 @@
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from './components/specific/Login'
-import Record from './view/Record';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./components/specific/Login";
+import Record from "./view/Record";
 import SignUp from "./components/specific/SignUp";
 import Home from "./view/Home";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import MicPermissions from "./view/MicPermissions";
 
 const App = () => {
+
   return (
     <>
-      <ToastContainer/>
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/record" element={<Record />} />
+          <Route
+            path="/record"
+            element={<Record />}
+          />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/help/microhone" element={<MicPermissions />} />
         </Routes>
       </BrowserRouter>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
