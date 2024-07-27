@@ -95,10 +95,7 @@ const Login = () => {
                   },
                 }}
               >
-                <Link>Features</Link>
-                <Link>How it Works</Link>
-                <Link>Pricing</Link>
-                <Link>About Us</Link>
+              
                 <Button
                   onClick={routeChange}
                   sx={{
