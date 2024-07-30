@@ -12,10 +12,12 @@ import StickyNote2Icon from "@mui/icons-material/StickyNote2";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import FolderDeleteIcon from "@mui/icons-material/FolderDelete";
 import PropTypes from "prop-types";
-
+import { useNavigate } from "react-router-dom";
 const SideBar = ({ loading = false, records = [] }) => {
   const [selectedOption, setSelectedOption] = useState("allnote");
+  const navigate = useNavigate();
 
+console.log('records', records)
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -50,6 +52,7 @@ const SideBar = ({ loading = false, records = [] }) => {
             <Button
               sx={{ width: "100%", marginTop: "10px" }}
               variant="outlined"
+              onClick={() => navigate("/record")}
             >
               <AddIcon
                 sx={{ width: "20px", height: "20px", marginRight: "8px" }}
@@ -99,7 +102,7 @@ const SideBar = ({ loading = false, records = [] }) => {
                 top: 0,
                 background: "white",
                 zIndex: 1,
-                padding: "10px",
+                // padding: "10px",
               }}
             >
               <FormControlLabel
@@ -124,9 +127,9 @@ const SideBar = ({ loading = false, records = [] }) => {
                   displayEmpty
                   fullWidth
                   sx={{
-                    "& .MuiSelect-select": {
-                      padding: "0",
-                    },
+                    // "& .MuiSelect-select": {
+                    //   padding: "0",
+                    // },
                     "& fieldset": {
                       border: "none",
                     },

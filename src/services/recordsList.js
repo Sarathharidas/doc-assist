@@ -1,8 +1,11 @@
 import {
   collection,
+  getDocs,
   getDocsFromServer,
   query,
   where,
+  // query,
+  // where,
 } from "firebase/firestore";
 import { db } from "./firebase";
 /**
@@ -11,13 +14,14 @@ import { db } from "./firebase";
  * Each record is an object with an 'id' property and the merged data from the Firestore document.
  * @throws {Error} If there is an error retrieving the documents from the Firestore database.
  */
-export const recordsList = async (userId) => {
+// eslint-disable-next-line no-unused-vars
+export const recordsList = async () => {
   // Retrieve the documents from the 'patient' collection in the Firestore database
 
   const patientRef = collection(db, "patient");
-  const q = query(patientRef, where("userId", "==", userId));
+  // const q = query(patientRef, where("userId", "==", userId));
 
-  const response = await getDocsFromServer(q)
+  const response = await getDocsFromServer(patientRef)
     .then((querySnapshot) => {
       // Create an empty array to store the patient records
       const dataList = [];

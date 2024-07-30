@@ -66,12 +66,12 @@ const Recorder = ({ getData }) => {
         .replace(/:/g, "-")
         .replace(/\..+/, "")}.mp3`;
       const newFile = new File([audioBlob?.blob], newFileName, { type: "audio/mp3" });
-      getData({ blob: audioBlob?.blob, name: patientName });
+      getData({ blob: audioBlob?.blob, name: patientName })
       handleCloseModal();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioBlob]);
-
+   
   /**
    * Start recording.
    */

@@ -171,7 +171,6 @@ const MicPermissions = () => {
                   top: 0,
                   background: "white",
                   zIndex: 1,
-                  padding: "10px",
                 }}
               >
                 <FormControlLabel
@@ -196,9 +195,6 @@ const MicPermissions = () => {
                     displayEmpty
                     fullWidth
                     sx={{
-                      "& .MuiSelect-select": {
-                        padding: "0",
-                      },
                       "& fieldset": {
                         border: "none",
                       },
@@ -277,7 +273,7 @@ const MicPermissions = () => {
                       margin: "0px 0px 0.35em",
                       fontFamily: "Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 400,
-                      fontSize: "34px",
+                      
                       lineHeight: 1.235,
                       letterSpacing: "0.00735em",
                     }}
@@ -292,7 +288,7 @@ const MicPermissions = () => {
                       margin: "0px 0px 5.6px",
                       fontFamily: "Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 400,
-                      fontSize: "16px",
+                      
                       lineHeight: 1.5,
                       letterSpacing: "0.00938em",
                     }}
@@ -585,7 +581,7 @@ const MicPermissions = () => {
             {/* End visit model */}
           </Box>
 
-          {/* ============================== End visit model ============================== */}
+          {/* ======= End visit model ======= */}
           <Box style={{ display: "none" }} sx={{ padding: "32px" }}>
             <Box>
               <Typography
@@ -595,7 +591,6 @@ const MicPermissions = () => {
                   margin: "0px 0px 0.35em",
                   fontFamily: "Roboto, Helvetica, Arial, sans-serif",
                   fontWeight: 400,
-                  fontSize: "34px",
                   lineHeight: 1.235,
                   letterSpacing: "0.00735em",
                 }}
@@ -610,7 +605,6 @@ const MicPermissions = () => {
                   margin: "0px 0px 5.6px",
                   fontFamily: "Roboto, Helvetica, Arial, sans-serif",
                   fontWeight: 400,
-                  fontSize: "16px",
                   lineHeight: 1.5,
                   letterSpacing: "0.00938em",
                 }}

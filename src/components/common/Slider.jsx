@@ -15,7 +15,7 @@ export default function App() {
         <>
             <Swiper
                 slidesPerView={3}
-                centeredSlides={true}
+                // centeredSlides={true}
                 spaceBetween={30}
                 autoplay={{
                     delay: 2500,

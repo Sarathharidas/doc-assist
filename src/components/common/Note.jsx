@@ -3,12 +3,13 @@ import { Typography, FormControlLabel, Checkbox } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
 import { PlayArrow } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const Note = ({ record }) => {
   const createdAt = record?.createdAt?.toDate();
+  const navigate = useNavigate();
   return (
     <div>
-      {" "}
       <Box
         sx={{
           display: "flex",
@@ -20,6 +21,7 @@ const Note = ({ record }) => {
             backgroundColor: "#1976d214",
           },
         }}
+        onClick={() => navigate(`/visit/${record?.id}`)}
       >
         <FormControlLabel
           sx={{

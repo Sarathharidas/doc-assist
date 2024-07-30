@@ -1,16 +1,16 @@
 import Box from "@mui/material/Box";
-import { Typography, Link } from "@mui/material";
+import { Typography, Link, Menu, MenuItem, FormControlLabel, Switch } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import FaceIcon from '@mui/icons-material/Face';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Window from "../assets/image/windows-system-step1.png";
 import Window_two from "../assets/image/windows-system-step2.png";
 import Window_three from "../assets/image/windows-system-step3.png";
 import Window_Four from "../assets/image/windows-system-step4.png";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { TextareaAutosize } from "@mui/material";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material";
 import SideBar from "../components/common/SideBar";
@@ -18,17 +18,22 @@ import Recorder from "../components/common/Recorder";
 import { uploadAudio } from "../services/uploadAudio";
 import { recordsList } from "../services/recordsList";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { auto } from "@popperjs/core";
 
-const FreedPage = () => {
+const FreedPage = ({ visit = false }) => {
   /**
    * State for storing the records fetched from the server
    */
   const [records, setRecords] = useState([]);
+  const [currentRecord, setCurrentRecord] = useState({});
+  const [fullSummary, setFullSummary] = useState(false);
+  const [fullTranscript, setFullTranscript] = useState(false);
 
   const userId = localStorage.getItem("userId");
 
   const navigate = useNavigate();
+  const { id } = useParams();
 
   /**
    * State for indicating if the records are still loading
@@ -45,7 +50,7 @@ const FreedPage = () => {
       /**
        * Get the records from the server
        */
-      const response = await recordsList(userId);
+      const response = await recordsList();
       if (response) {
         /**
          * Set the records state
@@ -96,15 +101,36 @@ const FreedPage = () => {
    * This function is called inside the useEffect hook with an empty dependency array.
    * This means that it will only run once, when the component mounts.
    */
+  
   useEffect(() => {
     // Call the fetchRecords function to fetch the records from the server
     fetchRecords();
   }, []); // Empty dependency array ensures that the effect runs only once
 
+  useEffect(() => {
+    const matchedRecord = records.find(record => record.id === id);
+    setCurrentRecord(matchedRecord || {});
+  }, [id, records])
+
   useLayoutEffect(() => {
     if (!userId) navigate("/login");
   }, []);
 
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
+  const handleLogout = () =>{
+    localStorage.clear();
+    navigate("/login")
+    setAnchorEl(null);
+  }
   return (
     <>
       <Box
@@ -133,7 +159,28 @@ const FreedPage = () => {
         >
           <AddIcon />
           <ChatBubbleOutlineIcon />
-          <AccountCircleIcon />
+          <Button
+            id="basic-button"
+            style={{ padding: 0, minWidth: auto }}
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+          >
+            <AccountCircleIcon />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem onClick={handleClose} sx={{ fontSize: 14 }}> <FaceIcon sx={{ fontSize: 17, marginRight: 1, color: "gray" }} /> You</MenuItem>
+            <MenuItem onClick={handleLogout} sx={{ fontSize: 14 }}> <LogoutIcon sx={{ fontSize: 17, marginRight: 1, color: "gray" }} /> Logout</MenuItem>
+          </Menu>
         </Box>
       </Box>
 
@@ -151,6 +198,158 @@ const FreedPage = () => {
             position: "relative",
           }}
         >
+            {visit ? <><Box
+            sx={{
+              backgroundColor: "rgb(255, 255, 255)",
+              color: "rgba(0, 0, 0, 0.87)",
+              boxShadow:
+                "0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)",
+              position: "relative",
+              transition: "margin 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+              overflowAnchor: "none",
+              borderRadius: "0px",
+              margin: "25px",
+              padding: "16px",
+              width: "calc(100% - 100px)",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                fontWeight: 400,
+                fontSize: "24px",
+                lineHeight: "23px",
+                letterSpacing: "0.00938em",
+                color: "rgba(0, 0, 0, 0.87)",
+                boxSizing: "border-box",
+                cursor: "text",
+                display: "inline-flex",
+                WebkitBoxAlign: "center",
+                alignItems: "center",
+                position: "relative",
+                gap: "8px",
+              }}
+            >
+              Visit Summary
+              <ErrorOutlineIcon
+                sx={{
+                  color: "#0000008a",
+                  width: "15px",
+                  height: "15px",
+                }}
+              />
+            </Typography>
+            <Box
+              sx={{
+                width: "100%",
+                marginTop: "35px",
+                marginBottom: "15px",
+                "& textarea": {
+                  width: "calc(100% - 40px)",
+                  height: "auto !important",
+                  resize: "none",
+                  fontSize: "16px",
+                  fontWeight: 400,
+                  lineHeight: "24px",
+                  letterSpacing: "0.00938em",
+                  color: "rgba(0, 0, 0, 0.87)",
+                  padding: "16px",
+                  borderRadius: "4px",
+                },
+              }}
+            >
+              {loadingRecords ? "Loading..." : <TextareaAutosize
+                id="w3review"
+                name="w3review"
+                aria-label="empty textarea"
+                rows={4}
+                placeholder="Please enter summary"
+                defaultValue={currentRecord?.summary ?? ""}
+              />}
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Box sx={{ display: "flex", gap: "10px" }}>
+                <FormControlLabel control={<Switch checked={fullSummary} disabled={loadingRecords} />} label="Full Summary" onClick={() => setFullSummary(!fullSummary)} />
+              </Box>
+              <Box>
+                <Button
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    border: "1px solid #1976d2",
+                  }}
+                >
+                  <ContentCopyIcon
+                    sx={{ width: "18px", height: "18px" }}
+                  />
+                  COPY
+                </Button>
+              </Box>
+            </Box>
+           {fullSummary && <Box sx={{marginTop: 3}}> 
+            <Typography
+              sx={{
+                fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                fontWeight: 400,
+                fontSize: "24px",
+                lineHeight: "23px",
+                letterSpacing: "0.00938em",
+                color: "rgba(0, 0, 0, 0.87)",
+                boxSizing: "border-box",
+                cursor: "text",
+                display: "inline-flex",
+                WebkitBoxAlign: "center",
+                alignItems: "center",
+                position: "relative",
+                gap: "8px",
+              }}
+            >
+              Full Transcript Summary
+              <ErrorOutlineIcon
+                sx={{
+                  color: "#0000008a",
+                  width: "15px",
+                  height: "15px",
+                }}
+              />
+            </Typography>
+            <Box
+              sx={{
+                width: "100%",
+                marginTop: "35px",
+                marginBottom: "15px",
+                "& textarea": {
+                  width: "calc(100% - 40px)",
+                  height: "auto !important",
+                  resize: "none",
+                  fontSize: "16px",
+                  fontWeight: 400,
+                  lineHeight: "24px",
+                  letterSpacing: "0.00938em",
+                  color: "rgba(0, 0, 0, 0.87)",
+                  padding: "16px",
+                  borderRadius: "4px",
+                },
+              }}
+            >
+              {<TextareaAutosize
+                id="w3review"
+                name="w3review"
+                aria-label="empty textarea"
+                rows={5}
+                defaultValue={currentRecord?.transcript ?? ""}
+              />}
+            </Box>
+            </Box>}
+          </Box>
+          </> : 
           <Box
             sx={{
               width: "340px",
@@ -162,7 +361,7 @@ const FreedPage = () => {
             }}
           >
             <Recorder getData={handleSaveAudio} />
-          </Box>
+          </Box>}
 
           {/* ============================== End visit model ============================== */}
           <Box style={{ display: "none" }} sx={{ padding: "32px" }}>
@@ -387,119 +586,6 @@ const FreedPage = () => {
 
           {/* ============================ Visit card Summary =============================== */}
 
-          <Box
-            style={{ display: "none" }}
-            sx={{
-              backgroundColor: "rgb(255, 255, 255)",
-              color: "rgba(0, 0, 0, 0.87)",
-              boxShadow:
-                "0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)",
-              position: "relative",
-              transition: "margin 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-              overflowAnchor: "none",
-              borderRadius: "0px",
-              margin: "25px",
-              padding: "16px",
-              width: "calc(100% - 100px)",
-            }}
-          >
-            <Typography
-              sx={{
-                fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-                fontWeight: 400,
-                fontSize: "24px",
-                lineHeight: "23px",
-                letterSpacing: "0.00938em",
-                color: "rgba(0, 0, 0, 0.87)",
-                boxSizing: "border-box",
-                cursor: "text",
-                display: "inline-flex",
-                WebkitBoxAlign: "center",
-                alignItems: "center",
-                position: "relative",
-                gap: "8px",
-              }}
-            >
-              Visit Summary{" "}
-              <ErrorOutlineIcon
-                sx={{
-                  color: "#0000008a",
-                  width: "15px",
-                  height: "15px",
-                }}
-              />
-            </Typography>
-
-            <Box
-              sx={{
-                width: "100%",
-                marginTop: "35px",
-                marginBottom: "15px",
-                "& textarea": {
-                  width: "calc(100% - 40px)",
-                  height: "auto !important",
-                  resize: "none",
-                  fontSize: "16px",
-                  fontWeight: 400,
-                  lineHeight: "24px",
-                  letterSpacing: "0.00938em",
-                  color: "rgba(0, 0, 0, 0.87)",
-                  padding: "16px",
-                  borderRadius: "4px",
-                },
-              }}
-            >
-              <TextareaAutosize
-                id="w3review"
-                name="w3review"
-                aria-label="empty textarea"
-                rows={4}
-                defaultValue="At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies."
-              />
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Box sx={{ display: "flex", gap: "10px" }}>
-                <ThumbUpOffAltIcon
-                  sx={{
-                    color: "#0000008a",
-                    width: "25px",
-                    height: "25px",
-                    cursor: "pointer",
-                  }}
-                />
-                <ThumbDownOffAltIcon
-                  sx={{
-                    color: "#0000008a",
-                    width: "25px",
-                    height: "25px",
-                    cursor: "pointer",
-                  }}
-                />
-              </Box>
-              <Box>
-                <Button
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "5px",
-                    border: "1px solid #1976d2",
-                  }}
-                >
-                  {" "}
-                  <ContentCopyIcon
-                    sx={{ width: "18px", height: "18px" }}
-                  />{" "}
-                  COPY
-                </Button>
-              </Box>
-            </Box>
-          </Box>
 
           {/* ============================ Visit card Summary =============================== */}
         </Box>

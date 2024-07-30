@@ -3,7 +3,6 @@ import {
   Button,
   Container,
   Grid,
-  Link,
   List,
   Typography,
 } from "@mui/material";
@@ -88,8 +87,8 @@ const Login = () => {
                     transition: "opacity 0.2s cubic-bezier(.215,.61,.355,1)",
                     listStyleType: "none",
                     textDecoration: "none",
-                    fontSize: "18px",
-                    fontWeight: "600",
+                    // fontSize: "18px",
+                    // fontWeight: "600",
                     display: "flex",
                     alignItems: "center",
                   },
@@ -281,6 +280,7 @@ const Login = () => {
             </Box>
           </Container>
           <Box>
+          {/* slider section */}
             <Images_Slider />
             <Box
               sx={{
@@ -312,7 +312,6 @@ const Login = () => {
           </Box>
         </Box>
       </Box>
-      {/* slider section */}
 
       {/* Instant clinical Card section */}
       <Box
@@ -543,9 +542,9 @@ const Login = () => {
                   }}
                   variant="p"
                 >
-                  Select “Capture visit”’ when your visit begins. Freed can
+                  {`Select “Capture visit”’ when your visit begins. Freed can
                   listen for up to two hours, whether it's a virtual or office
-                  visit.
+                  visit.`}
                 </Typography>
               </Box>
             </Grid>

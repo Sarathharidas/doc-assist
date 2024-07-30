@@ -20,6 +20,14 @@ const App = () => {
             path="/record"
             element={<Record />}
           />
+          <Route
+            path="/record/:id"
+            element={<Record />}
+          />
+          <Route
+            path="/visit/:id"
+            element={<Record visit={true}/>}
+          />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/help/microhone" element={<MicPermissions />} />
         </Routes>
