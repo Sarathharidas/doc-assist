@@ -1,11 +1,6 @@
 import {
   collection,
-  getDocs,
   getDocsFromServer,
-  query,
-  where,
-  // query,
-  // where,
 } from "firebase/firestore";
 import { db } from "./firebase";
 /**
@@ -33,6 +28,11 @@ export const recordsList = async () => {
           id: doc.id,
           ...doc.data(),
         });
+      });
+
+      // sort the records based on timestamp they have cretaed
+      dataList.sort((a, b) => {
+        return b.createdAt?.toMillis() - a.createdAt?.toMillis();
       });
 
       // Return the dataList array

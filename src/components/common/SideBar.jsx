@@ -17,7 +17,6 @@ const SideBar = ({ loading = false, records = [] }) => {
   const [selectedOption, setSelectedOption] = useState("allnote");
   const navigate = useNavigate();
 
-console.log('records', records)
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };

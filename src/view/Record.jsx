@@ -20,15 +20,22 @@ import { recordsList } from "../services/recordsList";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { auto } from "@popperjs/core";
+import { toast } from "react-toastify";
 
 const FreedPage = ({ visit = false }) => {
   /**
    * State for storing the records fetched from the server
    */
   const [records, setRecords] = useState([]);
+
+  // state to store record for disply on the visit page
   const [currentRecord, setCurrentRecord] = useState({});
+  
+  // State to check whether full summary option is checked or not
   const [fullSummary, setFullSummary] = useState(false);
-  const [fullTranscript, setFullTranscript] = useState(false);
+
+  // State to check whether summarty is copied or not
+  const [copySuccess, setCopySuccess] = useState(false)
 
   const userId = localStorage.getItem("userId");
 
@@ -131,6 +138,17 @@ const FreedPage = ({ visit = false }) => {
     navigate("/login")
     setAnchorEl(null);
   }
+
+  const handleCopySummary = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopySuccess(true);
+      toast.success("Text copied successfully")
+    }, (err) => {
+      toast.error("Failed to copy text")
+    });
+    setTimeout(() => setCopySuccess(false), 2000);
+  }
+  
   return (
     <>
       <Box
@@ -198,7 +216,8 @@ const FreedPage = ({ visit = false }) => {
             position: "relative",
           }}
         >
-            {visit ? <><Box
+            {visit ? <>
+            <Box
             sx={{
               backgroundColor: "rgb(255, 255, 255)",
               color: "rgba(0, 0, 0, 0.87)",
@@ -279,17 +298,19 @@ const FreedPage = ({ visit = false }) => {
               </Box>
               <Box>
                 <Button
+                  disabled={copySuccess}
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     gap: "5px",
-                    border: "1px solid #1976d2",
+                    border: `1px solid ${copySuccess ? "rgba(0,0,0,0.26)" : "#1976d2" }`,
                   }}
+                  onClick={() => handleCopySummary(currentRecord?.summary ?? "")}
                 >
                   <ContentCopyIcon
                     sx={{ width: "18px", height: "18px" }}
                   />
-                  COPY
+                  {copySuccess ? "Copied!": "COPY"}
                 </Button>
               </Box>
             </Box>

@@ -4,7 +4,7 @@ import { db, storage } from "./firebase";
 // import OpenAI from 'openai';
 import axios from "axios";
 
-const OPENAI_API_KEY = import.meta.env.OPENAI_API_KEY;
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
 // const client = new OpenAI({ apiKey: OPENAI_API_KEY });
 
