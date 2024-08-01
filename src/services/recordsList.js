@@ -1,6 +1,8 @@
 import {
   collection,
   getDocsFromServer,
+  query,
+  where,
 } from "firebase/firestore";
 import { db } from "./firebase";
 /**
@@ -10,13 +12,13 @@ import { db } from "./firebase";
  * @throws {Error} If there is an error retrieving the documents from the Firestore database.
  */
 // eslint-disable-next-line no-unused-vars
-export const recordsList = async () => {
+export const recordsList = async (userId) => {
   // Retrieve the documents from the 'patient' collection in the Firestore database
 
   const patientRef = collection(db, "patient");
-  // const q = query(patientRef, where("userId", "==", userId));
+  const q = query(patientRef, where("userId", "==", userId));
 
-  const response = await getDocsFromServer(patientRef)
+  const response = await getDocsFromServer(q)
     .then((querySnapshot) => {
       // Create an empty array to store the patient records
       const dataList = [];

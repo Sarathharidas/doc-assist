@@ -1,5 +1,10 @@
 import Box from "@mui/material/Box";
-import { Typography, FormControlLabel, Checkbox } from "@mui/material";
+import {
+  Typography,
+  FormControlLabel,
+  Checkbox,
+  CircularProgress,
+} from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
@@ -7,7 +12,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import { Button, TextField } from "@mui/material";
 import Note from "./Note";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import FolderDeleteIcon from "@mui/icons-material/FolderDelete";
@@ -15,11 +20,25 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 const SideBar = ({ loading = false, records = [] }) => {
   const [selectedOption, setSelectedOption] = useState("allnote");
+  const [searchedText, setSearchedText] = useState("");
+  const [filteredRecords, setFilteredRecords] = useState([]);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
+
+  const handleSerchTextChange = (event) => {
+    setSearchedText(event.target.value);
+  };
+
+  // filter the records when serached text is present
+  useEffect(() => {
+    const updatedRecords = records.filter((record) =>
+      record.patientName.toLowerCase().includes(searchedText.toLowerCase())
+    );
+    setFilteredRecords(updatedRecords);
+  }, [searchedText, records]);
 
   const options = [
     { value: "allnote", label: "All Notes", icon: <StickyNote2Icon /> },
@@ -68,6 +87,8 @@ const SideBar = ({ loading = false, records = [] }) => {
               id="outlined-basic"
               label="Search notes by name"
               variant="outlined"
+              value={searchedText}
+              onChange={handleSerchTextChange}
               fullWidth
               sx={{
                 marginTop: "16px",
@@ -170,11 +191,19 @@ const SideBar = ({ loading = false, records = [] }) => {
 
             <Box>
               {loading ? (
-                <div>Loading...</div>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    margin: "30px auto",
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
               ) : (
-                records?.map((record) => (
-                  <Note key={record.id} record={record} />
-                ))
+                (searchedText === "" ? records : filteredRecords)?.map(
+                  (record) => <Note key={record.id} record={record} />
+                )
               )}
             </Box>
           </Box>

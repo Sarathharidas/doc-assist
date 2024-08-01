@@ -26,20 +26,18 @@ const generateSummary = async (text) => {
   const outputChunks = [];
 
   const response = await axios.post(
-    'https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions',
+    "https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions",
     {
       prompt: `Summarize in short : ${text}`,
       max_tokens: 100,
     },
     {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
       },
     }
   );
-
-  console.log("openai response", response)
 
   // for (const chunk of inputChunks) {
   //   const response = await client.completions.create({
@@ -55,7 +53,7 @@ const generateSummary = async (text) => {
   //   outputChunks.push(summary);
   // }
 
-  return response?.data?.choices?.[0]?.text ?? 'Summary N/A';
+  return response?.data?.choices?.[0]?.text ?? "Summary N/A";
 };
 
 export const uploadAudio = async (file, objectData, fileName) => {
@@ -104,7 +102,7 @@ export const uploadAudio = async (file, objectData, fileName) => {
           summary: generate_summary,
           ...objectData,
         });
-        console.log('first', result)
+        console.log("first", result);
       })
       .catch((error) => console.error(error));
   });
