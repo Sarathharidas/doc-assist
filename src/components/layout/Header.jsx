@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  List,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid, List, Typography } from "@mui/material";
 import "../../App.css";
 import HeroImg from "../../assets/image/hero-img.jpg";
 import Images_Slider from "../common/Slider";
@@ -94,7 +87,6 @@ const Login = () => {
                   },
                 }}
               >
-              
                 <Button
                   onClick={routeChange}
                   sx={{
@@ -247,7 +239,7 @@ const Login = () => {
           background: "#fff",
         }}
       >
-        <Box sx={{ paddingBottom: "75px" }}>
+        <Box sx={{ paddingBottom: "75px", display: "none" }}>
           <Container maxWidth="xl">
             <Box
               sx={{
@@ -280,7 +272,7 @@ const Login = () => {
             </Box>
           </Container>
           <Box>
-          {/* slider section */}
+            {/* slider section */}
             <Images_Slider />
             <Box
               sx={{

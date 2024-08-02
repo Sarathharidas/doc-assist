@@ -44,6 +44,7 @@ const SignUp = () => {
             localStorage.setItem("user", JSON.stringify(userInfo));
           }
           navigate("/record");
+          window.location.reload();
         })
         .catch((err) => {
           if (err.message === "Firebase: Error (auth/email-already-in-use).") {

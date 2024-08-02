@@ -4,6 +4,7 @@ import { db, storage } from "./firebase";
 // import OpenAI from 'openai';
 import axios from "axios";
 
+const WHISPER_API_KEY = import.meta.env.VITE_WHISPER_API_KEY;
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
 // const client = new OpenAI({ apiKey: OPENAI_API_KEY });
@@ -67,10 +68,7 @@ export const uploadAudio = async (file, objectData, fileName) => {
 
   await uploadBytes(storageRef, file, metadata).then(async (snapshot) => {
     const myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      "Bearer IUQ04fFbryRahjHkV7eHBVpXw5KAxV62"
-    );
+    myHeaders.append("Authorization", `Bearer ${WHISPER_API_KEY}`);
 
     const formdata = new FormData();
     formdata.append("file", file);
