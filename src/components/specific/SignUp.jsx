@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 const auth = getAuth(app);
 
 const SignUp = () => {
-  const [initialValues] = useState({ email: "", password: "" });
+  const [initialValues] = useState({ email: "", password: "", username: "" });
   const [acceptPolicy, setAcceptPolicy] = useState(false);
 
   const navigate = useNavigate();
@@ -29,14 +29,15 @@ const SignUp = () => {
     initialValues,
     validationSchema: Signup_Schema,
     enableReinitialize: true,
-    onSubmit: ({ email, password }) => {
+    onSubmit: ({ email, password, username }) => {
       // Create a new user with email and password using firebase
-      createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(auth, email, password, username)
         .then((res) => {
           if (res?.user?.accessToken) {
             localStorage.setItem("token", JSON.stringify(res.user.accessToken));
             const userInfo = {
               email: res.email,
+              usernmae: res.username,
               displayName: res.displayName,
               uid: res.user.uid,
             };
@@ -168,6 +169,37 @@ const SignUp = () => {
                   SignUp.errors.password &&
                   SignUp.touched.password &&
                   SignUp.errors.password
+                }
+                FormHelperTextProps={{ sx: { ml: 0, fontSize: 13 } }}
+              />
+
+              <TextField
+                sx={{
+                  "& .MuiInputBase-input": {
+                    border: "1px solid #d3d3d3",
+                    padding: "10px 15px",
+                    borderRadius: "4px",
+                    fontSize: "14px",
+                    fontFamily: "sans-serif",
+                  },
+
+                  "& fieldset": {
+                    border: "none",
+                    padding: "10px 15px",
+                    borderRadius: "4px",
+                  },
+                }}
+                placeholder="Doctor's name"
+                name="username"
+                type="text"
+                value={SignUp.values.username}
+                onChange={SignUp.handleChange}
+                onBlur={SignUp.handleBlur}
+                error={SignUp.errors.username && SignUp.touched.username}
+                helperText={
+                  SignUp.errors.username &&
+                  SignUp.touched.username &&
+                  SignUp.errors.username
                 }
                 FormHelperTextProps={{ sx: { ml: 0, fontSize: 13 } }}
               />

@@ -18,7 +18,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import FolderDeleteIcon from "@mui/icons-material/FolderDelete";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-const SideBar = ({ loading = false, records = [] }) => {
+const SideBar = ({ loading = false, records = [], fetchRecords }) => {
   const [selectedOption, setSelectedOption] = useState("allnote");
   const [searchedText, setSearchedText] = useState("");
   const [filteredRecords, setFilteredRecords] = useState([]);
@@ -202,7 +202,13 @@ const SideBar = ({ loading = false, records = [] }) => {
                 </Box>
               ) : (
                 (searchedText === "" ? records : filteredRecords)?.map(
-                  (record) => <Note key={record.id} record={record} />
+                  (record) => (
+                    <Note
+                      key={record.id}
+                      record={record}
+                      fetchRecords={fetchRecords}
+                    />
+                  )
                 )
               )}
             </Box>

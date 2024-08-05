@@ -42,6 +42,7 @@ const Login = () => {
           };
           localStorage.setItem("user", JSON.stringify(userInfo));
           navigate("/");
+          window.location.reload();
         }
       })
       .catch((error) => {
@@ -57,10 +58,9 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: ({ email, password }) => {
       // Create a new user with email and password using firebase
-      
+
       signInWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          
           if (res?.user?.accessToken) {
             localStorage.setItem("token", JSON.stringify(res.user.accessToken));
             const userInfo = {
@@ -74,7 +74,6 @@ const Login = () => {
           }
         })
         .catch((error) => {
-         
           if (error.message === "Firebase: Error (auth/invalid-credential).") {
             toast.error("Invalid email or password. Please try again");
           }
@@ -87,11 +86,17 @@ const Login = () => {
     },
   });
 
- return (
+  return (
     <>
-      <Box sx={{ position: "relative", background: "#1976d2", padding: "10px" }}>
-        <Typography sx={{ color: "#fff", fontSize: "25px" }} onClick={() => navigate("/")}>Freed</Typography>
-        
+      <Box
+        sx={{ position: "relative", background: "#1976d2", padding: "10px" }}
+      >
+        <Typography
+          sx={{ color: "#fff", fontSize: "25px" }}
+          onClick={() => navigate("/")}
+        >
+          Freed
+        </Typography>
       </Box>
       <Box>
         <Container maxWidth="xl">
@@ -157,7 +162,7 @@ const Login = () => {
               </svg>
               Sign in with Google
             </Button>
-            <Box component='form' noValidate onSubmit={logIn.handleSubmit}>
+            <Box component="form" noValidate onSubmit={logIn.handleSubmit}>
               <Box>
                 <Box
                   sx={{
@@ -196,7 +201,7 @@ const Login = () => {
                     padding: "10px 15px",
                     color: "#808080",
                     background: "transparent",
-                    fontSize: '13px',
+                    fontSize: "13px",
                   },
                 }}
               >
@@ -208,7 +213,11 @@ const Login = () => {
                   onChange={logIn.handleChange}
                   onBlur={logIn.handleBlur}
                   error={logIn.errors.email && logIn.touched.email}
-                  helperText={(logIn.errors.email && logIn.touched.email) && logIn.errors.email}
+                  helperText={
+                    logIn.errors.email &&
+                    logIn.touched.email &&
+                    logIn.errors.email
+                  }
                   FormHelperTextProps={{ sx: { ml: 0, fontSize: 13 } }}
                 />
 
@@ -222,7 +231,11 @@ const Login = () => {
                   onChange={logIn.handleChange}
                   onBlur={logIn.handleBlur}
                   error={logIn.errors.password && logIn.touched.password}
-                  helperText={(logIn.errors.password && logIn.touched.password) && logIn.errors.password}
+                  helperText={
+                    logIn.errors.password &&
+                    logIn.touched.password &&
+                    logIn.errors.password
+                  }
                   FormHelperTextProps={{ sx: { ml: 0, fontSize: 13 } }}
                 />
               </Box>
@@ -237,12 +250,12 @@ const Login = () => {
                     color: "#fff",
                     marginTop: "15px",
                     marginBottom: "15px",
-                    '&:hover': {
+                    "&:hover": {
                       background: "#115293",
                     },
                   }}
                 >
-                 Sign in
+                  Sign in
                 </Button>
               </Box>
             </Box>
@@ -271,4 +284,3 @@ const Login = () => {
   );
 };
 export default Login;
-

@@ -1,13 +1,35 @@
 import Box from "@mui/material/Box";
-import { Typography, FormControlLabel, Checkbox } from "@mui/material";
+import {
+  Typography,
+  FormControlLabel,
+  Checkbox,
+  IconButton,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
 import { PlayArrow } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { db } from "../../services/firebase";
+import { deleteDoc, doc } from "firebase/firestore";
 
-const Note = ({ record }) => {
+const Note = ({ record, fetchRecords }) => {
   const createdAt = record?.createdAt?.toDate();
   const navigate = useNavigate();
+
+  const deletePatientRecord = async (event, patientId) => {
+    event.stopPropagation();
+
+    try {
+      // Delete the document
+      await deleteDoc(doc(db, "patient", patientId));
+      toast.success("Patient successfully deleted!");
+      fetchRecords();
+    } catch (e) {
+      toast.error("Error deleting patient: ", e);
+    }
+  };
+
   return (
     <div>
       <Box
@@ -71,8 +93,12 @@ const Note = ({ record }) => {
             Paused
           </Typography>
         </Box>
-        <DeleteIcon sx={{ color: "#686d73" }} />
-        <PlayArrow />
+        <IconButton onClick={(event) => deletePatientRecord(event, record?.id)}>
+          <DeleteIcon sx={{ color: "#686d73" }} />
+        </IconButton>
+        <IconButton>
+          <PlayArrow />
+        </IconButton>
       </Box>
     </div>
   );

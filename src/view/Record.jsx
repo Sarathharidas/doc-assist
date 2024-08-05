@@ -226,7 +226,11 @@ const FreedPage = ({ visit = false }) => {
       </Box>
 
       <Box sx={{ display: "flex" }}>
-        <SideBar loading={loadingRecords} records={records} />
+        <SideBar
+          loading={loadingRecords}
+          records={records}
+          fetchRecords={fetchRecords}
+        />
 
         <Box
           sx={{
