@@ -1,399 +1,931 @@
-
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import '../../assets/css/slider.css'
+import "swiper/css";
+import "../../assets/css/slider.css";
 
 // import required modules
-import { Autoplay } from 'swiper/modules';
-import { Box, Typography } from '@mui/material';
+import { Autoplay } from "swiper/modules";
+import { Box, Typography } from "@mui/material";
 
 export default function App() {
-    return (
-        <>
-            <Swiper
-                slidesPerView={3}
-                // centeredSlides={true}
-                spaceBetween={30}
-                autoplay={{
-                    delay: 2500,
+  return (
+    <>
+      <Swiper
+        slidesPerView={3}
+        // centeredSlides={true}
+        spaceBetween={30}
+        autoplay={{
+          delay: 2500,
+        }}
+        plugins={[Autoplay]}
+        className="mySwiper"
+      >
+        <SwiperSlide sx={{ position: "relative" }}>
+          <Box
+            sx={{
+              backgroundColor: "#f9f6ff",
+              textAlign: "center",
+              cursor: "default",
+              borderRadius: "1rem",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Box>
+              <Box sx={{ marginBottom: "40px", paddingTop: "32px" }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Psychiatric Mental Health
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                  }}
+                  variant="h1"
+                >
+                  Kristy, NP
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  letterSpacing: "-0.2px",
+                  fontSize: "20px",
+                  marginBottom: "35px",
                 }}
-                plugins={[Autoplay]}
-                className="mySwiper"
-            >
-                <SwiperSlide sx={{ position: 'relative' }}>
-                    <Box sx={{
-                        backgroundColor: '#f9f6ff',
-                        textAlign: 'center',
-                        cursor: 'default',
-                        borderRadius: '1rem',
-                        flexDirection: 'column',
-                        width: '100%',
-                    }}>
-                        <Box>
-                            <Box sx={{ marginBottom: '40px', paddingTop: '32px' }}>
-                                <Typography variant='h1' sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                    marginBottom: '5px',
-                                }}>Psychiatric Mental Health</Typography>
-                                <Typography sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                }} variant='h1'>Kristy, NP</Typography>
-                            </Box>
-                            <Box sx={{
-                                letterSpacing: '-0.2px',
-                                fontSize: '20px',
-                                marginBottom: '35px'
-                            }}>
-                                <Typography variant='p'>“Freed gives me peace of mind knowing that every encounter is thoroughly documented to a level that I would never achieve on my own, even if I had lots of time."</Typography>
-                            </Box>
+              >
+                <Typography variant="p">
+                  “Doctor-assist gives me peace of mind knowing that every
+                  encounter is thoroughly documented to a level that I would
+                  never achieve on my own, even if I had lots of time."
+                </Typography>
+              </Box>
 
-                            <Box sx={{
-                                paddingBottom: '32px',
-                                display: 'flex',
-                                gap: '10px',
-                                justifyContent: 'center',
-                            }}>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                            </Box>
-                        </Box>
+              <Box
+                sx={{
+                  paddingBottom: "32px",
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+              </Box>
+            </Box>
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide sx={{ position: "relative" }}>
+          <Box
+            sx={{
+              backgroundColor: "#f9f6ff",
+              textAlign: "center",
+              cursor: "default",
+              borderRadius: "1rem",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Box>
+              <Box sx={{ marginBottom: "40px", paddingTop: "32px" }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Psychiatric Mental Health
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                  }}
+                  variant="h1"
+                >
+                  Kristy, NP
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  letterSpacing: "-0.2px",
+                  fontSize: "20px",
+                  marginBottom: "35px",
+                }}
+              >
+                <Typography variant="p">
+                  “Doctor-assist gives me peace of mind knowing that every
+                  encounter is thoroughly documented to a level that I would
+                  never achieve on my own, even if I had lots of time."
+                </Typography>
+              </Box>
 
-                    </Box>
-                </SwiperSlide>
-                <SwiperSlide sx={{ position: 'relative' }}>
-                    <Box sx={{
-                        backgroundColor: '#f9f6ff',
-                        textAlign: 'center',
-                        cursor: 'default',
-                        borderRadius: '1rem',
-                        flexDirection: 'column',
-                        width: '100%',
-                    }}>
-                        <Box>
-                            <Box sx={{ marginBottom: '40px', paddingTop: '32px' }}>
-                                <Typography variant='h1' sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                    marginBottom: '5px',
-                                }}>Psychiatric Mental Health</Typography>
-                                <Typography sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                }} variant='h1'>Kristy, NP</Typography>
-                            </Box>
-                            <Box sx={{
-                                letterSpacing: '-0.2px',
-                                fontSize: '20px',
-                                marginBottom: '35px'
-                            }}>
-                                <Typography variant='p'>“Freed gives me peace of mind knowing that every encounter is thoroughly documented to a level that I would never achieve on my own, even if I had lots of time."</Typography>
-                            </Box>
+              <Box
+                sx={{
+                  paddingBottom: "32px",
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+              </Box>
+            </Box>
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide sx={{ position: "relative" }}>
+          <Box
+            sx={{
+              backgroundColor: "#f9f6ff",
+              textAlign: "center",
+              cursor: "default",
+              borderRadius: "1rem",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Box>
+              <Box sx={{ marginBottom: "40px", paddingTop: "32px" }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Psychiatric Mental Health
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                  }}
+                  variant="h1"
+                >
+                  Kristy, NP
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  letterSpacing: "-0.2px",
+                  fontSize: "20px",
+                  marginBottom: "35px",
+                }}
+              >
+                <Typography variant="p">
+                  “Doctor-assist gives me peace of mind knowing that every
+                  encounter is thoroughly documented to a level that I would
+                  never achieve on my own, even if I had lots of time."
+                </Typography>
+              </Box>
 
-                            <Box sx={{
-                                paddingBottom: '32px',
-                                display: 'flex',
-                                gap: '10px',
-                                justifyContent: 'center',
-                            }}>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                            </Box>
-                        </Box>
+              <Box
+                sx={{
+                  paddingBottom: "32px",
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+              </Box>
+            </Box>
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide sx={{ position: "relative" }}>
+          <Box
+            sx={{
+              backgroundColor: "#f9f6ff",
+              textAlign: "center",
+              cursor: "default",
+              borderRadius: "1rem",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Box>
+              <Box sx={{ marginBottom: "40px", paddingTop: "32px" }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Psychiatric Mental Health
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                  }}
+                  variant="h1"
+                >
+                  Kristy, NP
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  letterSpacing: "-0.2px",
+                  fontSize: "20px",
+                  marginBottom: "35px",
+                }}
+              >
+                <Typography variant="p">
+                  “Doctor-assist gives me peace of mind knowing that every
+                  encounter is thoroughly documented to a level that I would
+                  never achieve on my own, even if I had lots of time."
+                </Typography>
+              </Box>
 
-                    </Box>
-                </SwiperSlide>
-                <SwiperSlide sx={{ position: 'relative' }}>
-                    <Box sx={{
-                        backgroundColor: '#f9f6ff',
-                        textAlign: 'center',
-                        cursor: 'default',
-                        borderRadius: '1rem',
-                        flexDirection: 'column',
-                        width: '100%',
-                    }}>
-                        <Box>
-                            <Box sx={{ marginBottom: '40px', paddingTop: '32px' }}>
-                                <Typography variant='h1' sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                    marginBottom: '5px',
-                                }}>Psychiatric Mental Health</Typography>
-                                <Typography sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                }} variant='h1'>Kristy, NP</Typography>
-                            </Box>
-                            <Box sx={{
-                                letterSpacing: '-0.2px',
-                                fontSize: '20px',
-                                marginBottom: '35px'
-                            }}>
-                                <Typography variant='p'>“Freed gives me peace of mind knowing that every encounter is thoroughly documented to a level that I would never achieve on my own, even if I had lots of time."</Typography>
-                            </Box>
+              <Box
+                sx={{
+                  paddingBottom: "32px",
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+              </Box>
+            </Box>
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide sx={{ position: "relative" }}>
+          <Box
+            sx={{
+              backgroundColor: "#f9f6ff",
+              textAlign: "center",
+              cursor: "default",
+              borderRadius: "1rem",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Box>
+              <Box sx={{ marginBottom: "40px", paddingTop: "32px" }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Psychiatric Mental Health
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                  }}
+                  variant="h1"
+                >
+                  Kristy, NP
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  letterSpacing: "-0.2px",
+                  fontSize: "20px",
+                  marginBottom: "35px",
+                }}
+              >
+                <Typography variant="p">
+                  “Doctor-assist gives me peace of mind knowing that every
+                  encounter is thoroughly documented to a level that I would
+                  never achieve on my own, even if I had lots of time."
+                </Typography>
+              </Box>
 
-                            <Box sx={{
-                                paddingBottom: '32px',
-                                display: 'flex',
-                                gap: '10px',
-                                justifyContent: 'center',
-                            }}>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                            </Box>
-                        </Box>
+              <Box
+                sx={{
+                  paddingBottom: "32px",
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+              </Box>
+            </Box>
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide sx={{ position: "relative" }}>
+          <Box
+            sx={{
+              backgroundColor: "#f9f6ff",
+              textAlign: "center",
+              cursor: "default",
+              borderRadius: "1rem",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Box>
+              <Box sx={{ marginBottom: "40px", paddingTop: "32px" }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Psychiatric Mental Health
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                  }}
+                  variant="h1"
+                >
+                  Kristy, NP
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  letterSpacing: "-0.2px",
+                  fontSize: "20px",
+                  marginBottom: "35px",
+                }}
+              >
+                <Typography variant="p">
+                  “Doctor-assist gives me peace of mind knowing that every
+                  encounter is thoroughly documented to a level that I would
+                  never achieve on my own, even if I had lots of time."
+                </Typography>
+              </Box>
 
-                    </Box>
-                </SwiperSlide>
-                <SwiperSlide sx={{ position: 'relative' }}>
-                    <Box sx={{
-                        backgroundColor: '#f9f6ff',
-                        textAlign: 'center',
-                        cursor: 'default',
-                        borderRadius: '1rem',
-                        flexDirection: 'column',
-                        width: '100%',
-                    }}>
-                        <Box>
-                            <Box sx={{ marginBottom: '40px', paddingTop: '32px' }}>
-                                <Typography variant='h1' sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                    marginBottom: '5px',
-                                }}>Psychiatric Mental Health</Typography>
-                                <Typography sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                }} variant='h1'>Kristy, NP</Typography>
-                            </Box>
-                            <Box sx={{
-                                letterSpacing: '-0.2px',
-                                fontSize: '20px',
-                                marginBottom: '35px'
-                            }}>
-                                <Typography variant='p'>“Freed gives me peace of mind knowing that every encounter is thoroughly documented to a level that I would never achieve on my own, even if I had lots of time."</Typography>
-                            </Box>
+              <Box
+                sx={{
+                  paddingBottom: "32px",
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+              </Box>
+            </Box>
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide sx={{ position: "relative" }}>
+          <Box
+            sx={{
+              backgroundColor: "#f9f6ff",
+              textAlign: "center",
+              cursor: "default",
+              borderRadius: "1rem",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Box>
+              <Box sx={{ marginBottom: "40px", paddingTop: "32px" }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Psychiatric Mental Health
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                  }}
+                  variant="h1"
+                >
+                  Kristy, NP
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  letterSpacing: "-0.2px",
+                  fontSize: "20px",
+                  marginBottom: "35px",
+                }}
+              >
+                <Typography variant="p">
+                  “Doctor-assist gives me peace of mind knowing that every
+                  encounter is thoroughly documented to a level that I would
+                  never achieve on my own, even if I had lots of time."
+                </Typography>
+              </Box>
 
-                            <Box sx={{
-                                paddingBottom: '32px',
-                                display: 'flex',
-                                gap: '10px',
-                                justifyContent: 'center',
-                            }}>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                            </Box>
-                        </Box>
-
-                    </Box>
-                </SwiperSlide>
-                <SwiperSlide sx={{ position: 'relative' }}>
-                    <Box sx={{
-                        backgroundColor: '#f9f6ff',
-                        textAlign: 'center',
-                        cursor: 'default',
-                        borderRadius: '1rem',
-                        flexDirection: 'column',
-                        width: '100%',
-                    }}>
-                        <Box>
-                            <Box sx={{ marginBottom: '40px', paddingTop: '32px' }}>
-                                <Typography variant='h1' sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                    marginBottom: '5px',
-                                }}>Psychiatric Mental Health</Typography>
-                                <Typography sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                }} variant='h1'>Kristy, NP</Typography>
-                            </Box>
-                            <Box sx={{
-                                letterSpacing: '-0.2px',
-                                fontSize: '20px',
-                                marginBottom: '35px'
-                            }}>
-                                <Typography variant='p'>“Freed gives me peace of mind knowing that every encounter is thoroughly documented to a level that I would never achieve on my own, even if I had lots of time."</Typography>
-                            </Box>
-
-                            <Box sx={{
-                                paddingBottom: '32px',
-                                display: 'flex',
-                                gap: '10px',
-                                justifyContent: 'center',
-                            }}>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                            </Box>
-                        </Box>
-
-                    </Box>
-                </SwiperSlide>
-                <SwiperSlide sx={{ position: 'relative' }}>
-                    <Box sx={{
-                        backgroundColor: '#f9f6ff',
-                        textAlign: 'center',
-                        cursor: 'default',
-                        borderRadius: '1rem',
-                        flexDirection: 'column',
-                        width: '100%',
-                    }}>
-                        <Box>
-                            <Box sx={{ marginBottom: '40px', paddingTop: '32px' }}>
-                                <Typography variant='h1' sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                    marginBottom: '5px',
-                                }}>Psychiatric Mental Health</Typography>
-                                <Typography sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                }} variant='h1'>Kristy, NP</Typography>
-                            </Box>
-                            <Box sx={{
-                                letterSpacing: '-0.2px',
-                                fontSize: '20px',
-                                marginBottom: '35px'
-                            }}>
-                                <Typography variant='p'>“Freed gives me peace of mind knowing that every encounter is thoroughly documented to a level that I would never achieve on my own, even if I had lots of time."</Typography>
-                            </Box>
-
-                            <Box sx={{
-                                paddingBottom: '32px',
-                                display: 'flex',
-                                gap: '10px',
-                                justifyContent: 'center',
-                            }}>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                            </Box>
-                        </Box>
-
-                    </Box>
-                </SwiperSlide>
-                <SwiperSlide sx={{ position: 'relative' }}>
-                    <Box sx={{
-                        backgroundColor: '#f9f6ff',
-                        textAlign: 'center',
-                        cursor: 'default',
-                        borderRadius: '1rem',
-                        flexDirection: 'column',
-                        width: '100%',
-                    }}>
-                        <Box>
-                            <Box sx={{ marginBottom: '40px', paddingTop: '32px' }}>
-                                <Typography variant='h1' sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                    marginBottom: '5px',
-                                }}>Psychiatric Mental Health</Typography>
-                                <Typography sx={{
-                                    fontSize: '1.25rem', letterSpacing: '-0.2px',
-                                }} variant='h1'>Kristy, NP</Typography>
-                            </Box>
-                            <Box sx={{
-                                letterSpacing: '-0.2px',
-                                fontSize: '20px',
-                                marginBottom: '35px'
-                            }}>
-                                <Typography variant='p'>“Freed gives me peace of mind knowing that every encounter is thoroughly documented to a level that I would never achieve on my own, even if I had lots of time."</Typography>
-                            </Box>
-
-                            <Box sx={{
-                                paddingBottom: '32px',
-                                display: 'flex',
-                                gap: '10px',
-                                justifyContent: 'center',
-                            }}>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z" fill="#C7B5F9"></path>
-                                </svg>
-                            </Box>          
-                        </Box>
-                    </Box>
-                </SwiperSlide>
-            </Swiper>
-        </>
-    );
+              <Box
+                sx={{
+                  paddingBottom: "32px",
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.9144 6.75737L19.126 6.92211C19.5116 6.9331 19.8343 7.18571 19.955 7.57012C20.073 7.95453 19.955 8.35541 19.6481 8.60253L14.7139 12.5592L16.4845 18.7949C16.5947 19.182 16.4635 19.5802 16.1514 19.819C15.8392 20.0552 15.4378 20.0607 15.1204 19.8328L10 16.1452L4.87955 19.8328C4.56215 20.0607 4.1608 20.0552 3.84864 19.819C3.53648 19.5802 3.40533 19.182 3.5155 18.7949L5.28615 12.5592L0.351945 8.60253C0.0450331 8.35541 -0.07301 7.95453 0.0450331 7.57012C0.165699 7.18571 0.48835 6.9331 0.873958 6.92211L7.08565 6.75737L9.15796 0.623292C9.2865 0.244375 9.61439 0 10 0C10.3856 0 10.7135 0.244375 10.842 0.623292L12.9144 6.75737Z"
+                    fill="#C7B5F9"
+                  ></path>
+                </svg>
+              </Box>
+            </Box>
+          </Box>
+        </SwiperSlide>
+      </Swiper>
+    </>
+  );
 }

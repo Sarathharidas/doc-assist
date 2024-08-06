@@ -95,7 +95,7 @@ const Login = () => {
           sx={{ color: "#fff", fontSize: "25px" }}
           onClick={() => navigate("/")}
         >
-          Freed
+          Doctor-assist
         </Typography>
       </Box>
       <Box>

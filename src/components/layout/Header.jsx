@@ -198,7 +198,8 @@ const Login = () => {
                   }}
                   variant="h1"
                 >
-                  Freed listens, transcribes and writes medical notes for you.
+                  Doctor-assist listens, transcribes and writes medical notes
+                  for you.
                 </Typography>
                 <Box
                   sx={{
@@ -442,8 +443,8 @@ const Login = () => {
                     textAlign: "left",
                   }}
                 >
-                  Freed learns your style and format, with every edit. Get
-                  customized clinical notes in moments, not hours.
+                  Doctor-assist learns your style and format, with every edit.
+                  Get customized clinical notes in moments, not hours.
                 </Typography>
               </Box>
             </Grid>
@@ -489,8 +490,8 @@ const Login = () => {
                     textAlign: "left",
                   }}
                 >
-                  Freed learns your style and format, with every edit. Get
-                  customized clinical notes in moments, not hours.
+                  Doctor-assist learns your style and format, with every edit.
+                  Get customized clinical notes in moments, not hours.
                 </Typography>
               </Box>
             </Grid>
@@ -536,8 +537,8 @@ const Login = () => {
                     textAlign: "left",
                   }}
                 >
-                  Freed learns your style and format, with every edit. Get
-                  customized clinical notes in moments, not hours.
+                  Doctor-assist learns your style and format, with every edit.
+                  Get customized clinical notes in moments, not hours.
                 </Typography>
               </Box>
             </Grid>
@@ -631,7 +632,7 @@ const Login = () => {
                   }}
                   variant="p"
                 >
-                  {`Select “Capture visit”’ when your visit begins. Freed can
+                  {`Select “Capture visit”’ when your visit begins. Doctor-assist can
                   listen for up to two hours, whether it's a virtual or office
                   visit.`}
                 </Typography>
@@ -682,7 +683,7 @@ const Login = () => {
                   variant="p"
                 >
                   Select “End visit” and view your completed SOAP note in about
-                  a minute. Edit to help Freed learn your style.
+                  a minute. Edit to help Doctor-assist learn your style.
                 </Typography>
               </Box>
             </Grid>

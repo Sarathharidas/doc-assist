@@ -82,7 +82,7 @@ const MicPermissions = () => {
           sx={{ color: "#fff", fontSize: "20px" }}
           onClick={() => navigate("/")}
         >
-          Freed
+          Doctor-assist
         </Typography>
         <Box
           sx={{
@@ -273,13 +273,14 @@ const MicPermissions = () => {
                       margin: "0px 0px 0.35em",
                       fontFamily: "Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 400,
-                      
+
                       lineHeight: 1.235,
                       letterSpacing: "0.00735em",
                     }}
                     variant="h1"
                   >
-                    Freed needs the microphone permission to capture visits
+                    Doctor-assist needs the microphone permission to capture
+                    visits
                   </Typography>
                   <Typography
                     sx={{
@@ -288,14 +289,14 @@ const MicPermissions = () => {
                       margin: "0px 0px 5.6px",
                       fontFamily: "Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 400,
-                      
+
                       lineHeight: 1.5,
                       letterSpacing: "0.00938em",
                     }}
                     variant="p"
                   >
-                    Please follow the steps below to allow Freed to access your
-                    microphone:
+                    Please follow the steps below to allow Doctor-assist to
+                    access your microphone:
                   </Typography>
                 </Box>
                 <Box
@@ -574,7 +575,7 @@ const MicPermissions = () => {
                     fontSize: "18px",
                   }}
                 >
-                  How do I tell my patient about Freed?
+                  How do I tell my patient about Doctor-assist?
                 </Link>
               </Box>
             </Box>
@@ -596,7 +597,7 @@ const MicPermissions = () => {
                 }}
                 variant="h1"
               >
-                Freed needs the microphone permission to capture visits
+                Doctor-assist needs the microphone permission to capture visits
               </Typography>
               <Typography
                 sx={{
@@ -610,8 +611,8 @@ const MicPermissions = () => {
                 }}
                 variant="p"
               >
-                Please follow the steps below to allow Freed to access your
-                microphone:
+                Please follow the steps below to allow Doctor-assist to access
+                your microphone:
               </Typography>
             </Box>
             <Box

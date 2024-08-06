@@ -177,7 +177,7 @@ const FreedPage = ({ visit = false }) => {
           sx={{ color: "#fff", fontSize: "20px", cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
-          Freed
+          Doctor-assist
         </Typography>
         <Box
           sx={{
@@ -450,7 +450,7 @@ const FreedPage = ({ visit = false }) => {
                 }}
                 variant="h1"
               >
-                Freed needs the microphone permission to capture visits
+                Doctor-assist needs the microphone permission to capture visits
               </Typography>
               <Typography
                 sx={{
@@ -465,8 +465,8 @@ const FreedPage = ({ visit = false }) => {
                 }}
                 variant="p"
               >
-                Please follow the steps below to allow Freed to access your
-                microphone:
+                Please follow the steps below to allow Doctor-assist to access
+                your microphone:
               </Typography>
             </Box>
             <Box

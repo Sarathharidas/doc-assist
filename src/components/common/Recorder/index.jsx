@@ -273,7 +273,7 @@ const Recorder = ({ getData }) => {
               fontSize: "18px",
             }}
           >
-            How do I tell my patient about Freed?
+            How do I tell my patient about Doctor-assist?
           </Link>
         </Box>
       )}
@@ -355,7 +355,7 @@ const Recorder = ({ getData }) => {
 
           <Box sx={{ marginTop: "35px" }}>
             <Link sx={{ fontSize: "18px" }}>
-              How do I tell my patient about Freed?
+              How do I tell my patient about Doctor-assist?
             </Link>
           </Box>
         </Box>

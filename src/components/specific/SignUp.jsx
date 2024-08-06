@@ -101,7 +101,7 @@ const SignUp = () => {
               }}
               variant="h5"
             >
-              Create Your Freed Account
+              Create Your Doctor-assist Account
             </Typography>
 
             <Box
@@ -257,7 +257,7 @@ const SignUp = () => {
                       fontSize: "14px",
                     }}
                   >
-                    I agree to the terms of freed's
+                    I agree to the terms of Doctor-assist's
                     <Link
                       sx={{ marginLeft: "5px" }}
                       component={RouterLink}
@@ -301,7 +301,7 @@ const SignUp = () => {
                     paddingBottom: "5px",
                   }}
                 >
-                  Do you want to try Freed without signing up?
+                  Do you want to try Doctor-assist without signing up?
                 </Typography>
                 <Link href="/record">Try the Live Demo</Link>
               </Box>
