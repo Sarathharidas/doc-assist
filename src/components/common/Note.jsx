@@ -13,7 +13,14 @@ import { toast } from "react-toastify";
 import { db } from "../../services/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 
-const Note = ({ record, fetchRecords }) => {
+const Note = ({
+  record,
+  fetchRecords,
+  selectedRecords,
+  setSelectedRecords,
+  isSelected,
+  onSelect,
+}) => {
   const createdAt = record?.createdAt?.toDate();
   const navigate = useNavigate();
 
@@ -23,6 +30,11 @@ const Note = ({ record, fetchRecords }) => {
     try {
       // Delete the document
       await deleteDoc(doc(db, "patient", patientId));
+      if (selectedRecords.includes(patientId)) {
+        setSelectedRecords((prevSelectedRecords) =>
+          prevSelectedRecords.filter((id) => id !== patientId)
+        );
+      }
       toast.success("Patient successfully deleted!");
       fetchRecords();
     } catch (e) {
@@ -49,7 +61,12 @@ const Note = ({ record, fetchRecords }) => {
           sx={{
             marginRight: "0",
           }}
-          control={<Checkbox checked={false} />}
+          control={
+            <Checkbox
+              checked={isSelected}
+              onChange={() => onSelect(record?.id)}
+            />
+          }
         />
         <Box
           sx={{

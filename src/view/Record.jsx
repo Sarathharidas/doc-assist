@@ -124,7 +124,8 @@ const FreedPage = ({ visit = false }) => {
   }, [userId]); // Empty dependency array ensures that the effect runs only once
 
   useEffect(() => {
-    const matchedRecord = records.find((record) => record.id === id);
+    const matchedRecord =
+      records.find((record) => record.id === id) || records[0];
     setCurrentRecord(matchedRecord || {});
   }, [id, records]);
   console.log("records", records);

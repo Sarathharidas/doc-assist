@@ -18,10 +18,15 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import FolderDeleteIcon from "@mui/icons-material/FolderDelete";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { db } from "../../services/firebase";
+import { deleteDoc, doc } from "firebase/firestore";
 const SideBar = ({ loading = false, records = [], fetchRecords }) => {
   const [selectedOption, setSelectedOption] = useState("allnote");
   const [searchedText, setSearchedText] = useState("");
   const [filteredRecords, setFilteredRecords] = useState([]);
+  const [selectedRecords, setSelectedRecords] = useState([]);
+
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -39,6 +44,42 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
     );
     setFilteredRecords(updatedRecords);
   }, [searchedText, records]);
+
+  // Handle selecting/deselecting all records
+  const handleSelectAll = (event) => {
+    if (event.target.checked) {
+      setSelectedRecords(records.map((record) => record.id));
+    } else {
+      setSelectedRecords([]);
+    }
+  };
+
+  // Handle individual record selection
+  const handleSelectRecord = (id) => {
+    setSelectedRecords((prev) =>
+      prev.includes(id)
+        ? prev.filter((patientId) => patientId !== id)
+        : [...prev, id]
+    );
+  };
+
+  // Delete selected records
+  const deleteSelectedRecords = async () => {
+    console.log("inside the delete all function");
+    try {
+      const deletePromises = selectedRecords.map((recordId) => {
+        return deleteDoc(doc(db, "patient", recordId));
+      });
+
+      await Promise.all(deletePromises);
+
+      toast.success("Selected records deleted successfully!");
+      setSelectedRecords([]);
+      fetchRecords();
+    } catch (error) {
+      toast.error("Error deleting selected records: ", error);
+    }
+  };
 
   const options = [
     { value: "allnote", label: "All Notes", icon: <StickyNote2Icon /> },
@@ -129,8 +170,16 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
                 sx={{
                   marginRight: "0",
                 }}
-                control={<Checkbox checked={false} />}
+                control={
+                  <Checkbox
+                    checked={selectedRecords.length === records.length}
+                    onChange={handleSelectAll}
+                  />
+                }
               />
+              {selectedRecords.length ? (
+                <Button onClick={deleteSelectedRecords}>Delete Records</Button>
+              ) : null}
               <FormControl
                 fullWidth
                 sx={{
@@ -207,6 +256,10 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
                       key={record.id}
                       record={record}
                       fetchRecords={fetchRecords}
+                      selectedRecords={selectedRecords}
+                      setSelectedRecords={setSelectedRecords}
+                      isSelected={selectedRecords.includes(record.id)}
+                      onSelect={handleSelectRecord}
                     />
                   )
                 )
