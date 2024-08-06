@@ -12,6 +12,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db } from "../../services/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
+import DADialog from "./DADialog";
+import { useState } from "react";
+import {
+  deleteRecordConfirmationContent,
+  deleteRecordConfirmationTitle,
+} from "../../constants";
 
 const Note = ({
   record,
@@ -21,25 +27,40 @@ const Note = ({
   isSelected,
   onSelect,
 }) => {
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
   const createdAt = record?.createdAt?.toDate();
   const navigate = useNavigate();
 
-  const deletePatientRecord = async (event, patientId) => {
+  const handleDeleteButtonClick = (event) => {
     event.stopPropagation();
+    setDeleteConfirmation(!deleteConfirmation);
+  };
 
+  const deletePatientRecord = async () => {
     try {
       // Delete the document
-      await deleteDoc(doc(db, "patient", patientId));
-      if (selectedRecords.includes(patientId)) {
+      setDeleteLoading(true);
+      await deleteDoc(doc(db, "patient", record?.id));
+      if (selectedRecords.includes(record?.id)) {
         setSelectedRecords((prevSelectedRecords) =>
-          prevSelectedRecords.filter((id) => id !== patientId)
+          prevSelectedRecords.filter((id) => id !== record?.id)
         );
       }
       toast.success("Patient successfully deleted!");
+      setDeleteConfirmation(false);
+      setDeleteLoading(false);
       fetchRecords();
     } catch (e) {
       toast.error("Error deleting patient: ", e);
+    } finally {
+      setDeleteLoading(false);
     }
+  };
+
+  const handleDeleteClose = () => {
+    setDeleteConfirmation(false);
   };
 
   return (
@@ -104,19 +125,28 @@ const Note = ({
               color: "#686d73",
               fontSize: "16px",
               fontWeight: "400",
+              display: "none",
             }}
             variant="p"
           >
             Paused
           </Typography>
         </Box>
-        <IconButton onClick={(event) => deletePatientRecord(event, record?.id)}>
+        <IconButton onClick={(event) => handleDeleteButtonClick(event)}>
           <DeleteIcon sx={{ color: "#686d73" }} />
         </IconButton>
         <IconButton>
           <PlayArrow />
         </IconButton>
       </Box>
+      <DADialog
+        open={deleteConfirmation}
+        handleClose={handleDeleteClose}
+        title={deleteRecordConfirmationTitle}
+        message={deleteRecordConfirmationContent}
+        onSucesss={deletePatientRecord}
+        loading={deleteLoading}
+      />
     </div>
   );
 };

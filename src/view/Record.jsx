@@ -127,6 +127,7 @@ const FreedPage = ({ visit = false }) => {
     const matchedRecord =
       records.find((record) => record.id === id) || records[0];
     setCurrentRecord(matchedRecord || {});
+    if (!records.length) navigate("/record");
   }, [id, records]);
   console.log("records", records);
   useLayoutEffect(() => {

@@ -21,11 +21,18 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db } from "../../services/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
+import {
+  deleteRecordsConfirmationContent,
+  deleteRecordConfirmationTitle,
+} from "../../constants";
+import DADialog from "./DADialog";
 const SideBar = ({ loading = false, records = [], fetchRecords }) => {
   const [selectedOption, setSelectedOption] = useState("allnote");
   const [searchedText, setSearchedText] = useState("");
   const [filteredRecords, setFilteredRecords] = useState([]);
   const [selectedRecords, setSelectedRecords] = useState([]);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -63,22 +70,34 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
     );
   };
 
+  const handleDeleteButtonClick = (event) => {
+    event.stopPropagation();
+    setDeleteConfirmation(!deleteConfirmation);
+  };
+
   // Delete selected records
   const deleteSelectedRecords = async () => {
-    console.log("inside the delete all function");
     try {
+      setDeleteLoading(true);
       const deletePromises = selectedRecords.map((recordId) => {
         return deleteDoc(doc(db, "patient", recordId));
       });
 
       await Promise.all(deletePromises);
-
+      setDeleteLoading(false);
       toast.success("Selected records deleted successfully!");
       setSelectedRecords([]);
+      setDeleteConfirmation(false);
       fetchRecords();
     } catch (error) {
       toast.error("Error deleting selected records: ", error);
+    } finally {
+      setDeleteLoading(false);
     }
+  };
+
+  const handleDeleteClose = () => {
+    setDeleteConfirmation(false);
   };
 
   const options = [
@@ -172,70 +191,76 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
                 }}
                 control={
                   <Checkbox
-                    checked={selectedRecords.length === records.length}
+                    checked={
+                      selectedRecords.length > 0 &&
+                      selectedRecords.length === records.length
+                    }
                     onChange={handleSelectAll}
                   />
                 }
               />
               {selectedRecords.length ? (
-                <Button onClick={deleteSelectedRecords}>Delete Records</Button>
-              ) : null}
-              <FormControl
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": { borderColor: "transparent" },
-                  "& .MuiSelect-select": {
-                    padding: "0",
-                  },
-                }}
-              >
-                <Select
-                  id="notes-select"
-                  value={selectedOption}
-                  onChange={handleChange}
-                  displayEmpty
+                <Button onClick={handleDeleteButtonClick} sx={{ color: "red" }}>
+                  delete selected
+                </Button>
+              ) : (
+                <FormControl
                   fullWidth
                   sx={{
-                    // "& .MuiSelect-select": {
-                    //   padding: "0",
-                    // },
-                    "& fieldset": {
-                      border: "none",
-                    },
+                    "& .MuiOutlinedInput-root": { borderColor: "transparent" },
                     "& .MuiSelect-select": {
-                      minHeight: "unset",
-                      paddingTop: 0,
-                      paddingBottom: 0,
-                    },
-                    "&:focus": {
-                      backgroundColor: "transparent",
-                    },
-                    "& .MuiInputBase-input": {
                       padding: "0",
                     },
                   }}
-                  renderValue={() => {
-                    if (selectedOption === "") {
-                      return <Typography>Select an option</Typography>;
-                    }
-                    const selected = options.find(
-                      (option) => option.value === selectedOption
-                    );
-                    return (
-                      <>
-                        <Typography>{selected.label}</Typography>
-                      </>
-                    );
-                  }}
                 >
-                  {options.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      <ListItemIcon>{option.icon}</ListItemIcon>
-                      <Typography>{option.label}</Typography>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+                  <Select
+                    id="notes-select"
+                    value={selectedOption}
+                    onChange={handleChange}
+                    displayEmpty
+                    fullWidth
+                    sx={{
+                      // "& .MuiSelect-select": {
+                      //   padding: "0",
+                      // },
+                      "& fieldset": {
+                        border: "none",
+                      },
+                      "& .MuiSelect-select": {
+                        minHeight: "unset",
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                      },
+                      "&:focus": {
+                        backgroundColor: "transparent",
+                      },
+                      "& .MuiInputBase-input": {
+                        padding: "0",
+                      },
+                    }}
+                    renderValue={() => {
+                      if (selectedOption === "") {
+                        return <Typography>Select an option</Typography>;
+                      }
+                      const selected = options.find(
+                        (option) => option.value === selectedOption
+                      );
+                      return (
+                        <>
+                          <Typography>{selected.label}</Typography>
+                        </>
+                      );
+                    }}
+                  >
+                    {options.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        <ListItemIcon>{option.icon}</ListItemIcon>
+                        <Typography>{option.label}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              )}
             </Box>
 
             <Box>
@@ -268,6 +293,14 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
           </Box>
         </Box>
       </Box>
+      <DADialog
+        open={deleteConfirmation}
+        handleClose={handleDeleteClose}
+        title={deleteRecordConfirmationTitle}
+        message={deleteRecordsConfirmationContent}
+        onSucesss={deleteSelectedRecords}
+        loading={deleteLoading}
+      />
     </div>
   );
 };
