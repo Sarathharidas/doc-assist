@@ -26,7 +26,12 @@ import {
   deleteRecordConfirmationTitle,
 } from "../../constants";
 import DADialog from "./DADialog";
-const SideBar = ({ loading = false, records = [], fetchRecords }) => {
+const SideBar = ({
+  loading = false,
+  records = [],
+  fetchRecords,
+  sidebarVisible,
+}) => {
   const [selectedOption, setSelectedOption] = useState("allnote");
   const [searchedText, setSearchedText] = useState("");
   const [filteredRecords, setFilteredRecords] = useState([]);
@@ -107,7 +112,13 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
   ];
 
   return (
-    <div>
+    <Box
+      sx={{
+        "@media (max-width: 767px)": {
+          width: sidebarVisible ? "100%" : "auto",
+        },
+      }}
+    >
       <Box
         sx={{
           gridArea: "2 / 2 / 3 / 3",
@@ -119,6 +130,10 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
           height: "calc(100vh - 50px)",
           width: "360px",
           flex: "0 0 360px",
+          "@media (max-width: 767px)": {
+            width: "100%",
+            display: sidebarVisible ? "block" : "none",
+          },
         }}
       >
         <Box sx={{ width: "100%", overflow: "hidden" }}>
@@ -170,6 +185,9 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
             sx={{
               height: "calc(100vh - 154px)",
               overflow: "auto",
+              "@media (max-width: 767px)": {
+                height: "calc(100vh - 215px)",
+              },
             }}
           >
             <Box
@@ -301,7 +319,7 @@ const SideBar = ({ loading = false, records = [], fetchRecords }) => {
         onSucesss={deleteSelectedRecords}
         loading={deleteLoading}
       />
-    </div>
+    </Box>
   );
 };
 

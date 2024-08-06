@@ -12,6 +12,8 @@ import AddIcon from "@mui/icons-material/Add";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FaceIcon from "@mui/icons-material/Face";
+import MicIcon from "@mui/icons-material/Mic";
+import NoteIcon from "@mui/icons-material/Note";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Window from "../assets/image/windows-system-step1.png";
 import Window_two from "../assets/image/windows-system-step2.png";
@@ -26,11 +28,11 @@ import Recorder from "../components/common/Recorder";
 import { uploadAudio } from "../services/uploadAudio";
 import { recordsList } from "../services/recordsList";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { auto } from "@popperjs/core";
 import { toast } from "react-toastify";
 
-const FreedPage = ({ visit = false }) => {
+const FreedPage = ({ visit = false, sidebar = false }) => {
   /**
    * State for storing the records fetched from the server
    */
@@ -49,6 +51,7 @@ const FreedPage = ({ visit = false }) => {
 
   const navigate = useNavigate();
   const { id } = useParams();
+  const location = useLocation();
 
   /**
    * State for indicating if the records are still loading
@@ -129,13 +132,14 @@ const FreedPage = ({ visit = false }) => {
     setCurrentRecord(matchedRecord || {});
     if (!records.length) navigate("/record");
   }, [id, records]);
-  console.log("records", records);
+
   useLayoutEffect(() => {
     if (!userId) navigate("/login");
   }, []);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -210,17 +214,13 @@ const FreedPage = ({ visit = false }) => {
             }}
           >
             <MenuItem onClick={handleClose} sx={{ fontSize: 14 }}>
-              {" "}
-              <FaceIcon
-                sx={{ fontSize: 17, marginRight: 1, color: "gray" }}
-              />{" "}
+              <FaceIcon sx={{ fontSize: 17, marginRight: 1, color: "gray" }} />
               You
             </MenuItem>
             <MenuItem onClick={handleLogout} sx={{ fontSize: 14 }}>
-              {" "}
               <LogoutIcon
                 sx={{ fontSize: 17, marginRight: 1, color: "gray" }}
-              />{" "}
+              />
               Logout
             </MenuItem>
           </Menu>
@@ -232,6 +232,7 @@ const FreedPage = ({ visit = false }) => {
           loading={loadingRecords}
           records={records}
           fetchRecords={fetchRecords}
+          sidebarVisible={sidebar}
         />
 
         <Box
@@ -243,6 +244,9 @@ const FreedPage = ({ visit = false }) => {
             height: "calc(100vh - 50px)",
             width: "100%",
             position: "relative",
+            "@media (max-width: 767px)": {
+              display: sidebar ? "none" : "block",
+            },
           }}
         >
           {visit ? (
@@ -654,11 +658,62 @@ const FreedPage = ({ visit = false }) => {
               </Typography>
             </Box>
           </Box>
-          {/* ============================== End visit model ============================== */}
+        </Box>
+      </Box>
 
-          {/* ============================ Visit card Summary =============================== */}
-
-          {/* ============================ Visit card Summary =============================== */}
+      <Box
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          backgroundColor: "#fff",
+          display: "none",
+          "@media (max-width: 767px)": {
+            display: "block",
+          },
+        }}
+      >
+        <Box
+          sx={{
+            borderTop: "1px solid rgba(0, 0, 0, 0.12)",
+            display: "flex",
+            padding: "10px",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "50%",
+              gap: "5px",
+              color: location.pathname === "/record" ? "#1976d2" : "#333333",
+            }}
+            onClick={() => navigate("/record")}
+          >
+            <MicIcon />
+            <Typography fontSize="12px" variant="p">
+              Start a Visit
+            </Typography>
+          </Box>
+          <Box
+            onClick={() => navigate("/visit")}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "50%",
+              gap: "5px",
+              color: location.pathname === "/visit" ? "#1976d2" : "#333333",
+            }}
+          >
+            <NoteIcon />
+            <Typography fontSize="12px" variant="p">
+              Notes
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </>
