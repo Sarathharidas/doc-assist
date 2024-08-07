@@ -27,7 +27,7 @@ import SideBar from "../components/common/SideBar";
 import Recorder from "../components/common/Recorder";
 import { uploadAudio } from "../services/uploadAudio";
 import { recordsList } from "../services/recordsList";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { memo, useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { auto } from "@popperjs/core";
 import { toast } from "react-toastify";
@@ -62,7 +62,7 @@ const FreedPage = ({ visit = false, sidebar = false }) => {
    * Fetches the records from the server and updates the state
    * @returns {Promise<void>}
    */
-  const fetchRecords = async () => {
+  const fetchRecords = useCallback(async () => {
     setLoadingRecords(true);
     try {
       /**
@@ -87,7 +87,7 @@ const FreedPage = ({ visit = false, sidebar = false }) => {
        */
       setLoadingRecords(false);
     }
-  };
+  }, [userId]);
 
   /**
    * Fetches the records from the server and updates the state
@@ -720,4 +720,4 @@ const FreedPage = ({ visit = false, sidebar = false }) => {
   );
 };
 
-export default FreedPage;
+export default memo(FreedPage);
