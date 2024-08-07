@@ -1,16 +1,33 @@
-import { Box, Button, Container, Grid, List, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Drawer,
+  Grid,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import "../../App.css";
 import HeroImg from "../../assets/image/hero-img.jpg";
 import Images_Slider from "../common/Slider";
 import Note from "../../assets/image/Note.svg";
+import Work from "../../assets/image/Work.svg";
+import Easy from "../../assets/image/Easy.svg";
 import Visit from "../../assets/image/start-visit.png";
+import Logo from "../../assets/image/logo.png";
 import Footer from "./Footer";
-
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("userId");
@@ -50,7 +67,7 @@ const Login = () => {
           borderBottom: "1px solid rgba(6, 31, 47, 0.5)",
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Box
             sx={{
               display: "flex",
@@ -58,11 +75,13 @@ const Login = () => {
               alignItems: "center",
               width: "100%",
               height: "100%",
-              margin: "1rem auto",
+              margin: "0.5rem auto",
             }}
           >
             <Box>
-              <Typography>Logo</Typography>
+              <Typography>
+                <img style={{ width: "150px" }} src={Logo} alt="Logo" />
+              </Typography>
             </Box>
             <Box>
               <List
@@ -102,9 +121,8 @@ const Login = () => {
                       backgroundColor: "#000",
                       color: "#fff",
                     },
-
-                    "@media (max-width: 320px)": {
-                      padding: "12px",
+                    "@media (max-width: 767px)": {
+                      display: "none",
                     },
                   }}
                 >
@@ -126,14 +144,33 @@ const Login = () => {
                       backgroundColor: "#000",
                       color: "#fff",
                     },
-                    "@media (max-width: 320px)": {
-                      padding: "12px",
+                    "@media (max-width: 767px)": {
+                      display: "none",
                     },
                   }}
                   onClick={handleTryFree}
                 >
                   Try for Free
                 </Button>
+                <IconButton
+                  onClick={() => setDrawerOpen(!drawerOpen)}
+                  sx={{
+                    display: "none",
+                    borderRadius: "8px",
+                    marginLeft: "8px",
+                    fontWeight: 500,
+                    fontSize: "0px",
+                    color: "#061f2f",
+                    border: "1px solid #061f2f",
+                    textTransform: "capitalize",
+                    transition: "background-color 0.2s, color 0.2s",
+                    "@media (max-width: 767px)": {
+                      display: "block",
+                    },
+                  }}
+                >
+                  {drawerOpen ? <CloseIcon /> : <MenuIcon />}
+                </IconButton>
               </List>
             </Box>
           </Box>
@@ -144,44 +181,69 @@ const Login = () => {
       {/* hero section */}
       <Box
         sx={{
-          marginTop: "5rem",
-          paddingBottom: "5rem",
+          marginY: "80px",
           "@media (max-width: 1199px)": {
             marginTop: "20px",
             paddingBottom: "20px",
+            marginBottom: "20px",
           },
         }}
       >
-        <Container maxWidth="xl">
-          <Grid container spacing={2} justifyContent="space-between">
-            <Grid item xs={12} lg={6}>
+        <Container maxWidth="lg">
+          <Grid
+            sx={{
+              "@media (max-width: 575px)": {
+                width: "inherit",
+                marginLeft: "inherit",
+                display: "inherit",
+                WebkitBoxPack: "inherit",
+              },
+            }}
+            container
+            spacing={2}
+            justifyContent="space-between"
+          >
+            <Grid
+              sx={{
+                "@media (max-width: 575px)": {
+                  paddingLeft: "0px !important",
+                  paddingTop: "0px !important",
+                },
+              }}
+              item
+              xs={12}
+              lg={6}
+            >
               <Box
                 sx={{
-                  maxWidth: "24rem",
-
+                  maxWidth: "100%",
                   "@media (max-width: 1199px)": {
                     maxWidth: "100%",
+                    marginTop: "15px",
+                    marginBottom: "25px",
+                  },
+                  "@media (max-width: 575px)": {
+                    marginTop: "35px",
+                    marginBottom: "25px",
                   },
                 }}
               >
                 <Typography
                   sx={{
-                    marginTop: 0,
-                    marginBottom: 0,
-                    fontSize: "64px",
-                    fontWeight: 400,
-                    lineHeight: "1.1em",
+                    marginTop: "0px",
+                    marginBottom: "0px",
+                    fontSize: "40px",
+                    fontWeight: "400",
+                    lineHeight: "24px",
                     paddingBottom: "20px",
                     "@media (max-width: 1199px)": {
                       fontSize: "48px",
                     },
-
                     "@media (max-width: 991px)": {
                       fontSize: "43px",
                     },
-
                     "@media (max-width: 575px)": {
-                      fontSize: "34px",
+                      fontSize: "25px",
                     },
                   }}
                   variant="h1"
@@ -190,8 +252,8 @@ const Login = () => {
                 </Typography>
                 <Typography
                   sx={{
-                    letterSpacing: "-0.01em",
-                    fontSize: "1.25rem",
+                    letterSpacing: "-0.2px",
+                    fontSize: "19px",
                     color: "#061f2f",
                     marginBottom: "15px",
                     lineHeight: "30px",
@@ -237,7 +299,7 @@ const Login = () => {
                       opacity: 0.5,
                       fontSize: "12px",
                       marginTop: "10px",
-                      marginLeft: "10px",
+                      marginLeft: "4px",
                     }}
                     variant="span"
                   >
@@ -246,7 +308,16 @@ const Login = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={12} lg={5}>
+
+            <Grid
+              sx={{
+                paddingTop: "0px !important",
+                paddingLeft: "0px !important",
+              }}
+              item
+              xs={12}
+              lg={5}
+            >
               <Box
                 sx={{
                   width: "100%",
@@ -282,7 +353,7 @@ const Login = () => {
             },
           }}
         >
-          <Container maxWidth="xl">
+          <Container maxWidth="lg">
             <Box
               sx={{
                 paddingTop: "75px",
@@ -365,7 +436,8 @@ const Login = () => {
       {/* Instant clinical Card section */}
       <Box
         sx={{
-          paddingY: "100px",
+          background: "#d9c7ff",
+          paddingY: "80px",
           "@media (max-width: 1199px)": {
             paddingY: "50px",
           },
@@ -374,16 +446,16 @@ const Login = () => {
           },
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Box sx={{ textAlign: "center" }}>
             <Typography
               variant="h1"
               sx={{
-                fontSize: "48px",
+                fontSize: "40px",
                 color: "#061f2f",
-                fontWeight: "400",
+                fontWeight: "500",
                 textAlign: "left",
-                marginBottom: "50px",
+                marginBottom: "30px",
                 "@media (max-width: 1199px)": {
                   fontSize: "48px",
                 },
@@ -393,27 +465,32 @@ const Login = () => {
                 },
 
                 "@media (max-width: 575px)": {
-                  fontSize: "34px",
+                  fontSize: "25px",
                 },
               }}
             >
-              Instant clinical notes tailored to you
+              Instant Clinical Notes Tailored To You
             </Typography>
           </Box>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={4} sm={4}>
+            <Grid item xs={12} md={4} sm={6}>
               <Box
                 sx={{
                   background: "#fff",
                   borderRadius: "16px",
                   padding: "20px",
                   boxShadow: "0px 2px 8px rgba(99, 99, 99, 0.2)",
+                  height: "240px",
+                  "@media (max-width: 1199px)": {
+                    height: "280px",
+                  },
                 }}
               >
                 <Box
                   sx={{
-                    width: "80px",
-                    height: "80px",
+                    width: "65px",
+                    height: "65px",
+                    paddingBottom: "20px",
 
                     "& img": {
                       width: "100%",
@@ -429,8 +506,10 @@ const Login = () => {
                     color: "#061f2f",
                     fontWeight: "600",
                     textAlign: "left",
-                    marginBottom: "10px",
-                    marginTop: "30px",
+                    marginBottom: "5px",
+                    "@media (max-width: 575px)": {
+                      fontSize: "16px",
+                    },
                   }}
                 >
                   Notes in your style, 10x faster
@@ -441,6 +520,9 @@ const Login = () => {
                     color: "#061f2f",
                     fontWeight: "500",
                     textAlign: "left",
+                    "@media (max-width: 575px)": {
+                      fontSize: "15px",
+                    },
                   }}
                 >
                   Doctor-assist learns your style and format, with every edit.
@@ -448,19 +530,24 @@ const Login = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} sm={4}>
+            <Grid item xs={12} md={4} sm={6}>
               <Box
                 sx={{
                   background: "#fff",
                   borderRadius: "16px",
                   padding: "20px",
                   boxShadow: "0px 2px 8px rgba(99, 99, 99, 0.2)",
+                  height: "240px",
+                  "@media (max-width: 1199px)": {
+                    height: "270px",
+                  },
                 }}
               >
                 <Box
                   sx={{
-                    width: "80px",
-                    height: "80px",
+                    width: "65px",
+                    height: "65px",
+                    paddingBottom: "20px",
 
                     "& img": {
                       width: "100%",
@@ -468,7 +555,7 @@ const Login = () => {
                     },
                   }}
                 >
-                  <img src={Note} alt="Note" />
+                  <img src={Work} alt="Work" />
                 </Box>
                 <Typography
                   sx={{
@@ -476,11 +563,13 @@ const Login = () => {
                     color: "#061f2f",
                     fontWeight: "600",
                     textAlign: "left",
-                    marginBottom: "10px",
-                    marginTop: "30px",
+                    marginBottom: "5px",
+                    "@media (max-width: 575px)": {
+                      fontSize: "16px",
+                    },
                   }}
                 >
-                  Notes in your style, 10x faster
+                  Works in every setting
                 </Typography>
                 <Typography
                   sx={{
@@ -488,26 +577,34 @@ const Login = () => {
                     color: "#061f2f",
                     fontWeight: "500",
                     textAlign: "left",
+                    "@media (max-width: 575px)": {
+                      fontSize: "15px",
+                    },
                   }}
                 >
-                  Doctor-assist learns your style and format, with every edit.
-                  Get customized clinical notes in moments, not hours.
+                  Capture notes accurately for any specialty visit up to 2
+                  hours, be it virtual or in office, even if it’s noisy.
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} sm={4}>
+            <Grid item xs={12} md={4} sm={6}>
               <Box
                 sx={{
                   background: "#fff",
                   borderRadius: "16px",
                   padding: "20px",
                   boxShadow: "0px 2px 8px rgba(99, 99, 99, 0.2)",
+                  height: "240px",
+                  "@media (max-width: 1199px)": {
+                    height: "270px",
+                  },
                 }}
               >
                 <Box
                   sx={{
-                    width: "80px",
-                    height: "80px",
+                    paddingBottom: "20px",
+                    width: "65px",
+                    height: "65px",
 
                     "& img": {
                       width: "100%",
@@ -515,7 +612,7 @@ const Login = () => {
                     },
                   }}
                 >
-                  <img src={Note} alt="Note" />
+                  <img src={Easy} alt="Easy" />
                 </Box>
                 <Typography
                   sx={{
@@ -523,11 +620,13 @@ const Login = () => {
                     color: "#061f2f",
                     fontWeight: "600",
                     textAlign: "left",
-                    marginBottom: "10px",
-                    marginTop: "30px",
+                    marginBottom: "5px",
+                    "@media (max-width: 575px)": {
+                      fontSize: "16px",
+                    },
                   }}
                 >
-                  Notes in your style, 10x faster
+                  Easy to use
                 </Typography>
                 <Typography
                   sx={{
@@ -535,10 +634,13 @@ const Login = () => {
                     color: "#061f2f",
                     fontWeight: "500",
                     textAlign: "left",
+                    "@media (max-width: 575px)": {
+                      fontSize: "15px",
+                    },
                   }}
                 >
-                  Doctor-assist learns your style and format, with every edit.
-                  Get customized clinical notes in moments, not hours.
+                  Copy and paste into your “favorite” EHR. Support your patient
+                  with easy to follow patient instructions.
                 </Typography>
               </Box>
             </Grid>
@@ -550,7 +652,7 @@ const Login = () => {
       {/* simplicity Card section */}
       <Box
         sx={{
-          paddingY: "100px",
+          paddingY: "80px",
           background: "#fff",
           "@media (max-width: 1199px)": {
             paddingY: "50px",
@@ -560,16 +662,16 @@ const Login = () => {
           },
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Box sx={{ textAlign: "center" }}>
             <Typography
               variant="h1"
               sx={{
-                fontSize: "48px",
+                fontSize: "40px",
                 color: "#061f2f",
                 fontWeight: "400",
                 textAlign: "left",
-                marginBottom: "50px",
+                marginBottom: "30px",
                 "@media (max-width: 1199px)": {
                   fontSize: "48px",
                 },
@@ -579,7 +681,8 @@ const Login = () => {
                 },
 
                 "@media (max-width: 575px)": {
-                  fontSize: "34px",
+                  fontSize: "25px",
+                  marginBottom: "25px",
                 },
               }}
             >
@@ -587,11 +690,11 @@ const Login = () => {
             </Typography>
           </Box>
           <Grid container spacing={2}>
-            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={4}>
+            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={6}>
               <Box
                 sx={{
-                  width: "460px",
-                  height: "330px",
+                  width: "auto",
+                  height: "auto",
 
                   "& img": {
                     width: "100%",
@@ -619,6 +722,9 @@ const Login = () => {
                     fontWeight: "600",
                     color: "#061f2f",
                     marginBottom: "5px",
+                    "@media (max-width: 575px)": {
+                      fontSize: "15px",
+                    },
                   }}
                 >
                   1. Capture
@@ -629,6 +735,9 @@ const Login = () => {
                     color: "#061f2f",
                     fontSize: "20px",
                     fontWeight: 500,
+                    "@media (max-width: 575px)": {
+                      fontSize: "15px",
+                    },
                   }}
                   variant="p"
                 >
@@ -638,11 +747,11 @@ const Login = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={4}>
+            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={6}>
               <Box
                 sx={{
-                  width: "460px",
-                  height: "330px",
+                  width: "auto",
+                  height: "auto",
                   "& img": {
                     width: "100%",
                     height: "100%",
@@ -669,6 +778,9 @@ const Login = () => {
                     fontWeight: "600",
                     color: "#061f2f",
                     marginBottom: "5px",
+                    "@media (max-width: 575px)": {
+                      fontSize: "15px",
+                    },
                   }}
                 >
                   2. Edit
@@ -679,6 +791,9 @@ const Login = () => {
                     color: "#061f2f",
                     fontSize: "20px",
                     fontWeight: 500,
+                    "@media (max-width: 575px)": {
+                      fontSize: "15px",
+                    },
                   }}
                   variant="p"
                 >
@@ -687,11 +802,11 @@ const Login = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={4}>
+            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={6}>
               <Box
                 sx={{
-                  width: "460px",
-                  height: "330px",
+                  width: "auto",
+                  height: "auto",
 
                   "& img": {
                     width: "100%",
@@ -719,6 +834,9 @@ const Login = () => {
                     fontWeight: "600",
                     color: "#061f2f",
                     marginBottom: "5px",
+                    "@media (max-width: 575px)": {
+                      fontSize: "15px",
+                    },
                   }}
                 >
                   3. Sign off
@@ -729,6 +847,9 @@ const Login = () => {
                     color: "#061f2f",
                     fontSize: "20px",
                     fontWeight: 500,
+                    "@media (max-width: 575px)": {
+                      fontSize: "15px",
+                    },
                   }}
                   variant="p"
                 >
@@ -772,6 +893,82 @@ const Login = () => {
       </Box>
       {/* simplicity Card section */}
 
+      {/* Drawer for mobile-view */}
+      <Drawer
+        className="test010101"
+        anchor="top"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        sx={{
+          "& .MuiDrawer-paper": {
+            width: "100%",
+            height: "100%",
+            boxSizing: "border-box",
+            borderRadius: "0px",
+          },
+        }}
+      >
+        <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
+          <IconButton onClick={() => setDrawerOpen(false)} aria-label="close">
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            width: "100%",
+            gap: "10px",
+          }}
+        >
+          <Button
+            onClick={routeChange}
+            sx={{
+              borderRadius: "8px",
+              marginLeft: "8px",
+              padding: "1rem 1.5rem",
+              fontSize: "1.125rem",
+              fontWeight: 500,
+              lineHeight: 1,
+              color: "#061f2f",
+              border: "1px solid #061f2f",
+              textTransform: "capitalize",
+              transition: "background-color 0.2s, color 0.2s",
+              width: "80%",
+              "&:hover": {
+                backgroundColor: "#000",
+                color: "#fff",
+              },
+            }}
+          >
+            {isLoggedIn ? "Log out" : "Log in"}
+          </Button>
+          <Button
+            sx={{
+              borderRadius: "8px",
+              marginLeft: "8px",
+              padding: "1rem 1.5rem",
+              fontSize: "1.125rem",
+              fontWeight: 500,
+              lineHeight: 1,
+              color: "#061f2f",
+              background: "#d9c7ff",
+              textTransform: "capitalize",
+              transition: "background-color 0.2s, color 0.2s",
+              width: "80%",
+              "&:hover": {
+                backgroundColor: "#000",
+                color: "#fff",
+              },
+            }}
+            onClick={handleTryFree}
+          >
+            Try for Free
+          </Button>
+        </Box>
+      </Drawer>
       {/* Remove Instant clinical Card section or pricing section */}
       <Box
         sx={{
