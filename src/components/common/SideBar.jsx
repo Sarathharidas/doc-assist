@@ -12,7 +12,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import { Button, TextField } from "@mui/material";
 import Note from "./Note";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import FolderDeleteIcon from "@mui/icons-material/FolderDelete";
@@ -38,9 +38,31 @@ const SideBar = ({
   const [selectedRecords, setSelectedRecords] = useState([]);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [playingRecordId, setPlayingRecordId] = useState(null);
 
   const navigate = useNavigate();
+  const playingAudioRef = useRef(null);
 
+  const handleAudioPlay = (recordId, audioElement) => {
+    // Pause the currently playing audio if any
+    if (playingAudioRef.current && playingAudioRef.current !== audioElement) {
+      playingAudioRef.current.pause();
+      playingAudioRef.current.currentTime = 0;
+    }
+
+    // Set the new playing audio and record ID
+    playingAudioRef.current = audioElement;
+    setPlayingRecordId(recordId);
+  };
+
+  const handleAudioStop = () => {
+    if (playingAudioRef.current) {
+      playingAudioRef.current.pause();
+      playingAudioRef.current.currentTime = 0;
+      playingAudioRef.current = null;
+    }
+    setPlayingRecordId(null);
+  };
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -303,6 +325,9 @@ const SideBar = ({
                       setSelectedRecords={setSelectedRecords}
                       isSelected={selectedRecords.includes(record.id)}
                       onSelect={handleSelectRecord}
+                      playingRecordId={playingRecordId}
+                      handleAudioPlay={handleAudioPlay}
+                      handleAudioStop={handleAudioStop}
                     />
                   )
                 )

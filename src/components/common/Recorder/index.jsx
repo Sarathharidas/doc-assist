@@ -7,7 +7,7 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-
+import { toast } from "react-toastify";
 import AddPatientModal from "./AddPatientModal";
 
 const VisuallyHiddenInput = styled("input")({
@@ -93,6 +93,7 @@ const Recorder = ({ getData }) => {
       setIsRecording(true);
       setIsPaused(false);
     } catch (err) {
+      toast.error("Error accessing microphone");
       console.error("Error accessing microphone:", err);
     }
   };

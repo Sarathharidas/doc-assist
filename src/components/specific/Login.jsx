@@ -64,13 +64,14 @@ const Login = () => {
           if (res?.user?.accessToken) {
             localStorage.setItem("token", JSON.stringify(res.user.accessToken));
             const userInfo = {
-              email: res.email,
-              displayName: res.displayName,
+              email: res.user.email,
+              displayName: res.user.displayName,
               uid: res.user.uid,
             };
             localStorage.setItem("userId", res.user.uid);
             localStorage.setItem("user", JSON.stringify(userInfo));
             navigate("/");
+            window.location.reload();
           }
         })
         .catch((error) => {

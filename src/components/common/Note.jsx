@@ -27,10 +27,12 @@ const Note = ({
   setSelectedRecords,
   isSelected,
   onSelect,
+  playingRecordId,
+  handleAudioPlay,
+  handleAudioStop,
 }) => {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
-  const [audioPlay, setAudioPlay] = useState(false);
 
   const createdAt = record?.createdAt?.toDate();
   const navigate = useNavigate();
@@ -68,35 +70,28 @@ const Note = ({
 
   const handlePlayAudio = (event) => {
     event.stopPropagation();
+    event.stopPropagation();
     if (audioRef.current) {
-      setAudioPlay(true);
+      handleAudioPlay(record.id, audioRef.current);
       audioRef.current.play();
     }
   };
 
   const handleStopAudioPlay = (event) => {
     event.stopPropagation();
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      setAudioPlay(false);
-    }
-  };
-
-  const handleAudioEnded = () => {
-    setAudioPlay(false);
+    handleAudioStop();
   };
 
   useEffect(() => {
     const audioElement = audioRef.current;
     if (audioElement) {
-      audioElement.addEventListener("ended", handleAudioEnded);
+      audioElement.addEventListener("ended", handleAudioStop);
     }
 
     // Cleanup event listener when component unmounts
     return () => {
       if (audioElement) {
-        audioElement.removeEventListener("ended", handleAudioEnded);
+        audioElement.removeEventListener("ended", handleAudioStop);
       }
     };
   }, []);
@@ -174,8 +169,14 @@ const Note = ({
         <IconButton onClick={(event) => handleDeleteButtonClick(event)}>
           <DeleteIcon sx={{ color: "#686d73" }} />
         </IconButton>
-        <IconButton onClick={audioPlay ? handleStopAudioPlay : handlePlayAudio}>
-          {audioPlay ? <PauseIcon /> : <PlayArrow />}
+        <IconButton
+          onClick={
+            playingRecordId === record?.id
+              ? handleStopAudioPlay
+              : handlePlayAudio
+          }
+        >
+          {playingRecordId === record?.id ? <PauseIcon /> : <PlayArrow />}
         </IconButton>
         <audio ref={audioRef} src={record?.url} />
       </Box>
