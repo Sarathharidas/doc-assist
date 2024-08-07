@@ -9,7 +9,11 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useFormik } from "formik";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { app } from "../../services/firebase";
 import { useState } from "react";
 import { Signup_Schema } from "../../validation_schema";
@@ -31,21 +35,34 @@ const SignUp = () => {
     enableReinitialize: true,
     onSubmit: ({ email, password, username }) => {
       // Create a new user with email and password using firebase
-      createUserWithEmailAndPassword(auth, email, password, username)
+      createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          if (res?.user?.accessToken) {
-            localStorage.setItem("token", JSON.stringify(res.user.accessToken));
-            const userInfo = {
-              email: res.email,
-              usernmae: res.username,
-              displayName: res.displayName,
-              uid: res.user.uid,
-            };
-            localStorage.setItem("userId", res.user.uid);
-            localStorage.setItem("user", JSON.stringify(userInfo));
-          }
-          navigate("/record");
-          window.location.reload();
+          const user = res.user;
+
+          // Update the user's profile with the username
+          return updateProfile(user, {
+            displayName: username?.trim(),
+          })
+            .then(() => {
+              if (res?.user?.accessToken) {
+                localStorage.setItem(
+                  "token",
+                  JSON.stringify(res.user.accessToken)
+                );
+                const userInfo = {
+                  email: res.user.email,
+                  username: res.user.displayName,
+                  uid: res.user.uid,
+                };
+                localStorage.setItem("userId", res.user.uid);
+                localStorage.setItem("user", JSON.stringify(userInfo));
+              }
+              navigate("/record");
+              window.location.reload();
+            })
+            .catch((err) => {
+              console.log("Error updating profile => ", err.message);
+            });
         })
         .catch((err) => {
           if (err.message === "Firebase: Error (auth/email-already-in-use).") {
@@ -57,6 +74,8 @@ const SignUp = () => {
         });
     },
   });
+
+  console.log("SignUp.values.username", SignUp.values.username);
 
   return (
     <>

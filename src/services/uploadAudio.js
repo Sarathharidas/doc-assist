@@ -10,6 +10,7 @@ const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 // const client = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 const userId = localStorage.getItem("userId");
+const username = JSON.parse(localStorage.getItem("user"))?.username;
 
 // const splitText = (text) => {
 //   console.log('first', text)
@@ -95,6 +96,7 @@ export const uploadAudio = async (file, objectData, fileName) => {
         await addDoc(collection(db, "patient"), {
           url: downloadURL,
           userId: userId,
+          username: username ?? "Unknown",
           createdAt: new Date(),
           transcript: result.text,
           summary: generate_summary,

@@ -18,6 +18,21 @@ export const Signup_Schema = Yup.object({
   username: Yup.string()
     .max(255, "Doctor's name must not be greater than 255 characters.")
     .min(2, "Doctor's name must not be lesser than 2 characters.")
+    .test(
+      "no-blank-spaces",
+      "Doctor's name cannot contain only blank spaces.",
+      (value) => value && value.trim().length > 0
+    )
+    .test(
+      "min-two-non-space-chars",
+      "Doctor's name must contain at least 2 non-blank characters.",
+      (value) => {
+        if (!value) return false;
+        // Remove spaces and check if the length of remaining characters is at least 2
+        const nonSpaceChars = value.replace(/\s+/g, "");
+        return nonSpaceChars.length >= 2;
+      }
+    )
     .required("Doctor's name is required."),
 });
 
