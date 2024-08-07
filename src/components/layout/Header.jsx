@@ -772,9 +772,10 @@ const Login = () => {
       </Box>
       {/* simplicity Card section */}
 
-      {/* Instant clinical Card section */}
+      {/* Remove Instant clinical Card section or pricing section */}
       <Box
         sx={{
+          display: "none",
           paddingY: "100px",
           "@media (max-width: 1199px)": {
             paddingY: "50px",
