@@ -6,26 +6,20 @@ import {
   Grid,
   IconButton,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Typography,
 } from "@mui/material";
 import "../../App.css";
 import HeroImg from "../../assets/image/hero-img.jpg";
 import Images_Slider from "../common/Slider";
-import Note from "../../assets/image/Note.svg";
-import Work from "../../assets/image/Work.svg";
-import Easy from "../../assets/image/Easy.svg";
-import Visit from "../../assets/image/start-visit.png";
 import Logo from "../../assets/image/logo.png";
 import Footer from "./Footer";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { clinicalCardContent, simplicityCardContent } from "../../constants";
 
-const Login = () => {
+const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -55,9 +49,30 @@ const Login = () => {
     if (userId) {
       navigate("/record");
     } else {
-      navigate("/signup");
+      navigate("/login");
     }
   };
+
+  const buttonConfigs = [
+    {
+      text: isLoggedIn ? "Log out" : "Log in",
+      onClick: routeChange,
+      backgroundColor: "transparent",
+      borderColor: "#061f2f",
+      hoverBackgroundColor: "#000",
+      hoverTextColor: "#fff",
+      ariaLabel: isLoggedIn ? "Log out" : "Log in",
+    },
+    {
+      text: "Try for Free",
+      onClick: handleTryFree,
+      backgroundColor: "#d9c7ff",
+      borderColor: "transparent",
+      hoverBackgroundColor: "#000",
+      hoverTextColor: "#fff",
+      ariaLabel: "Try for Free",
+    },
+  ];
 
   return (
     <>
@@ -79,9 +94,7 @@ const Login = () => {
             }}
           >
             <Box>
-              <Typography>
-                <img style={{ width: "150px" }} src={Logo} alt="Logo" />
-              </Typography>
+              <img style={{ width: "150px" }} src={Logo} alt="Logo" />
             </Box>
             <Box>
               <List
@@ -104,54 +117,36 @@ const Login = () => {
                   },
                 }}
               >
-                <Button
-                  onClick={routeChange}
-                  sx={{
-                    borderRadius: "8px",
-                    marginLeft: "8px",
-                    padding: "1rem 1.5rem",
-                    fontSize: "1.125rem",
-                    fontWeight: 500,
-                    lineHeight: 1,
-                    color: "#061f2f",
-                    border: "1px solid #061f2f",
-                    textTransform: "capitalize",
-                    transition: "background-color 0.2s, color 0.2s",
-                    "&:hover": {
-                      backgroundColor: "#000",
-                      color: "#fff",
-                    },
-                    "@media (max-width: 767px)": {
-                      display: "none",
-                    },
-                  }}
-                >
-                  {isLoggedIn ? "Log out" : "Log in"}
-                </Button>
-                <Button
-                  sx={{
-                    borderRadius: "8px",
-                    marginLeft: "8px",
-                    padding: "1rem 1.5rem",
-                    fontSize: "1.125rem",
-                    fontWeight: 500,
-                    lineHeight: 1,
-                    color: "#061f2f",
-                    background: "#d9c7ff",
-                    textTransform: "capitalize",
-                    transition: "background-color 0.2s, color 0.2s",
-                    "&:hover": {
-                      backgroundColor: "#000",
-                      color: "#fff",
-                    },
-                    "@media (max-width: 767px)": {
-                      display: "none",
-                    },
-                  }}
-                  onClick={handleTryFree}
-                >
-                  Try for Free
-                </Button>
+                {buttonConfigs?.map((headerButton, index) => {
+                  return (
+                    <Button
+                      key={index}
+                      onClick={headerButton?.onClick}
+                      sx={{
+                        borderRadius: "8px",
+                        marginLeft: "8px",
+                        padding: "1rem 1.5rem",
+                        fontSize: "1.125rem",
+                        fontWeight: 500,
+                        lineHeight: 1,
+                        color: "#061f2f",
+                        backgroundColor: headerButton.backgroundColor,
+                        border: `1px solid ${headerButton.borderColor}`,
+                        textTransform: "capitalize",
+                        transition: "background-color 0.2s, color 0.2s",
+                        "&:hover": {
+                          backgroundColor: headerButton.hoverBackgroundColor,
+                          color: headerButton.hoverTextColor,
+                        },
+                        "@media (max-width: 767px)": {
+                          display: "none",
+                        },
+                      }}
+                    >
+                      {headerButton?.text}
+                    </Button>
+                  );
+                })}
                 <IconButton
                   onClick={() => setDrawerOpen(!drawerOpen)}
                   sx={{
@@ -473,177 +468,68 @@ const Login = () => {
             </Typography>
           </Box>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={4} sm={6}>
-              <Box
-                sx={{
-                  background: "#fff",
-                  borderRadius: "16px",
-                  padding: "20px",
-                  boxShadow: "0px 2px 8px rgba(99, 99, 99, 0.2)",
-                  height: "240px",
-                  "@media (max-width: 1199px)": {
-                    height: "280px",
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    width: "65px",
-                    height: "65px",
-                    paddingBottom: "20px",
-
-                    "& img": {
-                      width: "100%",
-                      height: "auto",
-                    },
-                  }}
-                >
-                  <img src={Note} alt="Note" />
-                </Box>
-                <Typography
-                  sx={{
-                    fontSize: "20px",
-                    color: "#061f2f",
-                    fontWeight: "600",
-                    textAlign: "left",
-                    marginBottom: "5px",
-                    "@media (max-width: 575px)": {
-                      fontSize: "16px",
-                    },
-                  }}
-                >
-                  Notes in your style, 10x faster
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "20px",
-                    color: "#061f2f",
-                    fontWeight: "500",
-                    textAlign: "left",
-                    "@media (max-width: 575px)": {
-                      fontSize: "15px",
-                    },
-                  }}
-                >
-                  Doctor-assist learns your style and format, with every edit.
-                  Get customized clinical notes in moments, not hours.
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4} sm={6}>
-              <Box
-                sx={{
-                  background: "#fff",
-                  borderRadius: "16px",
-                  padding: "20px",
-                  boxShadow: "0px 2px 8px rgba(99, 99, 99, 0.2)",
-                  height: "240px",
-                  "@media (max-width: 1199px)": {
-                    height: "270px",
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    width: "65px",
-                    height: "65px",
-                    paddingBottom: "20px",
-
-                    "& img": {
-                      width: "100%",
-                      height: "auto",
-                    },
-                  }}
-                >
-                  <img src={Work} alt="Work" />
-                </Box>
-                <Typography
-                  sx={{
-                    fontSize: "20px",
-                    color: "#061f2f",
-                    fontWeight: "600",
-                    textAlign: "left",
-                    marginBottom: "5px",
-                    "@media (max-width: 575px)": {
-                      fontSize: "16px",
-                    },
-                  }}
-                >
-                  Works in every setting
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "20px",
-                    color: "#061f2f",
-                    fontWeight: "500",
-                    textAlign: "left",
-                    "@media (max-width: 575px)": {
-                      fontSize: "15px",
-                    },
-                  }}
-                >
-                  Capture notes accurately for any specialty visit up to 2
-                  hours, be it virtual or in office, even if it’s noisy.
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4} sm={6}>
-              <Box
-                sx={{
-                  background: "#fff",
-                  borderRadius: "16px",
-                  padding: "20px",
-                  boxShadow: "0px 2px 8px rgba(99, 99, 99, 0.2)",
-                  height: "240px",
-                  "@media (max-width: 1199px)": {
-                    height: "270px",
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    paddingBottom: "20px",
-                    width: "65px",
-                    height: "65px",
-
-                    "& img": {
-                      width: "100%",
-                      height: "auto",
-                    },
-                  }}
-                >
-                  <img src={Easy} alt="Easy" />
-                </Box>
-                <Typography
-                  sx={{
-                    fontSize: "20px",
-                    color: "#061f2f",
-                    fontWeight: "600",
-                    textAlign: "left",
-                    marginBottom: "5px",
-                    "@media (max-width: 575px)": {
-                      fontSize: "16px",
-                    },
-                  }}
-                >
-                  Easy to use
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "20px",
-                    color: "#061f2f",
-                    fontWeight: "500",
-                    textAlign: "left",
-                    "@media (max-width: 575px)": {
-                      fontSize: "15px",
-                    },
-                  }}
-                >
-                  Copy and paste into your “favorite” EHR. Support your patient
-                  with easy to follow patient instructions.
-                </Typography>
-              </Box>
-            </Grid>
+            {clinicalCardContent?.map((clinicCardData) => {
+              return (
+                <Grid item xs={12} md={4} sm={6}>
+                  <Box
+                    sx={{
+                      background: "#fff",
+                      borderRadius: "16px",
+                      padding: "20px",
+                      boxShadow: "0px 2px 8px rgba(99, 99, 99, 0.2)",
+                      height: "240px",
+                      "@media (max-width: 1199px)": {
+                        height: "280px",
+                      },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: "65px",
+                        height: "65px",
+                        paddingBottom: "20px",
+                        "& img": {
+                          width: "100%",
+                          height: "auto",
+                        },
+                      }}
+                    >
+                      <img
+                        src={clinicCardData?.logo}
+                        alt={clinicCardData?.name}
+                      />
+                    </Box>
+                    <Typography
+                      sx={{
+                        fontSize: "20px",
+                        color: "#061f2f",
+                        fontWeight: "600",
+                        textAlign: "left",
+                        marginBottom: "5px",
+                        "@media (max-width: 575px)": {
+                          fontSize: "16px",
+                        },
+                      }}
+                    >
+                      {clinicCardData?.head}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "20px",
+                        color: "#061f2f",
+                        fontWeight: "500",
+                        textAlign: "left",
+                        "@media (max-width: 575px)": {
+                          fontSize: "15px",
+                        },
+                      }}
+                    >
+                      {clinicCardData?.content}
+                    </Typography>
+                  </Box>
+                </Grid>
+              );
+            })}
           </Grid>
         </Container>
       </Box>
@@ -690,174 +576,64 @@ const Login = () => {
             </Typography>
           </Box>
           <Grid container spacing={2}>
-            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={6}>
-              <Box
-                sx={{
-                  width: "auto",
-                  height: "auto",
-
-                  "& img": {
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: ".5rem",
-                  },
-                  "@media (max-width: 1199px)": {
-                    width: "auto",
-                    height: "auto",
-                  },
-                }}
-              >
-                <img src={Visit} alt="visit-img" />
-              </Box>
-              <Box
-                sx={{
-                  paddingTop: "20px",
-                }}
-              >
-                <Typography
-                  variant="h1"
-                  sx={{
-                    fontSize: "20px",
-                    fontWeight: "600",
-                    color: "#061f2f",
-                    marginBottom: "5px",
-                    "@media (max-width: 575px)": {
-                      fontSize: "15px",
-                    },
-                  }}
-                >
-                  1. Capture
-                </Typography>
-                <Typography
-                  sx={{
-                    lineHeight: 1.4,
-                    color: "#061f2f",
-                    fontSize: "20px",
-                    fontWeight: 500,
-                    "@media (max-width: 575px)": {
-                      fontSize: "15px",
-                    },
-                  }}
-                  variant="p"
-                >
-                  {`Select “Capture visit”’ when your visit begins. Doctor-assist can
-                  listen for up to two hours, whether it's a virtual or office
-                  visit.`}
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={6}>
-              <Box
-                sx={{
-                  width: "auto",
-                  height: "auto",
-                  "& img": {
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: ".5rem",
-                  },
-                  "@media (max-width: 1199px)": {
-                    width: "auto",
-                    height: "auto",
-                  },
-                }}
-              >
-                <img src={Visit} alt="visit-img" />
-              </Box>
-              <Box
-                sx={{
-                  paddingTop: "20px",
-                }}
-              >
-                <Typography
-                  variant="h1"
-                  sx={{
-                    fontSize: "20px",
-                    fontWeight: "600",
-                    color: "#061f2f",
-                    marginBottom: "5px",
-                    "@media (max-width: 575px)": {
-                      fontSize: "15px",
-                    },
-                  }}
-                >
-                  2. Edit
-                </Typography>
-                <Typography
-                  sx={{
-                    lineHeight: 1.4,
-                    color: "#061f2f",
-                    fontSize: "20px",
-                    fontWeight: 500,
-                    "@media (max-width: 575px)": {
-                      fontSize: "15px",
-                    },
-                  }}
-                  variant="p"
-                >
-                  Select “End visit” and view your completed SOAP note in about
-                  a minute. Edit to help Doctor-assist learn your style.
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={6}>
-              <Box
-                sx={{
-                  width: "auto",
-                  height: "auto",
-
-                  "& img": {
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: ".5rem",
-                  },
-                  "@media (max-width: 1199px)": {
-                    width: "auto",
-                    height: "auto",
-                  },
-                }}
-              >
-                <img src={Visit} alt="visit-img" />
-              </Box>
-              <Box
-                sx={{
-                  paddingTop: "20px",
-                }}
-              >
-                <Typography
-                  variant="h1"
-                  sx={{
-                    fontSize: "20px",
-                    fontWeight: "600",
-                    color: "#061f2f",
-                    marginBottom: "5px",
-                    "@media (max-width: 575px)": {
-                      fontSize: "15px",
-                    },
-                  }}
-                >
-                  3. Sign off
-                </Typography>
-                <Typography
-                  sx={{
-                    lineHeight: 1.4,
-                    color: "#061f2f",
-                    fontSize: "20px",
-                    fontWeight: 500,
-                    "@media (max-width: 575px)": {
-                      fontSize: "15px",
-                    },
-                  }}
-                  variant="p"
-                >
-                  Send simple patient instructions, and copy completed notes
-                  into any EHR.
-                </Typography>
-              </Box>
-            </Grid>
+            {simplicityCardContent?.map((cardContent) => {
+              return (
+                <Grid sx={{ paddingLeft: "0px" }} item xs={12} md={4} sm={6}>
+                  <Box
+                    sx={{
+                      width: "auto",
+                      height: "auto",
+                      "& img": {
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: ".5rem",
+                      },
+                      "@media (max-width: 1199px)": {
+                        width: "auto",
+                        height: "auto",
+                      },
+                    }}
+                  >
+                    <img src={cardContent?.logo} alt={cardContent?.name} />
+                  </Box>
+                  <Box
+                    sx={{
+                      paddingTop: "20px",
+                    }}
+                  >
+                    <Typography
+                      variant="h1"
+                      sx={{
+                        fontSize: "20px",
+                        fontWeight: "600",
+                        color: "#061f2f",
+                        marginBottom: "5px",
+                        "@media (max-width: 575px)": {
+                          fontSize: "15px",
+                        },
+                      }}
+                    >
+                      {cardContent?.head}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        lineHeight: 1.4,
+                        color: "#061f2f",
+                        fontSize: "20px",
+                        fontWeight: 500,
+                        "@media (max-width: 575px)": {
+                          fontSize: "15px",
+                        },
+                      }}
+                      variant="p"
+                    >
+                      {cardContent?.content}
+                    </Typography>
+                  </Box>
+                </Grid>
+              );
+            })}
           </Grid>
         </Container>
         <Box
@@ -923,50 +699,34 @@ const Login = () => {
             gap: "10px",
           }}
         >
-          <Button
-            onClick={routeChange}
-            sx={{
-              borderRadius: "8px",
-              marginLeft: "8px",
-              padding: "1rem 1.5rem",
-              fontSize: "1.125rem",
-              fontWeight: 500,
-              lineHeight: 1,
-              color: "#061f2f",
-              border: "1px solid #061f2f",
-              textTransform: "capitalize",
-              transition: "background-color 0.2s, color 0.2s",
-              width: "80%",
-              "&:hover": {
-                backgroundColor: "#000",
-                color: "#fff",
-              },
-            }}
-          >
-            {isLoggedIn ? "Log out" : "Log in"}
-          </Button>
-          <Button
-            sx={{
-              borderRadius: "8px",
-              marginLeft: "8px",
-              padding: "1rem 1.5rem",
-              fontSize: "1.125rem",
-              fontWeight: 500,
-              lineHeight: 1,
-              color: "#061f2f",
-              background: "#d9c7ff",
-              textTransform: "capitalize",
-              transition: "background-color 0.2s, color 0.2s",
-              width: "80%",
-              "&:hover": {
-                backgroundColor: "#000",
-                color: "#fff",
-              },
-            }}
-            onClick={handleTryFree}
-          >
-            Try for Free
-          </Button>
+          {buttonConfigs?.map((headerButton, index) => {
+            return (
+              <Button
+                key={index}
+                onClick={headerButton?.onClick}
+                sx={{
+                  borderRadius: "8px",
+                  marginLeft: "8px",
+                  padding: "1rem 1.5rem",
+                  fontSize: "1.125rem",
+                  fontWeight: 500,
+                  lineHeight: 1,
+                  color: "#061f2f",
+                  backgroundColor: headerButton.backgroundColor,
+                  border: `1px solid ${headerButton.borderColor}`,
+                  textTransform: "capitalize",
+                  transition: "background-color 0.2s, color 0.2s",
+                  width: "80%",
+                  "&:hover": {
+                    backgroundColor: headerButton.hoverBackgroundColor,
+                    color: headerButton.hoverTextColor,
+                  },
+                }}
+              >
+                {headerButton?.text}
+              </Button>
+            );
+          })}
         </Box>
       </Drawer>
       {/* Remove Instant clinical Card section or pricing section */}
@@ -1105,7 +865,6 @@ const Login = () => {
                 </Typography>
               </Box>
             </Grid>
-
             <Grid item xs={12} md={4} sm={4}>
               <Box
                 sx={{
@@ -1297,4 +1056,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Header;
