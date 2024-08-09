@@ -44,6 +44,7 @@ const Header = () => {
       let path = "/login";
       navigate(path);
     }
+    setDrawerOpen(false);
   };
 
   const handleTryFree = () => {
@@ -54,6 +55,7 @@ const Header = () => {
     } else {
       navigate("/login");
     }
+    setDrawerOpen(false);
   };
 
   const buttonConfigs = [
@@ -470,7 +472,7 @@ const Header = () => {
               Instant Clinical Notes Tailored To You
             </Typography>
           </Box>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} alignItems={{ md: "stretch" }}>
             {clinicalCardContent?.map((clinicCardData) => {
               return (
                 <Grid item xs={12} md={4} sm={6}>
@@ -478,11 +480,22 @@ const Header = () => {
                     sx={{
                       background: "#fff",
                       borderRadius: "16px",
-                      padding: "20px",
                       boxShadow: "0px 2px 8px rgba(99, 99, 99, 0.2)",
-                      height: "240px",
-                      "@media (max-width: 1199px)": {
-                        height: "280px",
+                      padding: "20px",
+                      "@media (max-width: 1100px)": {
+                        minHeight: "289px",
+                      },
+                      "@media (max-width: 991px)": {
+                        minHeight: "325px",
+                      },
+                      "@media (max-width: 899px)": {
+                        minHeight: "205px",
+                      },
+                      "@media (max-width: 767px)": {
+                        minHeight: "325px",
+                      },
+                      "@media (max-width: 599px)": {
+                        minHeight: "auto",
                       },
                     }}
                   >
@@ -522,8 +535,18 @@ const Header = () => {
                         color: "#061f2f",
                         fontWeight: "500",
                         textAlign: "left",
+                        minHeight: "135px",
+                        "@media (max-width: 991px)": {
+                          minHeight: "95px",
+                        },
                         "@media (max-width: 575px)": {
                           fontSize: "15px",
+                        },
+                        "@media (max-width: 767px)": {
+                          minHeight: "135px",
+                        },
+                        "@media (max-width: 599px)": {
+                          minHeight: "auto",
                         },
                       }}
                     >

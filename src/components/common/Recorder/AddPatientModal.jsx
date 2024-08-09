@@ -6,6 +6,7 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
+  Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
@@ -14,9 +15,12 @@ const AddPatientModal = ({
   showModal,
   patientName,
   setPatientName,
+  patientNameError,
+  setPatientNameError,
   handleClose,
   onSave = () => {},
 }) => {
+  console.log("patientNameError", patientNameError);
   return (
     <>
       <Dialog
@@ -60,8 +64,20 @@ const AddPatientModal = ({
             fullWidth
             variant="standard"
             value={patientName}
-            onChange={(e) => setPatientName(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.trim() === "") {
+                setPatientNameError(true);
+              } else {
+                setPatientNameError(false);
+              }
+              setPatientName(e.target.value);
+            }}
           />
+          {patientNameError && (
+            <Typography sx={{ color: "red", fontSize: 12 }}>
+              Patient name cannot be empty or contain only whitespace.
+            </Typography>
+          )}
         </DialogContent>
         <DialogActions>
           <Button sx={{ color: "#000000de" }} onClick={handleClose}>
