@@ -7,6 +7,7 @@ import {
   IconButton,
   List,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import "../../App.css";
 import HeroImg from "../../assets/image/hero-img.jpg";
@@ -22,6 +23,8 @@ import { clinicalCardContent, simplicityCardContent } from "../../constants";
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
     const token = localStorage.getItem("userId");
@@ -515,7 +518,7 @@ const Header = () => {
                     </Typography>
                     <Typography
                       sx={{
-                        fontSize: "20px",
+                        fontSize: "18px",
                         color: "#061f2f",
                         fontWeight: "500",
                         textAlign: "left",
@@ -610,7 +613,7 @@ const Header = () => {
                         color: "#061f2f",
                         marginBottom: "5px",
                         "@media (max-width: 575px)": {
-                          fontSize: "15px",
+                          fontSize: "16px",
                         },
                       }}
                     >
@@ -620,7 +623,7 @@ const Header = () => {
                       sx={{
                         lineHeight: 1.4,
                         color: "#061f2f",
-                        fontSize: "20px",
+                        fontSize: "18px",
                         fontWeight: 500,
                         "@media (max-width: 575px)": {
                           fontSize: "15px",
@@ -639,6 +642,7 @@ const Header = () => {
         <Box
           sx={{
             textAlign: "center",
+            display: "none",
           }}
         >
           <Button
@@ -670,65 +674,68 @@ const Header = () => {
       {/* simplicity Card section */}
 
       {/* Drawer for mobile-view */}
-      <Drawer
-        className="test010101"
-        anchor="top"
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        sx={{
-          "& .MuiDrawer-paper": {
-            width: "100%",
-            height: "100%",
-            boxSizing: "border-box",
-            borderRadius: "0px",
-          },
-        }}
-      >
-        <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
-          <IconButton onClick={() => setDrawerOpen(false)} aria-label="close">
-            <CloseIcon />
-          </IconButton>
-        </Box>
-        <Box
+      {isMobile ? (
+        <Drawer
+          anchor="top"
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            width: "100%",
-            gap: "10px",
+            zIndex: 0,
+            "& .MuiModal-backdrop": {
+              backgroundColor: "transparent",
+            },
+            "& .MuiDrawer-paper": {
+              width: "100%",
+              height: "100%",
+              boxSizing: "border-box",
+              borderRadius: "0px",
+              top: "90px",
+              boxShadow: "none",
+            },
           }}
         >
-          {buttonConfigs?.map((headerButton, index) => {
-            return (
-              <Button
-                key={index}
-                onClick={headerButton?.onClick}
-                sx={{
-                  borderRadius: "8px",
-                  marginLeft: "8px",
-                  padding: "1rem 1.5rem",
-                  fontSize: "1.125rem",
-                  fontWeight: 500,
-                  lineHeight: 1,
-                  color: "#061f2f",
-                  backgroundColor: headerButton.backgroundColor,
-                  border: `1px solid ${headerButton.borderColor}`,
-                  textTransform: "capitalize",
-                  transition: "background-color 0.2s, color 0.2s",
-                  width: "80%",
-                  "&:hover": {
-                    backgroundColor: headerButton.hoverBackgroundColor,
-                    color: headerButton.hoverTextColor,
-                  },
-                }}
-              >
-                {headerButton?.text}
-              </Button>
-            );
-          })}
-        </Box>
-      </Drawer>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              width: "100%",
+              gap: "10px",
+            }}
+          >
+            {buttonConfigs?.map((headerButton, index) => {
+              return (
+                <Button
+                  key={index}
+                  onClick={headerButton?.onClick}
+                  sx={{
+                    borderRadius: "8px",
+                    marginLeft: "8px",
+                    padding: "1rem 1.5rem",
+                    fontSize: "1.125rem",
+                    fontWeight: 500,
+                    lineHeight: 1,
+                    color: "#061f2f",
+                    backgroundColor: headerButton.backgroundColor,
+                    border: `1px solid ${headerButton.borderColor}`,
+                    textTransform: "capitalize",
+                    transition: "background-color 0.2s, color 0.2s",
+                    width: "80%",
+                    "&:hover": {
+                      backgroundColor: headerButton.hoverBackgroundColor,
+                      color: headerButton.hoverTextColor,
+                    },
+                  }}
+                >
+                  {headerButton?.text}
+                </Button>
+              );
+            })}
+          </Box>
+        </Drawer>
+      ) : null}
+
       {/* Remove Instant clinical Card section or pricing section */}
       <Box
         sx={{

@@ -39,7 +39,16 @@ const AddPatientModal = ({
           }}
           onClick={handleClose}
         />
-        <DialogTitle>Thank you for healing another human</DialogTitle>
+        <DialogTitle
+          sx={{
+            padding: "16px 60px 16px 24px",
+            "@media (max-width: 575px)": {
+              padding: "16px 32px 16px 24px",
+            },
+          }}
+        >
+          Thank you for healing another human
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
             Who was the patient for this visit?

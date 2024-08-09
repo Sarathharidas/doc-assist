@@ -168,7 +168,13 @@ const Recorder = ({ getData }) => {
   return (
     <>
       {!isRecording && (
-        <Box>
+        <Box
+          sx={{
+            "@media (max-width: 575px)": {
+              margin: "0 35px",
+            },
+          }}
+        >
           <Button
             onClick={startRecording}
             sx={{
@@ -269,18 +275,17 @@ const Recorder = ({ getData }) => {
               a pre-recorded visit.
             </Typography>
           </Box>
-          <Link
-            sx={{
-              fontSize: "18px",
-            }}
-          >
-            How do I tell my patient about Doctor-assist?
-          </Link>
         </Box>
       )}
 
       {isRecording && (
-        <Box>
+        <Box
+          sx={{
+            "@media (max-width: 575px)": {
+              margin: "0 35px",
+            },
+          }}
+        >
           <Typography
             sx={{
               color: "#000000de",
@@ -352,12 +357,6 @@ const Recorder = ({ getData }) => {
             >
               {isPaused ? <PlayArrowIcon /> : <PauseIcon />}
             </Button>
-          </Box>
-
-          <Box sx={{ marginTop: "35px" }}>
-            <Link sx={{ fontSize: "18px" }}>
-              How do I tell my patient about Doctor-assist?
-            </Link>
           </Box>
         </Box>
       )}

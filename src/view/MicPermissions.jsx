@@ -79,7 +79,7 @@ const MicPermissions = () => {
         }}
       >
         <Typography
-          sx={{ color: "#fff", fontSize: "20px" }}
+          sx={{ color: "#fff", fontSize: "20px", width: "max-content" }}
           onClick={() => navigate("/")}
         >
           Doctor-assist

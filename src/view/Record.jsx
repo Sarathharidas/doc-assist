@@ -179,7 +179,12 @@ const FreedPage = ({ visit = false, sidebar = false }) => {
         }}
       >
         <Typography
-          sx={{ color: "#fff", fontSize: "20px", cursor: "pointer" }}
+          sx={{
+            color: "#fff",
+            fontSize: "20px",
+            cursor: "pointer",
+            width: "max-content",
+          }}
           onClick={() => navigate("/")}
         >
           Doctor-assist

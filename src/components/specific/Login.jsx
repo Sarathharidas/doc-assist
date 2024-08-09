@@ -93,7 +93,7 @@ const Login = () => {
         sx={{ position: "relative", background: "#1976d2", padding: "10px" }}
       >
         <Typography
-          sx={{ color: "#fff", fontSize: "25px" }}
+          sx={{ color: "#fff", fontSize: "25px", width: "max-content" }}
           onClick={() => navigate("/")}
         >
           Doctor-assist
