@@ -46,6 +46,7 @@ const Recorder = ({ getData }) => {
    * The name of the patient.
    */
   const [patientName, setPatientName] = useState("");
+  const [patientNameError, setPatientNameError] = useState(false);
   /**
    * The audio blob.
    */
@@ -68,7 +69,13 @@ const Recorder = ({ getData }) => {
       const newFile = new File([audioBlob?.blob], newFileName, {
         type: "audio/mp3",
       });
-      getData({ blob: audioBlob?.blob, name: patientName });
+      if (patientName.trim() === "") {
+        setPatientNameError(true);
+        return;
+      } else {
+        setPatientNameError(false);
+      }
+      getData({ blob: audioBlob?.blob, name: patientName.trim() });
       handleCloseModal();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -365,6 +372,8 @@ const Recorder = ({ getData }) => {
         showModal={saveAudioModal}
         patientName={patientName}
         setPatientName={setPatientName}
+        patientNameError={patientNameError}
+        setPatientNameError={setPatientNameError}
         onSave={stopRecording}
         handleClose={handleCloseModal}
       />

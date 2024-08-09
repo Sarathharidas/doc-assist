@@ -44,6 +44,7 @@ const Header = () => {
       let path = "/login";
       navigate(path);
     }
+    setDrawerOpen(false);
   };
 
   const handleTryFree = () => {
@@ -54,6 +55,7 @@ const Header = () => {
     } else {
       navigate("/login");
     }
+    setDrawerOpen(false);
   };
 
   const buttonConfigs = [
