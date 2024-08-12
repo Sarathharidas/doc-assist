@@ -181,7 +181,8 @@ const Header = () => {
       {/* hero section */}
       <Box
         sx={{
-          marginY: "80px",
+          marginY: "40px",
+          marginBottom: "0px",
           "@media (max-width: 1199px)": {
             marginTop: "20px",
             paddingBottom: "20px",
@@ -437,7 +438,7 @@ const Header = () => {
       <Box
         sx={{
           background: "#d9c7ff",
-          paddingY: "80px",
+          paddingY: "40px",
           "@media (max-width: 1199px)": {
             paddingY: "50px",
           },
@@ -564,7 +565,7 @@ const Header = () => {
       {/* simplicity Card section */}
       <Box
         sx={{
-          paddingY: "80px",
+          paddingY: "40px",
           background: "#fff",
           "@media (max-width: 1199px)": {
             paddingY: "50px",

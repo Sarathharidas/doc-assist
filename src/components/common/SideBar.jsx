@@ -129,8 +129,8 @@ const SideBar = ({
 
   const options = [
     { value: "allnote", label: "All Notes", icon: <StickyNote2Icon /> },
-    { value: "unreadnotes", label: "Unread Notes", icon: <MailOutlineIcon /> },
-    { value: "trash", label: "Trash", icon: <FolderDeleteIcon /> },
+    // { value: "unreadnotes", label: "Unread Notes", icon: <MailOutlineIcon /> },
+    // { value: "trash", label: "Trash", icon: <FolderDeleteIcon /> },
   ];
 
   return (
@@ -222,7 +222,6 @@ const SideBar = ({
                 top: 0,
                 background: "white",
                 zIndex: 1,
-                // padding: "10px",
               }}
             >
               <FormControlLabel

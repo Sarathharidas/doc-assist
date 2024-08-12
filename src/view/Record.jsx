@@ -244,7 +244,7 @@ const FreedPage = ({ visit = false, sidebar = false }) => {
             display: "flex",
             flexDirection: "column",
             overflowY: "auto",
-            height: "calc(100vh - 50px)",
+            height: "calc(100vh - 110px)",
             width: "100%",
             position: "relative",
             "@media (max-width: 767px)": {
