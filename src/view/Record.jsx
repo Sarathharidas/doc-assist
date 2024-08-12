@@ -19,9 +19,6 @@ import Window from "../assets/image/windows-system-step1.png";
 import Window_two from "../assets/image/windows-system-step2.png";
 import Window_three from "../assets/image/windows-system-step3.png";
 import Window_Four from "../assets/image/windows-system-step4.png";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { TextareaAutosize } from "@mui/material";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material";
 import SideBar from "../components/common/SideBar";
 import Recorder from "../components/common/Recorder";
@@ -31,6 +28,7 @@ import { memo, useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { auto } from "@popperjs/core";
 import { toast } from "react-toastify";
+import VisitSummary from "./VisitSummary";
 
 const FreedPage = ({ visit = false, sidebar = false }) => {
   /**
@@ -255,180 +253,15 @@ const FreedPage = ({ visit = false, sidebar = false }) => {
           }}
         >
           {visit ? (
-            <>
-              <Box
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255)",
-                  color: "rgba(0, 0, 0, 0.87)",
-                  boxShadow:
-                    "0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)",
-                  position: "relative",
-                  transition: "margin 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-                  overflowAnchor: "none",
-                  borderRadius: "0px",
-                  margin: "25px",
-                  padding: "16px",
-                  width: "calc(100% - 100px)",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "24px",
-                    lineHeight: "23px",
-                    letterSpacing: "0.00938em",
-                    color: "rgba(0, 0, 0, 0.87)",
-                    boxSizing: "border-box",
-                    cursor: "text",
-                    display: "inline-flex",
-                    WebkitBoxAlign: "center",
-                    alignItems: "center",
-                    position: "relative",
-                    gap: "8px",
-                  }}
-                >
-                  Visit Summary
-                  <ErrorOutlineIcon
-                    sx={{
-                      color: "#0000008a",
-                      width: "15px",
-                      height: "15px",
-                    }}
-                  />
-                </Typography>
-                <Box
-                  sx={{
-                    width: "100%",
-                    marginTop: "35px",
-                    marginBottom: "15px",
-                    "& textarea": {
-                      width: "calc(100% - 40px)",
-                      height: "auto !important",
-                      resize: "none",
-                      fontSize: "16px",
-                      fontWeight: 400,
-                      lineHeight: "24px",
-                      letterSpacing: "0.00938em",
-                      color: "rgba(0, 0, 0, 0.87)",
-                      padding: "16px",
-                      borderRadius: "4px",
-                    },
-                  }}
-                >
-                  {loadingRecords ? (
-                    <CircularProgress />
-                  ) : (
-                    <TextareaAutosize
-                      id="w3review"
-                      name="w3review"
-                      aria-label="empty textarea"
-                      rows={4}
-                      placeholder="Please enter summary"
-                      value={currentRecord?.summary ?? ""}
-                    />
-                  )}
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Box sx={{ display: "flex", gap: "10px" }}>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          checked={fullSummary}
-                          disabled={loadingRecords}
-                        />
-                      }
-                      label="Full Summary"
-                      onClick={() => setFullSummary(!fullSummary)}
-                    />
-                  </Box>
-                  <Box>
-                    <Button
-                      disabled={copySuccess}
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                        border: `1px solid ${
-                          copySuccess ? "rgba(0,0,0,0.26)" : "#1976d2"
-                        }`,
-                      }}
-                      onClick={() =>
-                        handleCopySummary(currentRecord?.summary ?? "")
-                      }
-                    >
-                      <ContentCopyIcon sx={{ width: "18px", height: "18px" }} />
-                      {copySuccess ? "Copied!" : "COPY"}
-                    </Button>
-                  </Box>
-                </Box>
-                {fullSummary && (
-                  <Box sx={{ marginTop: 3 }}>
-                    <Typography
-                      sx={{
-                        fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-                        fontWeight: 400,
-                        fontSize: "24px",
-                        lineHeight: "23px",
-                        letterSpacing: "0.00938em",
-                        color: "rgba(0, 0, 0, 0.87)",
-                        boxSizing: "border-box",
-                        cursor: "text",
-                        display: "inline-flex",
-                        WebkitBoxAlign: "center",
-                        alignItems: "center",
-                        position: "relative",
-                        gap: "8px",
-                      }}
-                    >
-                      Full Transcript Summary
-                      <ErrorOutlineIcon
-                        sx={{
-                          color: "#0000008a",
-                          width: "15px",
-                          height: "15px",
-                        }}
-                      />
-                    </Typography>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        marginTop: "35px",
-                        marginBottom: "15px",
-                        "& textarea": {
-                          width: "calc(100% - 40px)",
-                          height: "auto !important",
-                          resize: "none",
-                          fontSize: "16px",
-                          fontWeight: 400,
-                          lineHeight: "24px",
-                          letterSpacing: "0.00938em",
-                          color: "rgba(0, 0, 0, 0.87)",
-                          padding: "16px",
-                          borderRadius: "4px",
-                        },
-                      }}
-                    >
-                      {
-                        <TextareaAutosize
-                          id="w3review"
-                          name="w3review"
-                          aria-label="empty textarea"
-                          rows={5}
-                          value={currentRecord?.transcript ?? ""}
-                        />
-                      }
-                    </Box>
-                  </Box>
-                )}
-              </Box>
-            </>
+            <VisitSummary
+              loadingRecords={loadingRecords}
+              fullSummary={fullSummary}
+              currentRecord={currentRecord}
+              setFullSummary={setFullSummary}
+              copySuccess={copySuccess}
+              handleCopySummary={handleCopySummary}
+              fetchRecords={fetchRecords}
+            />
           ) : (
             <Box
               sx={{
