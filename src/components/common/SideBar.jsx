@@ -190,7 +190,7 @@ const SideBar = ({
               sx={{
                 marginTop: "16px",
                 "& .MuiInputBase-input": {
-                  padding: "8.5px 14px",
+                  padding: "8.5px 14px 8.5px 0",
                 },
               }}
               InputProps={{
@@ -221,7 +221,7 @@ const SideBar = ({
                 position: "sticky",
                 top: 0,
                 background: "white",
-                zIndex: 1,
+                zIndex: 1000,
               }}
             >
               <FormControlLabel

@@ -249,7 +249,7 @@ const Header = () => {
                   }}
                   variant="h1"
                 >
-                  We’ll do your SOAP notes
+                  We’ll do your patient notes
                 </Typography>
                 <Typography
                   sx={{

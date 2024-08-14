@@ -20,7 +20,6 @@ const AddPatientModal = ({
   handleClose,
   onSave = () => {},
 }) => {
-  console.log("patientNameError", patientNameError);
   return (
     <>
       <Dialog

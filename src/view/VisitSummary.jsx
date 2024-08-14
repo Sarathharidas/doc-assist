@@ -25,13 +25,9 @@ const VisitSummary = ({
 }) => {
   const [summaryText, setSummaryText] = useState("");
   const [updateLoading, setUpdateLoading] = useState(false);
-  console.log("currentRecord", currentRecord);
-  console.log("summaryText", summaryText);
-  console.log("currentRecord?.summary", currentRecord?.summary);
-  console.log("========", summaryText === currentRecord?.summary);
 
   useEffect(() => {
-    setSummaryText(currentRecord?.summary);
+    setSummaryText(currentRecord?.summary?.replace(/^\n+/, ""));
   }, [currentRecord?.summary]);
 
   const handleUpdateRecord = async () => {

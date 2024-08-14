@@ -47,7 +47,7 @@ export const simplicityCardContent = [
     name: "card2",
     head: "2. Edit",
     content:
-      "Select “End visit” and view your completed SOAP note in about a minute. Edit to help Doctor-assist learn your style.",
+      "Select “End visit” and view your completed patient note in about a minute. Edit to help Doctor-assist learn your style.",
     logo: visit,
   },
   {

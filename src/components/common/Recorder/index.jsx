@@ -51,6 +51,12 @@ const Recorder = ({ getData }) => {
    * The audio blob.
    */
   const [audioBlob, setAudioBlob] = useState(null);
+  // select audio file for drag-drop and upload button functionality
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  // check for  drag-drop state
+  const [isDragging, setIsDragging] = useState(false);
+
   /**
    * The media recorder.
    */
@@ -142,6 +148,8 @@ const Recorder = ({ getData }) => {
       mediaRecorder.current.stop();
       setIsRecording(false);
       setIsPaused(false);
+    } else {
+      setAudioBlob(selectedFile);
     }
   };
 
@@ -171,15 +179,55 @@ const Recorder = ({ getData }) => {
     setAudioBlob({ url, blob });
   };
 
+  const processAudioFile = (file) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const audioData = e.target.result;
+      const blob = new Blob([audioData], { type: file.type });
+      setSelectedFile({ url: URL.createObjectURL(blob), blob });
+      setSaveAudioModal(true);
+    };
+    reader.readAsArrayBuffer(file);
+  };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      processAudioFile(file);
+    }
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    setIsDragging(false);
+    const file = event.dataTransfer.files[0];
+
+    if (file.type.startsWith("audio/")) {
+      processAudioFile(file);
+    } else {
+      toast.error("Please drop an audio file.");
+    }
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+    setIsDragging(true);
+  };
+
   return (
     <>
       {!isRecording && (
         <Box
           sx={{
+            backgroundColor: isDragging ? "rgba(0, 0, 0, 0.1)" : "transparent",
+            border: isDragging ? "2px dashed rgba(0, 0, 0, 0.3)" : "none",
+            transition: "background-color 0.3s ease, border 0.3s ease",
             "@media (max-width: 575px)": {
               margin: "0 35px",
             },
           }}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
         >
           <Button
             onClick={startRecording}
@@ -274,7 +322,11 @@ const Recorder = ({ getData }) => {
               startIcon={<CloudUploadIcon />}
             >
               Upload
-              <VisuallyHiddenInput type="file" />
+              <VisuallyHiddenInput
+                type="file"
+                accept="audio/*"
+                onChange={handleFileUpload}
+              />
             </Button>
 
             <Typography sx={{ color: "#6b6b6b", fontSize: "14px" }}>
