@@ -28,9 +28,11 @@ const generateSummary = async (text) => {
   const outputChunks = [];
 
   const response = await axios.post(
-    "https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions",
+    "https://api.openai.com/v1/engines/gpt-4/completions",
     {
-      prompt: `Summarize in short : ${text}`,
+      prompt: `This is a patient-doctor interaction in Malayalam/English. Convert this into the following format under the below sub-headings:
+       (1) Patient Complaint (2) Findings (3) Further Investigations (4) Advice.
+       All notes have to be in proper English: ${text}`,
       max_tokens: 100,
     },
     {
@@ -39,7 +41,7 @@ const generateSummary = async (text) => {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
       },
     }
-  );
+);
 
   // for (const chunk of inputChunks) {
   //   const response = await client.completions.create({
