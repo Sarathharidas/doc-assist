@@ -33,7 +33,7 @@ const generateSummary = async (text) => {
       prompt: `This is a patient-doctor interaction in Malayalam/English. Convert this into the following format under the below sub-headings:
        (1) Patient Complaint (2) Findings (3) Further Investigations (4) Advice.
        All notes have to be in proper English: ${text}`,
-      
+    
     },
     {
       headers: {
@@ -75,8 +75,9 @@ export const uploadAudio = async (file, objectData, fileName) => {
 
     const formdata = new FormData();
     formdata.append("file", file);
-    formdata.append("language", "english");
+    formdata.append("language", "malayalam");
     formdata.append("response_format", "json");
+    formdata.append("translate", True);
 
     const requestOptions = {
       method: "POST",
