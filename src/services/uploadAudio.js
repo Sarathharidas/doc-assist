@@ -77,7 +77,7 @@ export const uploadAudio = async (file, objectData, fileName) => {
     formdata.append("file", file);
     formdata.append("language", "malayalam");
     formdata.append("response_format", "json");
-    formdata.append("translate", True);
+    formdata.append("translate", true);
 
     const requestOptions = {
       method: "POST",
