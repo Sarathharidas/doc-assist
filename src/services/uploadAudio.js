@@ -33,7 +33,6 @@ const generateSummary = async (text) => {
       prompt: `This is a patient-doctor interaction in Malayalam/English. Convert this into the following format under the below sub-headings:
        (1) Patient Complaint (2) Findings (3) Further Investigations (4) Advice.
        All notes have to be in proper English: ${text}`,
-    
     },
     {
       headers: {
@@ -41,7 +40,7 @@ const generateSummary = async (text) => {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
       },
     }
-);
+  );
 
   // for (const chunk of inputChunks) {
   //   const response = await client.completions.create({
@@ -78,7 +77,7 @@ export const uploadAudio = async (file, objectData, fileName) => {
     formdata.append("language", "malayalam");
     formdata.append("response_format", "json");
     formdata.append("speaker_labels", true);
-  
+    formdata.append("translate", true);
 
     const requestOptions = {
       method: "POST",
