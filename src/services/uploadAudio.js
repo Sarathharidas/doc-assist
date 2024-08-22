@@ -30,9 +30,7 @@ const generateSummary = async (text) => {
   const response = await axios.post(
     "https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions",
     {
-      prompt: `This is a patient-doctor interaction in Malayalam/English. Convert this into the following format under the below sub-headings:
-       (1) Patient Complaint (2) Findings (3) Further Investigations (4) Advice.
-       All notes have to be in proper English: ${text}`,
+      prompt: `Summarize this: ${text}`,
     
     },
     {
