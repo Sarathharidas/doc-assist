@@ -21,7 +21,8 @@ import { Signup_Schema } from "../../validation_schema";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const auth = getAuth(app);
+// Moved inside component to prevent errors when Firebase is not configured
+// const auth = getAuth(app);
 
 const SignUp = () => {
   const [initialValues] = useState({ email: "", password: "", username: "" });
@@ -35,6 +36,11 @@ const SignUp = () => {
     enableReinitialize: true,
     onSubmit: ({ email, password, username }) => {
       // Create a new user with email and password using firebase
+      if (!app) {
+        toast.error("Firebase is not configured. Please add your credentials to .env file");
+        return;
+      }
+      const auth = getAuth(app);
       createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
           const user = res.user;

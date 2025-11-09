@@ -15,14 +15,22 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 //import Loader from "../common/Loader";
 
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+// Moved inside component to prevent errors when Firebase is not configured
+// const auth = getAuth(app);
+// const provider = new GoogleAuthProvider();
 
 const Login = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState();
 
   const handleLogin = () => {
+    // Check if Firebase is configured
+    if (!app) {
+      toast.error("Firebase is not configured. Please add your credentials to .env file");
+      return;
+    }
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         setUser(result.user);
@@ -58,7 +66,11 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: ({ email, password }) => {
       // Create a new user with email and password using firebase
-
+      if (!app) {
+        toast.error("Firebase is not configured. Please add your credentials to .env file");
+        return;
+      }
+      const auth = getAuth(app);
       signInWithEmailAndPassword(auth, email, password)
         .then((res) => {
           if (res?.user?.accessToken) {
